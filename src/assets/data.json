@@ -1,0 +1,65 @@
+{
+    "catalog": {  
+        "title": "Подбор недвижимости"
+        
+        
+    },
+    "objects": [
+        {
+            "title": "Flat 1",
+            "id": "1",
+            "layout": "layout-1.svg",
+            "address": "Эл Классик Плюс <br>ул.Коенкозова/Чуйкова",
+            "price": 20000,
+            "area": "90",
+            "plinth": "yes",
+            "bathroom": "no",
+            "stainedGlass": "yes",
+            "separateSntrance": "no",
+            "video": "yes",
+            "loadingEntrance": "no",
+            "gallery": [
+                {
+                    "img": "flat-1.png",
+                    "id": "32"
+                },
+                {
+                    "img": "flat-1_2.png",
+                    "id": "323"
+                },
+                {
+                    "img": "flat-1_3.png",
+                    "id": "3254"
+                }
+            ]
+        },
+        {
+            "title": "Flat 2",
+            "id": "2",
+            "layout": "layout-1.svg",
+            "address": "Эл Классик Плюс <br>ул.Коенкозова/Чуйкова",
+            "price": 500,
+            "area": "20",
+            "plinth": "no",
+            "bathroom": "yes",
+            "stainedGlass": "no",
+            "separateSntrance": "yes",
+            "video": "no",
+            "loadingEntrance": "yes",
+            "gallery": [
+                {
+                    "img": "flat-1.png",
+                    "id": "3254"
+                },
+                {
+                    "img": "flat-1_2.png",
+                    "id": "3233"
+                },
+                {
+                    "img": "flat-1_3.png",
+                    "id": "32544"
+                }
+            ]
+        }
+    ] 
+}

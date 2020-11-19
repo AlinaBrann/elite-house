@@ -1,0 +1,115 @@
+@import '@/assets/styles/variables'
+.catalog-item 
+	max-width: 100%
+	transition: all .35s ease-in-out
+	box-shadow: 0px 2px 8px lightgrey
+	border-radius: $radius * 2
+	background: $body_background
+	text-align: left
+	&:not(:last-of-type)
+		margin-bottom: 20px
+	&-enter 
+		transform: scale(0.5) translatey(-80px)
+		opacity: 0
+	&-leave-to
+		transform: translatey(30px)
+		opacity: 0
+	&-leave-active 
+		position: absolute
+		z-index: -1
+	&__container
+		padding: 40px
+	&__layout
+		display: flex
+		align-items: center
+		justify-content: center
+		height: 100%
+		background: #FFF
+		border: 1px solid #E6E5E5
+		border-radius: $radius
+	&__content
+		display: flex
+		flex-direction: column
+		align-items: flex-start
+		height: 100%
+	&__area
+		margin-bottom: 14px
+		color: $orange
+		font-family: $bold
+		font-size: 24px
+	&__address
+		margin-bottom: 14px
+		font-size: 14px
+		line-height: 18px
+	&__price
+		margin-bottom: 22px
+		font-family: "RoadRadio-Bold"
+		color: #000
+		font-size: 24px
+		line-height: 26px
+	&__button
+		margin-bottom: 16px
+	&__all-info
+		margin-top: auto
+		font-family: $medium
+		text-transform: uppercase
+		border: none
+		border-bottom: 2px dashed transparentize($orange,0.5)
+	
+.preview-slider
+	img
+		width: 100%
+		height: 100%
+		object-fit: cover
+		border-radius: $radius
+	.slick
+		&-slide
+			div
+				height: 100%
+		&-prev
+			display: none !important
+		&-next
+			position: absolute
+			top: 50%
+			right: 25%
+			display: block
+			width: 50px
+			height: 50px
+			border-radius: 50%
+			font-size: 0
+			transform: translate(50%,-50%)
+			background: transparentize(#FFF,.5) url(/images/arrow.svg) no-repeat center
+			background-size: 60%
+			border: 2px solid #FFF
+			transition: 0.5s
+			cursor: pointer
+
+			
+	&._for
+		margin-bottom: 8px
+		.slick-slide
+			height: 232px
+	&._nav
+		max-width: calc(100% + 8px)
+		width: calc(100% + 8px)
+		margin: 0 -4px
+		.slick-slide
+			position: relative
+			height: 80px
+			padding: 0 4px
+			cursor: pointer
+			&:before
+				content: ''
+				display: block
+				position: absolute
+				top: 0px
+				left: 4px
+				width: calc(100% - 8px)
+				height: 100%
+				background: transparentize(#4C4D4F, 0.5)
+				border-radius: $radius
+				opacity: 0
+				transition: 0.5s
+			&:hover
+				&:before
+					opacity: 1

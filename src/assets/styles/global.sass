@@ -1,0 +1,34 @@
+body
+	background: $body_background
+	font-family: $default-font-family
+
+.section
+	&__title
+		position: relative
+		font-family: "RoadRadio-Black"
+		font-size: 35px
+		color: #161515
+		&:before
+			content: attr(data-title)
+			display: block
+			position: absolute
+			bottom: 0
+			left: 50%
+			transform: translateX(-50%)
+			font-size: 77px
+			line-height: 66px
+			white-space: nowrap
+			font-family: "RoadRadio-Bold"
+			line-height: 1
+			-webkit-text-stroke: 2px #FFFFFF
+			color: transparent
+			z-index: -1
+
+.slick-slider
+	max-width: 100%
+
+.transition
+	transition: box-shadow $default-transition-duration $default-transition-function, border-color $default-transition-duration $default-transition-function, color $default-transition-duration $default-transition-function, background $default-transition-duration $default-transition-function, border-color $default-transition-duration $default-transition-function, opacity $default-transition-duration $default-transition-function, transform $default-transition-duration $default-transition-function, fill $default-transition-duration $default-transition-function
+
+.transition-hover
+	transition: none
