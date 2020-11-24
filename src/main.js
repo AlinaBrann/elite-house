@@ -4,8 +4,15 @@ import App from './App.vue'
 
 import 'slick-carousel/slick/slick.js'
 import 'slick-carousel/slick/slick.css'
-import {currency} from "@/filters/currency";
+import {currency} from "@/filters/currency"
+import VueSmoothScroll from 'vue2-smooth-scroll'
+
+
 Vue.filter('currency', currency)
+
+Vue.use(VueSmoothScroll,{
+  updateHistory: false
+})
 
 Vue.config.productionTip = false
 new Vue({
@@ -14,3 +21,4 @@ new Vue({
   },
   render: h => h(App),
 }).$mount('#app')
+

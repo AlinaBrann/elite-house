@@ -41,24 +41,40 @@
                             <span v-else> &#8381;</span>
                         </div>
                         <button class="catalog-item__button button _full">ЗАБРОНИРОВАТЬ</button>
-                        <button class="catalog-item__button button _full _border">Спец. предложение</button>
-                        <button class="catalog-item__all-info">••• Подробное описание</button>
+                        <button 
+                            class="catalog-item__button button _full _border"
+                            @click="openModal();popupOpener($event);"
+                        >Спец. предложение</button>
+                        <button class="button-more catalog-item__all-info">Подробное описание</button>
                     </div>
                     
                 </div>
             </div>
             
         </div>
-       
+       <Modal 
+            :leftPos="left"
+            :topPos="top"
+            :originX="posX"
+            :originY="posY"
+            v-if="showPopup" 
+            :class="{ '_showPopup': showPopup, '_hidePopup': !showPopup }" 
+            @close="showPopup = false"
+            class="popup-offer"
+        />
     </li>
    
 </template>
 
 <script>
 import Slick from 'vue-slick';
+import Modal from '@/components/Modal/Modal';
+
+
 export default {
     data () {
         return {
+            showPopup: false,
             settings: {
                 arrows: false,
                 dots: false,
@@ -84,8 +100,12 @@ export default {
         index: Number
     },
     components: {
-        Slick
+        Slick,
+        Modal
     },
+    methods: {
+       
+    }
 }
 </script>
 

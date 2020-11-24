@@ -1,0 +1,188 @@
+$halfHeight: 0.72em
+.flip
+	&-clock 
+		text-align: center
+		perspective: 600px
+		margin: 0 auto
+		*,
+		*:before,
+		*:after 
+			box-sizing: border-box
+		&__piece 
+			position: relative
+			display: inline-block
+			margin: 0 0.2vw
+			+min-screen($screen-md)
+				margin: 0 8px
+			&:not(:last-of-type)
+				&:after
+					content: ''
+					display: inline-block
+					position: absolute
+					width: 6px
+					height: 100%
+					left: calc(100% + 5px)
+					top: 0
+					background: url('/images/colon.svg') no-repeat center
+					background-size: 100%
+					animation: dots infinite 1s 
+		&__slot 
+			font-size: 1rem
+			line-height: 1.5
+			display: block
+			+min-screen($screen-md)
+				font-size: 1.2rem
+	&-card 
+		display: block
+		position: relative
+		padding-bottom: $halfHeight
+		font-size: 2.25rem
+		line-height: 0.95
+		+min-screen($screen-md)
+			font-size: 28px
+		&__top,
+		&__bottom,
+		&__back-bottom,
+		&__back::before,
+		&__back::after,
+		&__top-4digits,
+		&__bottom-4digits,
+		&__back-bottom-4digits,
+		&__back-4digits::before,
+		&__back-4digits::after 
+			display: block
+			height: $halfHeight
+			color: #000
+			font-family: $bold
+			letter-spacing: 4px
+			line-height: 1
+			background: #FFF
+			padding: 0.23em 0.08em 0.4em 0.15em
+			border-radius: $radius $radius 0 0
+			backface-visibility: hidden
+			-webkit-backface-visibility: hidden
+			transform-style: preserve-3d
+			width: 2.1em
+
+
+		&__top-4digits,
+		&__bottom-4digits,
+		&__back-bottom-4digits,
+		&__back-4digits::before,
+		&__back-4digits::after 
+			width: 2.65em
+
+
+		&__bottom,
+		&__back-bottom,
+		&__bottom-4digits,
+		&__back-bottom-4digits 
+			color: #000
+			position: absolute
+			top: 50%
+			left: 0
+			font-family: $bold
+			letter-spacing: 4px
+			line-height: 1
+			border-top: solid 2px #C4C4C4
+			background: #EAEAEA
+			border-radius: 0 0 $radius $radius
+			pointer-events: none
+			overflow: hidden
+			z-index: 2
+
+
+		&__back-bottom,
+		&__back-bottom-4digits 
+			z-index: 1
+
+
+		&__bottom::after,
+		&__back-bottom::after,
+		&__bottom-4digits::after,
+		&__back-bottom-4digits::after 
+			display: block
+			margin-top: -$halfHeight
+
+
+		&__back::before,
+		&__bottom::after,
+		&__back-bottom::after,
+		&__back-4digits::before,
+		&__bottom-4digits::after,
+		&__back-bottom-4digits::after 
+			content: attr(data-value)
+
+
+		&__back,
+		&__back-4digits 
+			position: absolute
+			top: 0
+			height: 100%
+			left: 0%
+			pointer-events: none
+
+
+		&__back::before,
+		&__back-4digits::before 
+			position: relative
+			overflow: hidden
+			z-index: -1
+
+	.flip-card
+		&__back::before,
+		&__back-4digits::before 
+			z-index: 1
+			animation: flipTop 0.3s cubic-bezier(0.37, 0.01, 0.94, 0.35)
+			animation-fill-mode: both
+			transform-origin: center bottom
+
+	.flip-card
+		&__bottom,
+ 		&__bottom-4digits 
+			transform-origin: center top
+			animation-fill-mode: both
+			animation: flipBottom 0.6s cubic-bezier(0.15, 0.45, 0.28, 1)
+
+
+@keyframes flipTop 
+	0% 
+		transform: rotateX(0deg)
+		z-index: 2
+	
+	0%,
+	99% 
+		opacity: 1
+	
+	100% 
+		transform: rotateX(-90deg)
+		opacity: 0
+	
+
+
+@keyframes flipBottom 
+	0%,
+	50% 
+		z-index: -1
+		transform: rotateX(90deg)
+		opacity: 0
+	
+	51% 
+		opacity: 1
+	
+	100% 
+		opacity: 1
+		transform: rotateX(0deg)
+		z-index: 5
+	
+@keyframes dots 
+	0%
+		opacity: 1
+	30%
+		opacity: 0.3
+	
+	60% 
+		opacity: 1
+	100%
+		opacity: 0.3
+	

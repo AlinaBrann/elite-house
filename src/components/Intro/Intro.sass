@@ -1,0 +1,155 @@
+@import '@/assets/styles/variables'
+@import '@/assets/styles/libs/media'
+@import '@/assets/styles/libs/mixins'
+
+.intro
+	display: flex
+	flex-direction: column
+	width: 100%
+	height: 100vh
+	background: #4C4D4F url('/images/intro-bg.jpg') no-repeat center
+	background-size: 100%
+	color: #FFF
+	&__top-banner
+		display: flex
+		height: 40px
+		align-items: center
+		justify-content: center
+		background: $orange
+		font-family: $medium
+		font-size: 14px
+		text-transform: uppercase
+		color: #FFF
+		letter-spacing: 1.5px
+	&-content
+		position: relative
+		margin-top: auto
+		display: flex
+		flex-direction: column
+		justify-content: flex-end
+		align-items: flex-start
+		flex: auto
+		padding-bottom: 10.526315789473683vh
+	&__title
+		margin-bottom: 24px
+		font-family: "RoadRadio-Bold"
+		font-size: 40px
+		width: 100%
+		+min-screen($screen-md)
+			width: 50%
+			margin-bottom: 30px
+			font-family: "RoadRadio-Black"
+			font-size: 52px
+	&__subtitle
+		margin-bottom: 24px
+		font-size: 22px
+		font-family: $medium
+		+min-screen($screen-md)
+			margin-bottom: 30px
+			font-size: 24px
+	&-slider
+		width: 40%
+		font-family: $medium
+		line-height: 24px
+		&-wrapper
+			padding-top: 50px
+			margin-top: 19.78vh
+			+max-screen-height(640px)
+				margin-top: 5vh
+		&-dots
+			position: absolute
+			bottom: calc(100% + 15px)
+			display: flex
+			&-dot
+				position: relative
+				padding-left: 30px
+				&:before,
+				&:after
+					content: ''
+					position: absolute
+					top: 50%
+					display: inline-block
+					transform: translateY(-50%)
+					border-radius: 50%
+					.slick-active &
+						opacity: 1
+				&:before
+					width: 4px
+					height: 4px
+					left: 6px
+					background: #FFF
+					opacity: 0.5
+				&:after
+					left: 0 
+					+size(16px)
+					border: 1px solid #FFF
+					opacity: 0
+				&__text
+					display: inline-block
+					max-width: 0
+					padding-right: 15px
+					white-space: nowrap
+					vertical-align: middle
+					line-height: 16px
+					font-size: 12px
+					text-transform: uppercase
+					overflow: hidden
+					opacity: 0
+					transition: all 0.5s
+					.slick-active &
+						max-width: 200px
+						opacity: 1
+						transition-delay: opacity 0.2s
+			&__text
+				font-family: $medium
+				line-height: 24px
+	&-video-toggle
+		$parent: &
+		position: absolute
+		top: 60%
+		right: 15%
+		display: block
+		+size(85px)
+		background: url('/images/play.svg') no-repeat center left 60%
+		background-size: 28px
+		border: none
+		border-radius: 50%
+		&__background,
+		&:before,
+		&:after
+			content: ''
+			display: block
+			position: absolute
+			top: 50%
+			left: 50%
+			transform: translate(-50%,-50%)
+			border-radius: 50%
+			z-index: -1
+		&__background
+			+size(100%)
+			background: $orange
+			transition: 0.4s
+			z-index: -1
+		&:before
+			+size(150px)
+			background: transparentize(#4C4D4F, .3)
+			border: 3px solid #4C4D4F
+		&:after
+			+size(150px)
+			border: 3px solid $orange
+			animation: pulse 3s ease-out infinite
+		&:hover
+			#{$parent}
+				&__background
+					transform: translate(-50%,-50%) scale(1.77) 
+
+@keyframes pulse
+	0%
+		opacity: 0
+	40%
+		+size(100%)
+		opacity: 1
+	100%
+		+size(100%)
+		opacity: 1
+

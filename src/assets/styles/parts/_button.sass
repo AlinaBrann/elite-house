@@ -1,20 +1,67 @@
 .button
-    display: flex
-    align-items: center
-    justify-content: center
-    white-space: nowrap
-    height: $button_height
-    padding: 0 25px
-    background: $orange
-    color: #FFF
-    font-family: $medium
-    text-transform: uppercase
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25)
-    border: 2px solid $orange
-    border-radius: $radius
-    &._full
-        width: 100%
-    &._border
-        background: transparent
-        color: $orange
-        box-shadow: none
+	display: flex
+	align-items: center
+	justify-content: center
+	white-space: nowrap
+	height: $button_height
+	padding: 3px 25px 0
+	background: $orange
+	color: #FFF
+	font-family: $medium
+	font-size: 16px
+	line-height: 1
+	text-transform: uppercase
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25)
+	border: 2px solid $orange
+	border-radius: $radius
+	@extend .transition
+	&:hover
+		background: $orange_dark
+		border-color: $orange_dark
+	&._full
+		width: 100%
+	&._border
+		background: transparent
+		color: $orange
+		box-shadow: none
+		&:hover
+			color: $orange_dark
+			background: rgba(209, 96, 24, 0.2)
+	&-reset
+		padding-bottom: 3px
+		text-transform: uppercase
+		font-family: $medium
+		border: none
+		border-bottom: 2px dashed transparentize(#EB5757,0.5)
+		color: #EB5757
+		&:before
+			content: ''
+			display: inline-block
+			vertical-align: middle
+			+size(12px)
+			background: url('/images/close-small.svg') no-repeat center
+		&:hover
+			border-color: #EB5757
+	&-more
+		font-family: $medium
+		text-transform: uppercase
+		border: none
+		border-bottom: 2px dashed transparentize($orange,0.5)
+		@extend .transition
+		&:before
+			content: '•••'
+			display: inline-block
+			margin-right: 5px
+		&:hover
+			color: $orange-dark
+			border-color: $orange-dark
+	&-white
+		+size(40px,56px)
+		background-color: #FFF
+		border-radius: $radius * 2
+		border: none
+		@extend .transition
+		&:hover
+			background-color: #E5E5E5 !important
+		._dark &
+			background-color: #4C4D4F

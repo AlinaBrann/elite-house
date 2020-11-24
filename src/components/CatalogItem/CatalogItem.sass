@@ -8,6 +8,14 @@
 	text-align: left
 	&:not(:last-of-type)
 		margin-bottom: 20px
+	&._no-results
+		display: flex
+		align-items: center
+		justify-content: center
+		min-height: 20vh
+		font-size: 24px
+		font-family: $medium
+		text-align: center
 	&-enter 
 		transform: scale(0.5) translatey(-80px)
 		opacity: 0
@@ -51,10 +59,7 @@
 		margin-bottom: 16px
 	&__all-info
 		margin-top: auto
-		font-family: $medium
-		text-transform: uppercase
-		border: none
-		border-bottom: 2px dashed transparentize($orange,0.5)
+		
 	
 .preview-slider
 	img

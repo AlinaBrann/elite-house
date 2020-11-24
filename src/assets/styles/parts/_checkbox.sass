@@ -1,0 +1,14 @@
+.checkbox
+    $parent: &
+    &__label
+        position: relative
+        border: none
+        border-bottom: 2px dashed currentColor
+    input
+       display: none
+       &:checked
+           + 
+                #{$parent}
+                    &__label
+                        color: $orange
+                    

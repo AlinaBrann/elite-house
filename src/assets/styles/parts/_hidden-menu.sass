@@ -1,0 +1,60 @@
+.hidden-menu
+	position: absolute
+	top: 100%
+	right: 0
+	width: 100%
+	&-content
+		display: flex
+		align-items: center
+		height: 100%
+		padding-top: 11.84vh
+		justify-content: space-between
+		opacity: 0
+		transition: 0.4s
+		._showPopup &
+			opacity: 1
+			transition-delay: 0.5s
+	&._showPopup
+		opacity: 1
+		visibility: visible
+		pointer-events: all
+	&._hidePopup
+		visibility: hidden
+		opacity: 0
+		pointer-events: none
+		transition-delay: 1s
+	&-nav
+		display: flex
+		flex-direction: column
+		align-items: flex-start
+		padding-left: 9.375vw
+		&__item
+			margin-bottom: 4vh
+			font-size: 42px
+			font-family: $medium
+			white-space: nowrap
+			&:last-of-type
+				margin-bottom: 9.89vh
+	&-info
+		align-self: flex-end
+		&__phone
+			display: inline-block
+			margin-bottom: 15px
+			font-family: $medium
+			font-size: 34px
+		&__title
+			margin-bottom: 8px
+			text-transform: uppercase
+			font-family: $bold
+		&__address
+			width: 280px
+			margin-bottom: 8px
+			line-height: 24px
+		&__mail
+			display: inline-block
+			color: $orange
+			font-family: $medium
+			border-bottom: 2px solid transparent
+			@extend .transition
+			&:hover
+				border-color: $orange

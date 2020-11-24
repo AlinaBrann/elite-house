@@ -1,18 +1,20 @@
 body
 	background: $body_background
 	font-family: $default-font-family
-
+	font-size: 16px
+	
 .section
 	&__title
 		position: relative
 		font-family: "RoadRadio-Black"
 		font-size: 35px
 		color: #161515
+		text-align: center
 		&:before
 			content: attr(data-title)
 			display: block
 			position: absolute
-			bottom: 0
+			bottom: -9px
 			left: 50%
 			transform: translateX(-50%)
 			font-size: 77px
@@ -28,7 +30,84 @@ body
 	max-width: 100%
 
 .transition
-	transition: box-shadow $default-transition-duration $default-transition-function, border-color $default-transition-duration $default-transition-function, color $default-transition-duration $default-transition-function, background $default-transition-duration $default-transition-function, border-color $default-transition-duration $default-transition-function, opacity $default-transition-duration $default-transition-function, transform $default-transition-duration $default-transition-function, fill $default-transition-duration $default-transition-function
+	transition: box-shadow $default-transition-duration $default-transition-function, border-color $default-transition-duration $default-transition-function, color $default-transition-duration $default-transition-function, background $default-transition-duration $default-transition-function, border-color $default-transition-duration $default-transition-function, background-color $default-transition-duration $default-transition-function, opacity $default-transition-duration $default-transition-function, transform $default-transition-duration $default-transition-function, fill $default-transition-duration $default-transition-function
 
 .transition-hover
 	transition: none
+
+.fade
+	&-leave-to,
+	&-enter
+		opacity: 0
+		transform: translateY(10px)
+	&-leave-active
+		position: absolute
+	&-move
+		transition: transform 1s
+	&-enter-active 
+		transition: opacity .5s
+
+.slide
+	&-leave-to,
+	&-enter
+		max-height: 0 !important
+		transform: translateY(-10px)
+	&-enter,
+	&-enter-active,
+	&-leave-active
+		opacity: 0
+
+	&-leave
+		opacity: 0
+	&-leave-to
+		opacity: 0
+		
+	&-move
+		transition: transform 1s
+
+._jcfe
+	display: flex
+	justify-content: flex-end
+
+.animated-link
+	position: relative
+	display: inline-block
+	@extend .transition
+	overflow-x: hidden
+	cursor: pointer
+	&:after
+		content: ''
+		display: block
+		position: absolute
+		bottom: 0
+		left: 0
+		width: 100%
+		height: 2px
+		background: #FFF
+		transition: 1s
+		._dark &
+			background: #4C4D4F
+	&:not(:hover)
+		&:after
+			animation: line 1s forwards
+	&:hover
+		&:after
+			animation: lineActive 1s forwards
+
+@keyframes line 
+	0%
+		transform: translateX(0%)
+	50%
+		transform: translateX(100%)
+	60%
+		opacity: 0
+	100%
+		transform: translateX(-100%)
+		opacity: 0
+
+
+@keyframes lineActive
+	0%
+		transform: translateX(-100%)
+	100%
+		transform: translateX(0%)

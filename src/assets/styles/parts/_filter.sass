@@ -1,27 +1,91 @@
 .filter
-    &__wrapper
-        padding: 40px 65px
-    &__border-block
-        border-bottom: 1px solid #BEBEBE
-        &:not(:last-of-type)
-            border-right: 1px solid #BEBEBE
-    &-block
-        padding-top: 23px
-        padding-bottom: 23px
-        color: #161515
-        font-family: $medium
-        ._no-pudding-top &
-            padding-top: 0
-        &__title
-            margin-bottom: 17px
-            text-transform: uppercase
-            font-size: 12px
-        &__label
-            display: flex
-            justify-content: space-between
-        &__radio-wrapper
-            display: flex
-            justify-content: space-around
-    
-.vue-range-slider
-    margin-bottom: 17px
+	&__wrapper
+		padding: 40px 65px
+	&__border-block
+		border-bottom: 1px solid #BEBEBE
+		&:not(:last-of-type)
+			border-right: 1px solid #BEBEBE
+	&-block
+		position: relative
+		height: 100%
+		padding-top: 23px
+		padding-bottom: 23px
+		color: #161515
+		text-align: center
+		font-family: $medium
+		._no-pudding-top &
+			padding-top: 0
+		&__title
+			margin-bottom: 10px
+			text-transform: uppercase
+			font-size: 12px
+		&__label
+			display: flex
+			justify-content: space-between
+		&__radio-wrapper
+			display: flex
+			justify-content: space-around
+	&-districts
+		position: relative
+		&__item
+			display: inline-block
+			margin-bottom: 10px
+			font-family: $medium
+			font-size: 17px
+			line-height: 22px
+			border: none
+			color: #161515
+			border-bottom: 2px dashed rgba($orange, 0.5)
+			transition: all 0.5s
+			cursor: pointer
+			&:first-letter
+				text-transform: uppercase
+			&:not(:last-of-type)
+				&:after
+					content: ','
+					display: inline-block
+					vertical-align: bottom
+			&:not(:first-of-type)
+				padding-left: 5px
+		&-popup
+			position: absolute
+			right: -$indent-col-md
+			top: 100%
+			display: flex
+			width: 800px
+			max-width: 100vw
+			flex-wrap: wrap
+			padding: 60px 45px 0
+			background: rgba(76, 77, 79, 0.96)
+			border-radius: $radius * 2
+			transition: all 0.5s
+			z-index: 10
+			&__checkbox
+				flex: 0 0 33%
+				margin-bottom: 70px
+				white-space: nowrap
+				color: #FFF
+	&-addinations
+		max-height: 200px
+		transition: all 0.5s
+	&-buttons
+		display: flex
+		align-items: center
+		padding-top: 24px
+		&__more
+			margin-right: auto
+			&._active
+				&:before
+					display: none
+			&:hover
+				color: $orange-dark
+				border-color: $orange-dark
+		&__button
+			margin-left: 22px
+			box-shadow: 0px 4px 13px transparentize(#000,.84)
+	
+	&-range
+		max-width: 90%
+		&.noUi-horizontal
+			margin-top: 20px
+			margin-bottom: 20px
