@@ -4,6 +4,7 @@
         <Banner deadline="2020-12-25 00:00:00" />
         <Catalog/>
         <Projects/>
+		<Possibilities/>
     </div>
     
 </template>
@@ -13,6 +14,7 @@
 	import Banner from '@/components/Banner/Banner'
 	import Catalog from '@/components/Catalog/Catalog'
 	import Projects from '@/components/Projects/Projects'
+	import Possibilities from '@/components/Possibilities/Possibilities'
 
 	import Vue from 'vue'
 
@@ -23,7 +25,8 @@
 			Intro,
 			Banner,
             Catalog,
-            Projects
+			Projects,
+			Possibilities
 		}
 	}
 	Vue.mixin({

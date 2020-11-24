@@ -15,6 +15,9 @@ body
 			color: #FFF
 			&:before
 				-webkit-text-stroke: 2px #2B2C2D
+		&._dark-back
+			&:before
+				-webkit-text-stroke: 2px #F2F2F2
 		&:before
 			content: attr(data-title)
 			display: block
@@ -25,6 +28,7 @@ body
 			font-size: 77px
 			line-height: 66px
 			white-space: nowrap
+			letter-spacing: 5px
 			font-family: "RoadRadio-Bold"
 			line-height: 1
 			-webkit-text-stroke: 2px #FFFFFF
@@ -73,6 +77,10 @@ body
 ._jcfe
 	display: flex
 	justify-content: flex-end
+
+._jcc
+	display: flex
+	justify-content: center
 
 .animated-link
 	position: relative

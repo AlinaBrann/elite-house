@@ -1,0 +1,35 @@
+@import '@/assets/styles/variables'
+
+.possibilities
+    padding: 125px 0
+    background: #FFF
+    overflow: hidden
+    &__title
+        margin-bottom: 50px
+        text-align: center
+    &-slider
+        &-slide
+            &__wrapper
+                display: flex
+                flex-direction: column
+                align-items: flex-start
+                height: 390px
+                padding: 20px 20px 24px
+                margin: 0 20px
+                background: #F2F2F2
+                border-radius: $radius * 2
+            &__image
+                margin-bottom: 20px
+            &__title
+                margin-bottom: 5px
+                font-family: $bold
+                font-size: 20px
+                line-height: 28px
+            &__text
+                font-family: $medium
+                color: transparentize(#000,.2)
+                line-height: 24px
+            &__button
+                width: 240px
+                max-width: 100%
+                margin-top: auto
