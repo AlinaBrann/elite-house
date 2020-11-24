@@ -9,12 +9,16 @@
 				<div class="row">
 					<div class="col-xs-12 col-md-7">
 						<div class="catalog-item-details-head">
-							<router-link to="/">back</router-link>
+							<router-link to="/" class="button-back">
+								<svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M0.292891 7.29289C-0.0976333 7.68341 -0.0976334 8.31658 0.29289 8.7071L6.65685 15.0711C7.04738 15.4616 7.68054 15.4616 8.07106 15.0711C8.46159 14.6805 8.46159 14.0474 8.07106 13.6569L2.41421 8L8.07107 2.34314C8.46159 1.95262 8.46159 1.31946 8.07107 0.928931C7.68054 0.538406 7.04738 0.538406 6.65685 0.92893L0.292891 7.29289ZM17 7L0.999998 7L0.999998 9L17 9L17 7Z" fill="#F47321"/>
+								</svg>
+							</router-link>
 						</div>
 					</div>
 					<div class="col-xs-12 col-md-5">
 						<div class="catalog-item-details-head">
-							<div class="catalog-item-detail-head__title">Подробное описание</div>
+							<div class="catalog-item-details-head__title">Подробное описание</div>
 						</div>
 					</div>
 				</div>
@@ -56,9 +60,11 @@
 							</div>
 							<button class="catalog-item__button button _full" @click="goTodetail(item.id)">ЗАБРОНИРОВАТЬ</button>
 							<button 
-								class="catalog-item__button button _full _border"
+								class="catalog-item__button button _full _border _dark-text"
 								@click="openModal();popupOpener($event);"
-							>Спец. предложение</button>
+								>
+								Спец. предложение
+							</button>
 							<div class="catalog-item-detail-about">
 								<div v-if="item.text">
 									<div class="catalog-item-detail-about__title _v2">О компликсе</div>
@@ -71,6 +77,12 @@
 									@click="popupOpener($event);showPopupMap = !showPopupMap"
 									>
 									<span>Показать на карте</span>
+								</button>
+								<button 
+									class="catalog-item__button button _full _border _dark-text"
+									@click="openModal();popupOpener($event);"
+									>
+									Документация объекта
 								</button>
 								<div v-if="item.infrastructure">
 									<div class="catalog-item-detail-about__title">Инфраструктра</div>
@@ -124,6 +136,44 @@
 							/>
 						</yandex-map>
 					</div>
+				</div>	
+				<div 
+					class="popup _dark" 
+					:class="{ '_showPopup': showPopupDocs, '_hidePopup': !showPopupDocs }"
+					v-if="item.coords"
+					>
+					<div class="popup-content" >
+						<div class="popup-body">
+							<button @click="showPopupDocs = false" class="popup-closer"></button>
+							<div class="popup__title">Документация объекта</div>
+							<ul class="popup-docs">
+								<li class="popup-docs-item" v-for="(doc,i) in item.documents" :key="i">
+									<a :href="doc.path" class="popup-docs-item__row" target="_blank">
+										<div class="popup-docs-item__icon-wrap">
+											<img 
+												class="popup-docs-item__icon"
+												v-if="doc.type" 
+												:src="'/images/' + doc.type + '.svg'" 
+												:alt="doc.name ">
+											<img 
+												class="popup-docs-item__icon"
+												v-else 
+												src="/images/simple-doc.svg" 
+												:alt="doc.name ">
+										</div>
+										<div class="popup-docs-item__col">
+											<div class="popup-docs-item__title">{{ doc.name }}</div>
+											<div class="popup-docs-item__small" v-if="doc.size || doc.date">
+												<span v-if="doc.size">{{ doc.size }} </span>
+												<span v-if="doc.date">• {{ doc.date }}</span>
+											</div>
+										</div>
+										
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
 				</div>			
 			</div>
 		</div>
@@ -154,6 +204,7 @@
 				title: "details",
 				showPopup: false,
 				showPopupMap: false,
+				showPopupDocs: false,
 				settings: {
 					arrows: false,
 					dots: false,

@@ -7,6 +7,11 @@
             display: flex
             align-items: center
             height: 21vh
+            &__title
+                font-size: 20px
+                text-transform: uppercase
+                color: #4F4F4F
+                font-family: "RoadRadio-Bold"
     &-detail
         box-shadow: none
         &__layout
@@ -42,3 +47,11 @@
                 width: 100%
                 .slick-slide
                     height: 400px
+            &.preview-slider._nav
+                width: calc(100% + 4px)
+                .slick-slide
+                    height: 70px
+                    // &:before
+                    //     background: transparentize(#4C4D4F, 0.5) url('/images/eye.svg') no-repeat center
+                .slick-next
+                    right: 65px

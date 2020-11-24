@@ -27,6 +27,8 @@
 		&:hover
 			color: $orange_dark
 			background: rgba(209, 96, 24, 0.2)
+		&._dark-text
+			color: #161515
 	&-reset
 		padding-bottom: 3px
 		text-transform: uppercase
@@ -67,6 +69,7 @@
 			background-color: #4C4D4F
 	&-map
 		&._border
+			margin-bottom: 25px
 			height: 80px
 			font-size: 24px
 			font-family: $bold
@@ -81,3 +84,18 @@
 				color: transparentize($orange,.8)
 				span
 					border-color: transparent
+	&-back
+		display: flex
+		align-items: center
+		justify-content: center
+		+size(40px)
+		background: transparentize($orange,0.5)
+		border: 2px solid $orange
+		border-radius: 50%
+		path
+			transition: 0.4s
+		&:hover
+			background: transparentize($orange-dark,0.5)
+			border-color: $orange-dark
+			path
+				fill: $orange-dark

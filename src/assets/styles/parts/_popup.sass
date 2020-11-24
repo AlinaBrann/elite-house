@@ -8,6 +8,8 @@
 	align-content: center
 	justify-content: center
 	z-index: 10000
+	._dark &
+		overflow: auto
 	&._showPopup
 		opacity: 1
 		visibility: visible
@@ -41,11 +43,25 @@
 		._showPopup &
 			opacity: 1
 			transition-delay: 0.5s
+		._dark &
+			max-height: none
+	&-body
+		._dark &
+			position: relative
+			width: 800px
+			max-width: 100%	
+			max-height: none
+			padding: 80px 40px 45px
+			background: #4C4D4F
+			border-radius: $radius * 2
 	&__title
 		margin-bottom: 10px
 		font-size: 46px
 		line-height: 60px
 		font-family: "RoadRadio-Bold"
+		._dark &
+			font-family: $medium
+			font-size: 36px
 	&__text
 		font-size: 18px
 		line-height: 26px
@@ -67,6 +83,37 @@
 		background: url('/images/close.svg') no-repeat center
 		background-size: contain
 		z-index: 100
+	
+	&-docs
+		&-item
+			$parent: &
+			padding: 35px 0
+			border: none
+			&:not(:last-of-type)
+				border-bottom: 1px solid transparentize(#FFF,.8)
+			&__row
+				display: flex
+			&__icon-wrap
+				flex: 0 0 auto
+			&__icon
+				display: block
+				margin-right: 35px
+				margin-top: 3px
+			&__title
+				margin-bottom: 5px
+				font-family: $medium
+				font-size: 18px
+				line-height: 22px
+				color: transparentize(#FFF,.2)
+				@extend .transition
+			&__small
+				font-size: 14px
+				color: transparentize(#FFF,.2)
+			&:hover
+				#{$parent}
+					&__title
+						color: #FFF
+
 
 @keyframes backdropIn
 	0%
