@@ -84,7 +84,7 @@
 				color: transparentize($orange,.8)
 				span
 					border-color: transparent
-	&-back
+	&-arrow
 		display: flex
 		align-items: center
 		justify-content: center
@@ -92,10 +92,22 @@
 		background: transparentize($orange,0.5)
 		border: 2px solid $orange
 		border-radius: 50%
+		@extend .transition
+		&._next
+			transform: rotate(180deg)
+		&._white 
+			border-color: #FFF
+			background: transparentize(#FFF,0.5)
+			path
+				fill: #FFF
 		path
+			fill: $orange
 			transition: 0.4s
 		&:hover
 			background: transparentize($orange-dark,0.5)
 			border-color: $orange-dark
+			&._white
+				background: #FFF
 			path
 				fill: $orange-dark
+		

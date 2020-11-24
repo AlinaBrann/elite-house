@@ -10,6 +10,11 @@ body
 		font-size: 35px
 		color: #161515
 		text-align: center
+		z-index: 1
+		&._white
+			color: #FFF
+			&:before
+				-webkit-text-stroke: 2px #2B2C2D
 		&:before
 			content: attr(data-title)
 			display: block

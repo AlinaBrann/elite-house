@@ -3,6 +3,7 @@
         <Intro free="168" />
         <Banner deadline="2020-12-25 00:00:00" />
         <Catalog/>
+        <Projects/>
     </div>
     
 </template>
@@ -11,6 +12,7 @@
 	import Intro from '@/components/Intro/Intro'
 	import Banner from '@/components/Banner/Banner'
 	import Catalog from '@/components/Catalog/Catalog'
+	import Projects from '@/components/Projects/Projects'
 
 	import Vue from 'vue'
 
@@ -20,7 +22,8 @@
 		components: {
 			Intro,
 			Banner,
-			Catalog
+            Catalog,
+            Projects
 		}
 	}
 	Vue.mixin({

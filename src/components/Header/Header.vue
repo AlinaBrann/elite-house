@@ -143,16 +143,22 @@ export default {
 		this.phonePopup = false	
     },
     updateScroll() {
+        let project = document.getElementById('projects'),
+        projectTop = project.offsetTop,
+        projectHeight = project.offsetHeight,
+        projectBottom = projectTop + projectHeight
         this.scrollPosition = window.scrollY
-        if (this.scrollPosition >= window.innerHeight) {
+        if (this.scrollPosition >= window.innerHeight && !(this.scrollPosition >= projectTop && this.scrollPosition <= projectBottom)) {
            this.darkTheme = true
-        }  else {
+        } else {
             this.darkTheme = false
         } 
     },
   },
    mounted() {
         window.addEventListener('scroll', this.updateScroll);
+        window.addEventListener("DOMContentLoaded", this.updateScroll);
+
         
     }
 

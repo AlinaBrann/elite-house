@@ -2,7 +2,7 @@
 	<section class="section catalog-section" id="catalog">
 		<h2 
 			class="section__title" 
-			v-bind:data-title=" content.catalog.title ">
+			v-bind:data-title="content.catalog.title">
 			{{ content.catalog.title }}
 		</h2>
 		<div class="filter">
