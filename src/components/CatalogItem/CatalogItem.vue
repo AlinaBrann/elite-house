@@ -45,7 +45,7 @@
                             class="catalog-item__button button _full _border"
                             @click="openModal();popupOpener($event);"
                         >Спец. предложение</button>
-                        <button class="button-more catalog-item__all-info">Подробное описание</button>
+                        <button class="button-more catalog-item__all-info" @click="goTodetail(item.id)">Подробное описание</button>
                     </div>
                     
                 </div>
@@ -74,6 +74,7 @@ import Modal from '@/components/Modal/Modal';
 export default {
     data () {
         return {
+            title:"details",
             showPopup: false,
             settings: {
                 arrows: false,
@@ -104,7 +105,9 @@ export default {
         Modal
     },
     methods: {
-       
+       goTodetail(prodId) {
+            this.$router.push({name:'CatalogItemDetails',params:{Pid:prodId}})
+        }
     }
 }
 </script>

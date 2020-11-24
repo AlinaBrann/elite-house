@@ -16,6 +16,7 @@
     "vue-fixed-header": "^3.2.15",
     "vue-nouislider": "^1.0.1",
     "vue-range-component": "^1.0.3",
+    "vue-router": "^3.4.9",
     "vue-slick": "^1.1.15",
     "vue-slider-component": "^4.0.0@next",
     "vue2-flip-countdown": "^0.11.1",
