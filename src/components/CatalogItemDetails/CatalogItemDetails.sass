@@ -11,11 +11,34 @@
         box-shadow: none
         &__layout
             height: 400px
+            margin-bottom: 40px
         &-about
             &__title
-                margin-bottom: 10px
+                margin: 30px 0 15px
                 font-family: $bold
                 font-size: 20px
                 line-height: 28px
+                &._v2
+                    margin-top: 15px
             &__text
+                margin-bottom: 20px
                 line-height: 26px
+            &-list
+                line-height: 26px
+                &__item
+                    position: relative
+                    padding-left: 15px
+                    &:before
+                        content: '-'
+                        display: inline-block
+                        position: absolute
+                        top: 0px
+                        left: 0
+                    &._v2
+                        &:before
+                            content: '•'
+        &-slider
+            &._for
+                width: 100%
+                .slick-slide
+                    height: 400px
