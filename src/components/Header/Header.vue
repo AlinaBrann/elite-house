@@ -51,7 +51,7 @@
                             <span class="header-menu-toggle__item"></span>
                             <span class="header-menu-toggle__item"></span>
                         </button>      
-                        <div class="popup popup-feedback" :class="{ '_showPopup': phonePopup, '_hidePopup': !phonePopup }">
+                        <div class="popup popup-feedback" @open="phonePopup = true" :class="{ '_showPopup': phonePopup, '_hidePopup': !phonePopup }">
                             <div class="popup-backdrop" 
                             :style="{
                                 left: left + 'px', 
@@ -88,7 +88,7 @@
                                 <a :href="'tel:' + phone" class="hidden-menu-info__phone">{{ phone }}</a>
                                 <div class="hidden-menu-info__title">Адрес</div>
                                 <div class="hidden-menu-info__address">{{ address }}</div>
-                                <div class="hidden-menu-info__mail">{{ mail }}</div>
+                                <a :href="'mailto:' + mail" class="hidden-menu-info__mail">{{ mail }}</a>
                             </div>
                         </div>
                     </div>
@@ -144,11 +144,15 @@ export default {
     },
     updateScroll() {
         let project = document.getElementById('projects'),
+        contacts = document.getElementById('contacts'),
         projectTop = project.offsetTop,
         projectHeight = project.offsetHeight,
-        projectBottom = projectTop + projectHeight
+        projectBottom = projectTop + projectHeight,
+        contactsTop = contacts.offsetTop,
+        contactsHeight = contacts.offsetHeight,
+        contactsBottom = contactsTop + contactsHeight
         this.scrollPosition = window.scrollY
-        if (this.scrollPosition >= window.innerHeight && !(this.scrollPosition >= projectTop && this.scrollPosition <= projectBottom)) {
+        if (this.scrollPosition >= window.innerHeight && !(this.scrollPosition >= projectTop && this.scrollPosition <= projectBottom) && !(this.scrollPosition >= contactsTop && this.scrollPosition <= contactsBottom)) {
            this.darkTheme = true
         } else {
             this.darkTheme = false

@@ -5,6 +5,7 @@
         <Catalog/>
         <Projects/>
 		<Possibilities/>
+		<Contacts/>
     </div>
     
 </template>
@@ -15,6 +16,7 @@
 	import Catalog from '@/components/Catalog/Catalog'
 	import Projects from '@/components/Projects/Projects'
 	import Possibilities from '@/components/Possibilities/Possibilities'
+	import Contacts from '@/components/Contacts/Contacts'
 
 	import Vue from 'vue'
 
@@ -26,7 +28,8 @@
 			Banner,
             Catalog,
 			Projects,
-			Possibilities
+			Possibilities,
+			Contacts
 		}
 	}
 	Vue.mixin({

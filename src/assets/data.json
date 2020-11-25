@@ -257,5 +257,31 @@
                 "img": "possibilities-3.svg"
             }
         ]
+    },
+    "contacts": {
+        "title": "Контакты",
+        "smallTitle": "Elite House",
+        "coords": [42.878645, 74.616197],
+        "workingTime": [
+            "Пн – Пт: с 9.00 до 20.00",
+            "Сб: с 11.00 до 20.00",
+            "Вс: с 11.00 до 20.00"
+        ],
+        "social": [
+            {
+                "link": "/",
+                "name": "instagram"
+            },
+            {
+                "link": "/",
+                "name": "facebook"
+            },
+            {
+                "link": "/",
+                "name": "vk"
+            }
+        ],
+        "site": "/",
+        "samolet": "https://samoliot.ru/"
     }
 }
