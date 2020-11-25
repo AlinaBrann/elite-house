@@ -43,7 +43,7 @@
                         <button class="catalog-item__button button _full">ЗАБРОНИРОВАТЬ</button>
                         <button 
                             class="catalog-item__button button _full _border"
-                            @click="openModal();popupOpener($event);"
+                            @click="openProposalModal();popupOpener($event);"
                         >Спец. предложение</button>
                         <button class="button-more catalog-item__all-info" @click="goTodetail(item.id)">Подробное описание</button>
                     </div>
@@ -52,7 +52,7 @@
             </div>
             
         </div>
-       <Modal 
+       <ProposalModal 
             :leftPos="left"
             :topPos="top"
             :originX="posX"
@@ -68,7 +68,7 @@
 
 <script>
 import Slick from 'vue-slick';
-import Modal from '@/components/Modal/Modal';
+import ProposalModal from '@/components/ProposalModal/ProposalModal';
 
 
 export default {
@@ -102,7 +102,7 @@ export default {
     },
     components: {
         Slick,
-        Modal
+        ProposalModal
     },
     methods: {
        goTodetail(prodId) {

@@ -8,8 +8,11 @@
 	align-content: center
 	justify-content: center
 	z-index: 10000
-	._dark &
+	&._dark
+		background: transparentize(#4C4D4F,.4)
 		overflow: auto
+		&._hidePopup
+			transition-delay: 0.4s !important
 	&._showPopup
 		opacity: 1
 		visibility: visible
@@ -32,7 +35,8 @@
 		._showPopup &,
 		._active &
 			animation: backdropIn 0.5s forwards
-		._hidePopup &
+		._hidePopup &,
+		.modal-leave-active &
 			animation: backdropOut 0.5s forwards
 	&-content
 		max-height: 60vh
@@ -40,9 +44,16 @@
 		color: #FFF
 		opacity: 0
 		transition: 0.4s
-		._showPopup &
+		._showPopup &,
+		.modal-enter-to &
 			opacity: 1
 			transition-delay: 0.5s
+		._dark &
+			transition-delay: 0s !important
+		._hidePopup &,
+		.modal-leave-active &
+			transition-delay: 0s !important
+			opacity: 0
 		._dark &
 			max-height: none
 	&-body

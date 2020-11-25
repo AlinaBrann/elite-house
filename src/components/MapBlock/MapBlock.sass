@@ -1,0 +1,33 @@
+@import '@/assets/styles/variables'
+
+.button
+	&-map
+		&._border
+			margin-bottom: 25px
+			height: auto
+			max-height: 80px
+			padding: 0
+			font-size: 24px
+			font-family: $bold
+			background-size: cover
+			position: relative
+			transition: 0.5s
+			overflow: hidden
+			&._active
+				max-height: 1000px
+			span
+				position: absolute
+				bottom: 20px
+				left: 50%
+				transform: translateX(-50%)
+				border: none
+				border-bottom: 2px dashed transparentize($orange,0.5)
+				cursor: pointer
+			&:hover
+				background: url('/images/button-map-bg.png') no-repeat center
+				background-size: cover
+				color: transparentize($orange,.8)
+				span
+					border-color: transparent
+		&__map
+			width: 100%

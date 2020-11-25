@@ -72,7 +72,7 @@
             :style="{
                 left: left + 'px', 
                 top: top + 'px',
-                transformOrigin: center
+                transformOrigin: '50% 50%' 
             }"
             @click="phonePopup = false;"
             ></div>

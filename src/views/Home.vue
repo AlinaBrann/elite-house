@@ -66,7 +66,7 @@
 				console.log(this.left);
 				
 			},
-			openModal() {
+			openProposalModal() {
 				this.showPopup = true
 			},
 		}

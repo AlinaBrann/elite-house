@@ -1,6 +1,10 @@
 const path = require('path')
 
 module.exports = {
+  publicPath: process.env.NODE_ENV === 'production'
+    ? '/site/elite-house/'
+    : '/',
+
   chainWebpack: config => {
     const oneOfsMap = config.module.rule('scss').oneOfs.store
     oneOfsMap.forEach(item => {

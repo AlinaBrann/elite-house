@@ -59,6 +59,7 @@
 				font-family: $bold
 				font-size: 20px
 				line-height: 28px
+				margin-bottom: 5px
 			&__address
 				margin-bottom: 15px
 				color: transparentize(#FFF,.2)
@@ -66,3 +67,41 @@
 				width: 240px
 				max-width: 100%
 				background: transparentize($orange,.9)
+	&-popup
+		line-height: 28px
+		&-slider
+			&._for
+				margin-top: 25px
+				.slick-slide
+					height: 390px
+			&._nav
+				.slick-slide
+					&:before
+						background: transparentize(#4C4D4F, 0.5) url('/images/eye.svg') no-repeat center
+		&__small-title
+			margin: 40px 0 25px
+			font-family: $bold
+			font-size: 20px
+		&__text
+			margin-bottom: 15px
+		&-list
+			&._v1
+				display: flex
+				flex-wrap: wrap
+			&__item
+				position: relative
+				padding-left: 15px
+				._v1 &
+					flex: 0 0 50%
+				&:before
+					content: '-'
+					display: inline-block
+					position: absolute
+					top: 0px
+					left: 0
+				&._v2
+					&:before
+						content: '•'
+		&__button
+			margin-top: 30px
+			

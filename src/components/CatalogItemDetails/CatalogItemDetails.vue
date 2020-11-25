@@ -61,7 +61,7 @@
 							<button class="catalog-item__button button _full" @click="goTodetail(item.id)">ЗАБРОНИРОВАТЬ</button>
 							<button 
 								class="catalog-item__button button _full _border _dark-text"
-								@click="openModal();popupOpener($event);"
+								@click="openProposalModal();popupOpener($event);"
 								>
 								Спец. предложение
 							</button>
@@ -71,16 +71,12 @@
 									<div class="catalog-item-detail-about__text" v-html="item.text"></div>
 								</div>
 
-								<button 
-									v-if="item.coords"
-									class="catalog-item__button button button-map _full _border"
-									@click="popupOpener($event);showPopupMap = !showPopupMap"
-									>
-									<span>Показать на карте</span>
-								</button>
+								<MapBlock :coords="item.coords" :height="400" :center="[42.880534, 74.616267]"/>
+
 								<button 
 									class="catalog-item__button button _full _border _dark-text"
-									@click="openModal();popupOpener($event);"
+									@click="showPopupDocs = true"
+									v-if="item.documents"
 									>
 									Документация объекта
 								</button>
@@ -114,33 +110,9 @@
 					</div>
 				</div>	
 				<div 
-					class="popup" 
-					:class="{ '_showPopup': showPopupMap, '_hidePopup': !showPopupMap }"
-					v-if="item.coords"
-					>
-					<div class="popup-backdrop" 
-					:style="{
-						left: left + 'px', 
-						top: top + 'px',
-						transformOrigin: posX + ' ' + posY
-					}"
-					@click="showPopupMap = !showPopupMap"
-					></div>
-					<div class="popup-content" >
-						<yandex-map :coords="item.coords" style="width: 60vw; height: 60vh;">
-							<ymap-marker 
-							marker-id="123" 
-							:coords="item.coords"
-							:icon="markerIcon"
-							
-							/>
-						</yandex-map>
-					</div>
-				</div>	
-				<div 
 					class="popup _dark" 
 					:class="{ '_showPopup': showPopupDocs, '_hidePopup': !showPopupDocs }"
-					v-if="item.coords"
+					v-if="item.documents"
 					>
 					<div class="popup-content" >
 						<div class="popup-body">
@@ -177,7 +149,7 @@
 				</div>			
 			</div>
 		</div>
-		<Modal 
+		<ProposalModal 
             :leftPos="left"
             :topPos="top"
             :originX="posX"
@@ -193,8 +165,9 @@
 <script>
 	import Flats from '@/assets/data.json'
 	import Slick from 'vue-slick'
-	import Modal from '@/components/Modal/Modal'
-	import { yandexMap, ymapMarker } from 'vue-yandex-maps'
+	import ProposalModal from '@/components/ProposalModal/ProposalModal'
+	import MapBlock from '@/components/MapBlock/MapBlock'
+
 	export default {
 		name:'CatalogItemDetails',
 		data() {
@@ -219,21 +192,13 @@
 					focusOnSelect: true,
 					slidesToShow: 5,
 					asNavFor: '._for'
-				},
-				markerIcon: {
-					layout: 'default#imageWithContent',
-					imageHref: '/images/marker.svg',
-					imageSize: [42, 78],
-					imageOffset: [0, -40],
-					contentLayout: '<div style="background: red; width: 50px; color: #FFFFFF; font-weight: bold;">$[properties.iconContent]</div>'
 				}
 			}
 		},
 		components: {
 			Slick,
-			Modal,
-			yandexMap, 
-			ymapMarker
+			ProposalModal,
+			MapBlock
 		},
 	}
 </script>

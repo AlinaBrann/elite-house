@@ -10,7 +10,7 @@
             <div class="container">
                 <h1 class="intro__title">{{ item.title }}</h1>
                 <div class="intro__subtitle">{{ item.subTitle }}</div>
-                <button class="button" @click="openModal();popupOpener($event);">индивидуальное предложение </button>
+                <button class="button" @click="openProposalModal();popupOpener($event);">индивидуальное предложение </button>
                 <div class="intro-slider-wrapper">
                     <Slick
                         :options="settings"
@@ -44,7 +44,7 @@
                 <iframe width="560" height="315" src="https://www.youtube.com/embed/NsUWXo8M7UA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         </div>
-        <Modal 
+        <ProposalModal 
             :leftPos="left"
             :topPos="top"
             :originX="posX"
@@ -62,7 +62,7 @@ import Intro from '@/assets/data.json'
 import Slick from 'vue-slick'
 import $ from 'jquery'
 import Header from '@/components/Header/Header'
-import Modal from '@/components/Modal/Modal';
+import ProposalModal from '@/components/ProposalModal/ProposalModal';
 
 
 export default {
@@ -95,7 +95,7 @@ export default {
     components: {
         Slick,
         Header,
-        Modal
+        ProposalModal
     },
     methods: {
         closePopup() {

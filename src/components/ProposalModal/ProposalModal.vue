@@ -33,14 +33,14 @@
                     </div>
                     <div class="filter-block popup-offer-filter-block" v-if="slide.range">
                         <div class="filter-block__title popup-offer-filter-block__title" v-html="slide.range.title"></div>
-                        <div ref="sliderAreaModal" class="filter-range sliderAreaModal"></div>
+                        <div ref="sliderAreaProposalModal" class="filter-range sliderAreaProposalModal"></div>
                         <input type="hidden" name="offerAreaMin" :value="slide.range.value[0]">
                         <input type="hidden" name="offerAreaMax" :value="slide.range.value[1]">
                         <div class="filter-block__label">
                             <span>от {{ valueArea[0] | currency }}</span><span>до {{ valueArea[1] | currency }}</span>
                         </div>
                     </div>
-                    <FeedbackForm v-if="slide.feedback" :name="'modalFeedback' + (index + 1)"/>
+                    <FeedbackForm v-if="slide.feedback" :name="'ProposalModalFeedback' + (index + 1)"/>
                 </div>
             </Slick>
             <button class="popup-offer-slider__next button">Далее</button>
@@ -52,8 +52,6 @@
 import Popup from '@/components/PopupBackdrop/PopupBackdrop'
 import Slick from 'vue-slick';
 import Offer from '@/assets/data.json'
-// import 'vue-range-component/dist/vue-range-slider.css'
-// import VueRangeSlider from 'vue-range-component'
 import FeedbackForm from '@/components/FeedbackForm/FeedbackForm'
 import 'nouislider/distribute/nouislider.css'
 import noUiSlider from 'nouislider'
@@ -104,9 +102,9 @@ export default {
     },
     mounted() {
 		let vm = this
-        var sliderAreaModal = document.getElementsByClassName('sliderAreaModal')[0]
+        var sliderAreaProposalModal = document.getElementsByClassName('sliderAreaProposalModal')[0]
         noUiSlider.create(
-            sliderAreaModal, {
+            sliderAreaProposalModal, {
                 start: vm.valueArea,
                 connect: true,
                 range: {
@@ -116,7 +114,7 @@ export default {
             }
         );
         
-        sliderAreaModal.noUiSlider.on('update', function (values) {
+        sliderAreaProposalModal.noUiSlider.on('update', function (values) {
             vm.valueArea = values
             console.log(vm.valueArea);
         });
@@ -124,4 +122,4 @@ export default {
 }
 </script>
 
-<style src="./Modal.sass" lang="sass"></style>
+<style src="./ProposalModal.sass" lang="sass"></style>
