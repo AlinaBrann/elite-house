@@ -7,6 +7,8 @@
     width: 100vw
     padding-top: 7.1vh
     z-index: 1000
+    &._back
+        z-index: 1
     &.vue-fixed-header--isFixed 
         position: fixed
     &-row
@@ -29,8 +31,10 @@
         ._dark &
             color: #4C4D4F
     &-menu
-        display: flex
-        justify-content: space-between
+        display: none
+        +min-screen($screen-md)
+            display: flex
+            justify-content: space-between
         &-wrapper
             flex: auto
         &__item

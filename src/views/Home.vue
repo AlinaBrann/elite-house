@@ -1,11 +1,23 @@
 <template>
     <div id="app">
-        <Intro free="168" />
+        <Intro 
+			free="168" 
+			@open-booking="openBookingPopup"
+			@open-proposal="openProposalPopup"
+			@round-position="roundPosition"
+			@open-special="openSpecialPopup"
+			@open-feedback="openFeedbackPopup" />
         <Banner deadline="2020-12-25 00:00:00" />
-        <Catalog/>
+        <Catalog 
+			@open-booking="openBookingPopup"
+			@open-proposal="openProposalPopup"
+			@round-position="roundPosition"
+			@open-special="openSpecialPopup"/>
         <Projects/>
 		<Possibilities/>
-		<Contacts/>
+		<Contacts
+			@round-position="roundPosition"
+			@open-feedback="openFeedbackPopup"/>
     </div>
     
 </template>
@@ -30,46 +42,34 @@
 			Projects,
 			Possibilities,
 			Contacts
+		},
+		methods: {
+			openBookingPopup(item) {
+				this.$emit('open-booking', item)
+			},
+			openProposalPopup() {
+				this.$emit('open-proposal')
+			},
+			openFeedbackPopup() {
+				this.$emit('open-feedback')
+			},
+			openSpecialPopup(item) {
+				this.$emit('open-special', item)
+			},
+			roundPosition(event) {
+				this.$emit('round-position', event)
+			}
+			
 		}
 	}
 	Vue.mixin({
 		data: function () {
 			return {
-				left: 0,
-				top: 0,
-				posY: "80%",
-				posX: "80%",
-				screenWidth: window.innerWidth,
-				screenHeight: window.innerHeight
+				
 			}
 		},
 		
-		methods: {
-			trans() {
-				if(this.top <= this.screenHeight / 2) {
-					this.posY = "20%"
-				} else if(this.top <= this.screenHeight / 2.5) {
-					this.posY = "70%"
-				} else if(this.left <= this.screenWidth / 2){
-					this.posX = "20%"
-				} else if(this.left <= this.screenWidth / 2.5){
-					this.posX = "50%"
-				}
-			},
-			popupOpener(event) {
-				let current = event.currentTarget
-					// currentAttr = current.getAttribute('data-popup-opener');
-
-				this.left = current.getBoundingClientRect().left
-				this.top = current.getBoundingClientRect().top
-				this.trans()
-				console.log(this.left);
-				
-			},
-			openProposalModal() {
-				this.showPopup = true
-			},
-		}
+		
 		
 	})
 </script>

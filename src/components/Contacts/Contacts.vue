@@ -63,35 +63,16 @@
                     <div class="contacts-content__title _v2">Отдел продаж</div>
                     <a :href="'tel:' + phone" class="contacts-content__phone">{{ phone }}</a>
                     <a :href="'mailto:' + mail" class="contacts-content__mail">{{ mail }}</a>
-                    <button class="button" @click="phonePopup = true; popupOpener($event);">оставить заявку</button>
+                    <button class="button" @click="$emit('open-feedback'); $emit('round-position', $event);">оставить заявку</button>
                 </div>
             </div>
         </div>
-        <div class="popup popup-feedback" @open="phonePopup = true" :class="{ '_showPopup': phonePopup, '_hidePopup': !phonePopup }">
-            <div class="popup-backdrop" 
-            :style="{
-                left: left + 'px', 
-                top: top + 'px',
-                transformOrigin: '50% 50%' 
-            }"
-            @click="phonePopup = false;"
-            ></div>
-            <div class="popup-content popup-feedback__content" >
-                <div class="popup__title">{{ feedback.title }}</div>
-                <div class="popup__text" v-html="feedback.text"></div>
-                <FeedbackForm 
-                    class="popup-feedback-form"
-                    name="headerFeedback"
-                />
-            </div>
-        </div>   
     </footer>
 </template>
 
 <script>
 import Contacts from '@/assets/data.json'
 import { yandexMap, ymapMarker } from 'vue-yandex-maps'
-import FeedbackForm from '@/components/FeedbackForm/FeedbackForm'
 
 export default {
     data() {
@@ -116,7 +97,6 @@ export default {
     components: {
         yandexMap, 
         ymapMarker,
-        FeedbackForm
     },
     methods: {
         zoomIn() {

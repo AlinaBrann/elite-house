@@ -17,6 +17,7 @@
         box-shadow: none
         &__layout
             height: 400px
+            margin: 0
             margin-bottom: 40px
         &-about
             &__title
@@ -43,6 +44,8 @@
                     &._v2
                         &:before
                             content: '•'
+        &__content
+            width: 100%
         &-slider
             &._for
                 width: 100%
@@ -52,7 +55,7 @@
                 width: calc(100% + 4px)
                 .slick-slide
                     height: 70px
-                    // &:before
-                    //     background: transparentize(#4C4D4F, 0.5) url('/images/eye.svg') no-repeat center
+                    &:before
+                        background: transparentize(#4C4D4F, 0.5) url('/images/eye.svg') no-repeat center
                 .slick-next
                     right: 65px

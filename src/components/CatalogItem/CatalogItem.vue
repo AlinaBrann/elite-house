@@ -1,8 +1,8 @@
 <template>
     <li>
         <div class="catalog-item__container">
-            <div class="row">
-                <div class="col-md-3">
+            <div class="catalog-item__row">
+                <div class="catalog-item__slider">
                     <Slick
                         :options="settings"
                         :class="'preview-slider _for for_' + item.id"
@@ -21,61 +21,45 @@
                         </div>
                     </Slick>
                 </div>
-                <div class="col-md-6">
-                    <div class="catalog-item__layout">
-                        <img 
-                            v-if="item.layout"
-                            :src="/images/ + item.layout"
-                            :alt="item.title"
-                        >
-                    </div>
-                    
+                <div class="catalog-item__layout">
+                    <img 
+                        v-if="item.layout"
+                        :src="/images/ + item.layout"
+                        :alt="item.title"
+                    >
                 </div>
-                <div class="col-md-3">
-                    <div class="catalog-item__content">
-                        <div class="catalog-item__area">{{ item.area }} m<sup>2</sup></div>
-                        <div class="catalog-item__address" v-html="item.address"></div>
-                        <div class="catalog-item__price">
-                            $ {{ item.price | currency }}
-                            <span v-if="item.currency"> {{ item.currency }}</span>
-                            <span v-else> &#8381;</span>
-                        </div>
-                        <button class="catalog-item__button button _full">ЗАБРОНИРОВАТЬ</button>
-                        <button 
-                            class="catalog-item__button button _full _border"
-                            @click="openProposalModal();popupOpener($event);"
-                        >Спец. предложение</button>
-                        <button class="button-more catalog-item__all-info" @click="goTodetail(item.id)">Подробное описание</button>
-                    </div>
                     
-                </div>
+                <div class="catalog-item__content">
+                    <div class="catalog-item__area">{{ item.area }} m<sup>2</sup></div>
+                    <div class="catalog-item__address" v-html="item.address"></div>
+                    <div class="catalog-item__price">
+                        $ {{ item.price | currency }}
+                        <span v-if="item.currency"> {{ item.currency }}</span>
+                        <span v-else> &#8381;</span>
+                    </div>
+                    <button class="catalog-item__button button _full" @click="$emit('open-booking', item)">ЗАБРОНИРОВАТЬ</button>
+                    <button 
+                        class="catalog-item__button button _full _border"
+                        @click="$emit('open-special', item);"
+                    >Спец. предложение</button>
+                    <button class="button-more catalog-item__all-info" @click="goTodetail(item.id)">Подробное описание</button>
+                </div>                    
             </div>
             
         </div>
-       <ProposalModal 
-            :leftPos="left"
-            :topPos="top"
-            :originX="posX"
-            :originY="posY"
-            v-if="showPopup" 
-            :class="{ '_showPopup': showPopup, '_hidePopup': !showPopup }" 
-            @close="showPopup = false"
-            class="popup-offer"
-        />
+       
     </li>
    
 </template>
 
 <script>
 import Slick from 'vue-slick';
-import ProposalModal from '@/components/ProposalModal/ProposalModal';
 
 
 export default {
     data () {
         return {
             title:"details",
-            showPopup: false,
             settings: {
                 arrows: false,
                 dots: false,
@@ -98,14 +82,13 @@ export default {
             type: Object,
             required: true
         },
-        index: Number
+        booking: String
     },
     components: {
-        Slick,
-        ProposalModal
+        Slick
     },
     methods: {
-       goTodetail(prodId) {
+        goTodetail(prodId) {
             this.$router.push({name:'CatalogItemDetails',params:{Pid:prodId}})
         }
     }

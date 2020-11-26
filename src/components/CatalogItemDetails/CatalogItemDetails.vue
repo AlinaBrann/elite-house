@@ -9,7 +9,7 @@
 				<div class="row">
 					<div class="col-xs-12 col-md-7">
 						<div class="catalog-item-details-head">
-							<router-link to="/" class="button-arrow">
+							<router-link to="/#catalog" class="button-arrow">
 								<svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 									<path d="M0.292891 7.29289C-0.0976333 7.68341 -0.0976334 8.31658 0.29289 8.7071L6.65685 15.0711C7.04738 15.4616 7.68054 15.4616 8.07106 15.0711C8.46159 14.6805 8.46159 14.0474 8.07106 13.6569L2.41421 8L8.07107 2.34314C8.46159 1.95262 8.46159 1.31946 8.07107 0.928931C7.68054 0.538406 7.04738 0.538406 6.65685 0.92893L0.292891 7.29289ZM17 7L0.999998 7L0.999998 9L17 9L17 7Z" fill="#F47321"/>
 								</svg>
@@ -50,7 +50,7 @@
 						</Slick>
 					</div>
 					<div class="col-xs-12 col-md-5">
-						<div class="catalog-item__content">
+						<div class="catalog-item__content catalog-item-detail__content">
 							<div class="catalog-item__area">{{ item.area }} m<sup>2</sup></div>
 							<div class="catalog-item__address" v-html="item.address"></div>
 							<div class="catalog-item__price">
@@ -58,10 +58,10 @@
 								<span v-if="item.currency"> {{ item.currency }}</span>
 								<span v-else> &#8381;</span>
 							</div>
-							<button class="catalog-item__button button _full" @click="goTodetail(item.id)">ЗАБРОНИРОВАТЬ</button>
+							<button class="catalog-item__button button _full" @click="$emit('open-booking', item)">ЗАБРОНИРОВАТЬ</button>
 							<button 
 								class="catalog-item__button button _full _border _dark-text"
-								@click="openProposalModal();popupOpener($event);"
+								@click="$emit('open-proposal');$emit('round-position', $event);"
 								>
 								Спец. предложение
 							</button>
@@ -99,7 +99,7 @@
 											class="catalog-item-detail-about-list__item _v2" 
 											v-for="list in item.advantage"
 											:key="list"
-										>
+											>
 											{{ list }}
 										</li>
 									</ul>
@@ -140,7 +140,6 @@
 												<span v-if="doc.date">• {{ doc.date }}</span>
 											</div>
 										</div>
-										
 									</a>
 								</li>
 							</ul>
@@ -149,23 +148,11 @@
 				</div>			
 			</div>
 		</div>
-		<ProposalModal 
-            :leftPos="left"
-            :topPos="top"
-            :originX="posX"
-            :originY="posY"
-            v-if="showPopup" 
-            :class="{ '_showPopup': showPopup, '_hidePopup': !showPopup }" 
-            @close="showPopup = false"
-            class="popup-offer"
-        />
-		
 	</div>
 </template>
 <script>
 	import Flats from '@/assets/data.json'
 	import Slick from 'vue-slick'
-	import ProposalModal from '@/components/ProposalModal/ProposalModal'
 	import MapBlock from '@/components/MapBlock/MapBlock'
 
 	export default {
@@ -178,6 +165,7 @@
 				showPopup: false,
 				showPopupMap: false,
 				showPopupDocs: false,
+				
 				settings: {
 					arrows: false,
 					dots: false,
@@ -187,7 +175,7 @@
 					
 				},
 				navSettings: {
-					arrows: true,
+					arrows: false,
 					dots: false,
 					focusOnSelect: true,
 					slidesToShow: 5,
@@ -197,9 +185,11 @@
 		},
 		components: {
 			Slick,
-			ProposalModal,
-			MapBlock
+			MapBlock,
 		},
+		methods: {
+			
+		}
 	}
 </script>
 

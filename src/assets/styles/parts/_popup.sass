@@ -22,6 +22,14 @@
 		opacity: 0
 		pointer-events: none
 		transition-delay: 1s
+	&-back-closer
+		position: absolute
+		top: 0
+		left: 0
+		display: block
+		+size(100%)
+		z-index: 0
+		cursor: pointer
 	&-backdrop
 		position: fixed
 		display: block
@@ -31,19 +39,23 @@
 		background: transparentize(#4C4D4F,.04)
 		border-radius: 50%
 		cursor: pointer
-		z-index: -100	
+		z-index: 10	
 		._showPopup &,
-		._active &
+		._active &,
+		&._active
 			animation: backdropIn 0.5s forwards
 		._hidePopup &,
-		.modal-leave-active &
+		.modal-leave-active &,
+		&._hide
 			animation: backdropOut 0.5s forwards
 	&-content
+		position: static
 		max-height: 60vh
 		margin: auto
 		color: #FFF
 		opacity: 0
 		transition: 0.4s
+		z-index: 1
 		._showPopup &,
 		.modal-enter-to &
 			opacity: 1
@@ -77,7 +89,7 @@
 		font-size: 18px
 		line-height: 26px
 	&-feedback
-		z-index: 9
+		z-index: 11
 		&__content
 			width: 640px
 			max-width: 100%

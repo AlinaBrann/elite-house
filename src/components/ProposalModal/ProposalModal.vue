@@ -1,11 +1,5 @@
 <template>
     <div class="popup popup-offer" >
-        <Popup 
-            :leftPosition="leftPos" 
-            :topPosition="topPos" 
-            :yPos="originY" 
-            :xPos="originX"
-            @click="$emit('close')"/>
         <div class="popup-offer__head">
             <div class="popup-offer-total">
                 <div class="popup-offer-total__item">{{ current }}</div>
@@ -49,7 +43,6 @@
 </template>
 
 <script>
-import Popup from '@/components/PopupBackdrop/PopupBackdrop'
 import Slick from 'vue-slick';
 import Offer from '@/assets/data.json'
 import FeedbackForm from '@/components/FeedbackForm/FeedbackForm'
@@ -74,22 +67,7 @@ export default {
             maxArea: 200
         }
     },
-    props: {
-        leftPos: {
-            type: Number
-        },
-        topPos: {
-            type: Number
-        },
-        originX: {
-            type: String
-        },
-        originY: {
-            type: String
-        }
-    },
     components: {
-        Popup,
         Slick,
         // VueRangeSlider,
         FeedbackForm
@@ -116,7 +94,6 @@ export default {
         
         sliderAreaProposalModal.noUiSlider.on('update', function (values) {
             vm.valueArea = values
-            console.log(vm.valueArea);
         });
 	}
 }

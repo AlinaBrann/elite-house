@@ -1,6 +1,6 @@
 <template>
     <fixed-header :fixed.sync="isFixed" :threshold="40">
-        <header class="header" :class="{ 'is-fixed': isFixed, '_dark': darkTheme }">
+        <header class="header" id="header" :class="{ 'is-fixed': isFixed, '_dark': darkTheme }">
             <div class="container">
                 <div class="header-row">
                     <div class="header-logo-wrapper">
@@ -25,7 +25,7 @@
                     
                     <div class="header-menu-wrapper">
                         <ul class="header-menu">
-                            <li class="header-menu__item animated-link">
+                            <li class="header-menu__item animated-link" @click="$emit('open-special');">
                                 Специальные предложения
                             </li>
                             <li class="header-menu__item animated-link">
@@ -36,8 +36,9 @@
                     <div class="header-info-wrapper _jcfe">
                         <a :href="'tel:' + phone" class="header-phone">{{ phone }}</a>
                         <button class="header-button header-phone-toggle button-white"
+                            id="phoneButton"
                             :class="{ '_active': phonePopup }"
-                            @click="popupOpener($event); phonePopupOpener(); menuShow = false"
+                            @click="$emit('round-position', $event); $emit('open-feedback'); menuShow = false"
                             >
                             <span class="header-phone-toggle__item"></span>
                             <span class="header-phone-toggle__item"></span>
@@ -46,33 +47,15 @@
                             class="header-button header-menu-toggle button-white" 
                             ref="menuButton"
                             :class="{ '_active': menuShow }"
-                            @click="popupOpener($event); menuToggle(); phonePopup = false"
+                            @click="$emit('round-position', $event); menuToggle();"
                             >
                             <span class="header-menu-toggle__item"></span>
                             <span class="header-menu-toggle__item"></span>
-                        </button>      
-                        <div class="popup popup-feedback" @open="phonePopup = true" :class="{ '_showPopup': phonePopup, '_hidePopup': !phonePopup }">
-                            <div class="popup-backdrop" 
-                            :style="{
-                                left: left + 'px', 
-                                top: top + 'px',
-                                transformOrigin: posX + ' ' + posY
-                            }"
-                            @click="closePopup()"
-                            ></div>
-                            <div class="popup-content popup-feedback__content" >
-                                <div class="popup__title">{{ feedback.title }}</div>
-                                <div class="popup__text" v-html="feedback.text"></div>
-                                <FeedbackForm 
-                                    class="popup-feedback-form"
-                                    name="headerFeedback"
-                                />
-                            </div>
-                        </div>                  
+                        </button>          
                     </div>
                 </div>
                 <div class="hidden-menu" :class="{ '_showPopup': menuShow, '_hidePopup': !menuShow }">
-                    <Popup :leftPosition="left" :topPosition="top" :yPos="posY" :xPos="posX"/>
+                    
                     <div class="container">
                         <div class="hidden-menu-content">
                             <ul class="hidden-menu-nav">
@@ -81,7 +64,13 @@
                                     :key="item.name"
                                     class="hidden-menu-nav__item animated-link"
                                     >
-                                    <a :href="item.path">{{ item.name }}</a>
+                                    <a 
+                                        @click="$emit('round-position', $event); menuToggle();" 
+                                        :href="item.path"
+                                        v-smooth-scroll="{ duration: 2000, offset: 2 }"
+                                        >
+                                        {{ item.name }}
+                                    </a>
                                 </li>
                             </ul>
                             <div class="hidden-menu-info">
@@ -101,14 +90,10 @@
 <script>
 import FixedHeader from 'vue-fixed-header'
 import Content from'@/assets/data.json'
-import Popup from '@/components/PopupBackdrop/PopupBackdrop'
-import FeedbackForm from '@/components/FeedbackForm/FeedbackForm'
 
 export default {
   components: {
-    FixedHeader,
-    Popup,
-    FeedbackForm
+    FixedHeader
   },
 
   data () {
@@ -127,13 +112,23 @@ export default {
     }
   },
   methods: {
+      openBookingPopup(item) {
+        this.$emit('open-booking', item)
+    },
+    openProposalPopup() {
+        this.$emit('round-roposal')
+    },
+    roundPosition(event) {
+        this.$emit('round-position', event)
+
+    },
     menuToggle() {
         this.menuShow = !this.menuShow
         if (this.scrollPosition >= window.innerHeight) {
             this.darkTheme = false
         }
     },
-    phonePopupOpener() {
+    phoneroundPosition() {
         this.phonePopup = !this.phonePopup
         if (this.scrollPosition >= window.innerHeight) {
             this.darkTheme = false
@@ -145,24 +140,33 @@ export default {
     updateScroll() {
         let project = document.getElementById('projects'),
         contacts = document.getElementById('contacts'),
-        projectTop = project.offsetTop,
-        projectHeight = project.offsetHeight,
-        projectBottom = projectTop + projectHeight,
-        contactsTop = contacts.offsetTop,
-        contactsHeight = contacts.offsetHeight,
-        contactsBottom = contactsTop + contactsHeight
-        this.scrollPosition = window.scrollY
-        if (this.scrollPosition >= window.innerHeight && !(this.scrollPosition >= projectTop && this.scrollPosition <= projectBottom) && !(this.scrollPosition >= contactsTop && this.scrollPosition <= contactsBottom)) {
-           this.darkTheme = true
-        } else {
-            this.darkTheme = false
-        } 
+        topBanner = document.getElementById('topBanner')
+        if (project || contacts || topBanner) {
+            let projectTop = project.offsetTop,
+            projectHeight = project.offsetHeight,
+            projectBottom = projectTop + projectHeight,
+            contactsTop = contacts.offsetTop,
+            contactsHeight = contacts.offsetHeight,
+            contactsBottom = contactsTop + contactsHeight,
+            topBannerHeight = topBanner.offsetHeight
+            this.scrollPosition = window.scrollY
+            if ( this.scrollPosition >= topBannerHeight){
+                this.isFixed = true
+            }
+            if (this.scrollPosition >= window.innerHeight && !(this.scrollPosition >= projectTop && this.scrollPosition <= projectBottom) && !(this.scrollPosition >= contactsTop && this.scrollPosition <= contactsBottom)) {
+            this.darkTheme = true
+            } else {
+                this.darkTheme = false
+            } 
+        }
+        
+        
     },
   },
    mounted() {
+       this.updateScroll()
         window.addEventListener('scroll', this.updateScroll);
-        window.addEventListener("DOMContentLoaded", this.updateScroll);
-
+        
         
     }
 

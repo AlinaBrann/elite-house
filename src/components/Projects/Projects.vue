@@ -108,7 +108,6 @@ export default {
             projects: Projects.projects,
             showMap: false,
             modalVisible: false,
-            modalData: null,
             popupTitle: '',
             popupAddress: '',
             popupGallery: '',

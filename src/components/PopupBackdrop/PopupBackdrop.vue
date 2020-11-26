@@ -1,10 +1,9 @@
 <template>
     <div class="popup-backdrop" 
-    :style="{
-        left: leftPosition + 'px', 
-        top: topPosition + 'px',
-        transformOrigin: xPos + ' ' + yPos
-    }"
+    :style="
+    [leftPosition ? {'left': + leftPosition + 'px' } : {'left': '10%'},
+    topPosition ? {'top': + topPosition + 'px' } : {'top': '10%'},
+    xPos && yPos ? {'transformOrigin': + xPos + '%' + ' ' + yPos + '%' } : {'transformOrigin': '50% 50%'}]"
     ></div>
 </template>
 
@@ -12,19 +11,15 @@
 export default {
     props: {
         leftPosition: {
-            type: Number,
             required: true
         },
         topPosition: {
-            type: Number,
             required: true
         },
         yPos: {
-            type: String,
             required: true
         },
         xPos: {
-            type: String,
             required: true
         }
     }

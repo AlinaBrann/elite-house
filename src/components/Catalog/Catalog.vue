@@ -240,6 +240,11 @@
 								v-bind:item="item" 
 								:key="item.id" 
 								class="catalog-item"
+								booking="item"
+								@open-booking="openBookingPopup"
+								@open-proposal="openProposalPopup"
+								@round-position="roundPosition"
+								@open-special="openSpecialPopup" 
 							/>
 						</transition-group>
 						<transition name="catalog-item">
@@ -254,7 +259,7 @@
 						</button>
 					</div>
 				</div>
-				
+
 			</div>
 		</div>
 	</section>
@@ -275,7 +280,6 @@
 		},
 		data() {
 			return {
-				
 				value: [50000, 300000],
 				valueArea: [0, 100],
 				content: Flats,
@@ -296,12 +300,15 @@
 				filtered: false,
 				errorText: false,
 				districtShow: false,
-				filterAddinations: false
+				filterAddinations: false,
+				popupPrice: '',
+				popupArea: '',
+				popupTitle: '',
 			}
 		},
 
 		methods: {
-
+			
 			districtsUncheck() {
 				this.isUnCheckAll = false;				
 			},
@@ -319,8 +326,6 @@
 					&& (vm.video.length === 0 || vm.video.includes(item.video))
 					&& (vm.loadingEntrance.length === 0 || vm.loadingEntrance.includes(item.loadingEntrance))
 					&& (vm.districts.length === 0 || vm.districts.includes('all') || vm.districts.includes(item.districts))
-					
-					
 				})
 				if (this.sortedProducts.length === 0) {
 					this.errorText = true
@@ -353,6 +358,22 @@
 			onSubmit() {
 				this.sortByCategories();
 				console.log(this.errorText);
+			},
+			closeModal() {
+				this.modalVisible = false
+			},
+			openBookingPopup(item) {
+				this.$emit('open-booking', item)
+			},
+			openProposalPopup() {
+				this.$emit('open-proposal')
+			},
+			openSpecialPopup(item) {
+				this.$emit('open-special', item)
+			},
+			roundPosition(event) {
+				this.$emit('round-position', event)
+
 			}
 			
 		},

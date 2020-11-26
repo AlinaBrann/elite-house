@@ -1,13 +1,20 @@
 <template>
-    <form class="popup-form feedback-form">
+    <form  @submit="checkForm" class="popup-form feedback-form">
         <div class="feedback-form-row _v1">
             <div class="input-wrapper feedback-form__name">
                 <label :for="name + '-name'" class="input-label">Ваше имя</label>
                 <input type="text" :id="name + '-name'" class="input">
             </div>
-            <div class="input-wrapper feedback-form__phone">
+            <div class="input-wrapper feedback-form__phone" :class="{'_error': errors}">
                 <label :for="name + '-phone'" class="input-label">Номер телефона</label>
-                <input type="tel" :id="name + '-phone'" class="input">
+                <input 
+                    type="tel" 
+                    :id="name + '-phone'" 
+                    v-model="phone"
+                    class="input">
+                <transition name="fade">
+                    <div v-show="errors" class="input-error">{{ errors }}</div>
+                </transition>
             </div>
         </div>
         <div class="feedback-form-row _v2">
@@ -27,7 +34,33 @@ export default {
             type: String,
             required: true
         }
+    },
+    data() {
+        return {
+            errors: '',
+            phone: null
+        }
+    
+  },
+  methods: {
+    checkForm: function (e) {
+        if (!this.phone && !this.validEmail(this.phone)) {
+            this.errors = 'Укажите номер телефона.';
+        } else if (this.phone && !this.validEmail(this.phone)) {
+            this.errors = 'Укажите корректный номер телефона.';
+        } else {
+            this.errors = ''
+        }
+        if (!this.errors) {
+            return true;
+        }
+        e.preventDefault();
+    },
+    validEmail: function (phone) {
+        var re = /^[+]?[0-9]{9,12}$/;
+        return re.test(phone);
     }
+  }
 }
 </script>
 
