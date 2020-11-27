@@ -12,16 +12,17 @@
        
         <div class="intro-content">
             <Header 
-                @open-booking="openBookingPopup"
-                @open-proposal="openProposalPopup"
+                @open-booking="openPopupBooking"
+                @open-proposal="openPopupProposal"
                 @round-position="roundPosition"
-                @open-feedback="openFeedbackPopup"
-                @open-special="openSpecialPopup" />
+                @open-feedback="openPopupFeedback"
+                @open-menu="openMenu"
+                @open-special="openPopupSpecial" />
 
             <div class="container">
                 <h1 class="intro__title">{{ item.title }}</h1>
                 <div class="intro__subtitle">{{ item.subTitle }}</div>
-                <button class="button" @click="$emit('open-proposal');$emit('round-position', $event);">индивидуальное предложение </button>
+                <button class="button" @click="$emit('open-proposal');">индивидуальное предложение </button>
                 <div class="intro-slider-wrapper">
                     <Slick
                         :options="settings"
@@ -92,22 +93,25 @@ export default {
         closePopup() {
 			return this.videoPopup = false	
         },
-        openBookingPopup(item) {
+        openPopupBooking(item) {
             this.$emit('open-booking', item)
         },
-        openFeedbackPopup() {
+        openPopupFeedback() {
             this.$emit('open-feedback')
         },
-        openProposalPopup() {
+        openMenu() {
+            this.$emit('open-menu')
+        },
+        openPopupProposal() {
             this.$emit('round-roposal')
         },
         roundPosition(event) {
             this.$emit('round-position', event)
 
         },
-        openSpecialPopup() {
-				this.$emit('open-special')
-			},
+        openPopupSpecial() {
+            this.$emit('open-special')
+        },
     
     }
 }

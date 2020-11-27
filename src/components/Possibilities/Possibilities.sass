@@ -1,12 +1,19 @@
 @import '@/assets/styles/variables'
+@import '@/assets/styles/libs/media'
 
 .possibilities
-    padding: 117px 0 121px
+    padding: 140px 0 100px
     background: #FFF
     overflow: hidden
+    +min-screen($screen-md)
+        padding: 117px 0 121px
     &__title
         margin-bottom: 50px
         text-align: center
+        +max-screen($screen-md)
+            &:before
+                bottom: -3px
+                white-space: pre-wrap
     &-slider
         width: 96.5%
         margin: auto
@@ -35,3 +42,38 @@
                 width: 240px
                 max-width: 100%
                 margin-top: auto
+        .slick-dots
+            display: flex
+            position: absolute
+            bottom: -40px
+            left: 50%
+            transform: translateX(-50%)
+            button
+                position: relative
+                width: 4px
+                height: 4px
+                margin: 0 10px
+                border-radius: 50%
+                border: none
+                background: $grey
+                transition: 0.4s
+                opacity: 0.5
+                font-size: 0
+                &:after
+                    content: ''
+                    display: block
+                    position: absolute
+                    top: 50%
+                    left: 50%
+                    width: 16px
+                    height: 16px
+                    transform: translate(-50%,-50%)
+                    border-radius: 50%
+                    border: 1px solid $grey
+                    transition: 0.4s
+                    opacity: 0
+            .slick-active 
+                button
+                    opacity: 1
+                    &:after
+                        opacity: 1

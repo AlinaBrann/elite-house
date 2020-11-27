@@ -18,9 +18,9 @@
             </div>
         </div>
         <div class="feedback-form-row _v2">
-            <input type="submit" class="button" value="Перезвоните мне">
+            <input type="submit" class="button feedback-form__button" value="Перезвоните мне">
             <div class="feedback-privacy">
-                Нажимая на кнопку «Перезвоните мне» вы соглашаетесь <br>с 
+                Нажимая на кнопку «Перезвоните мне» вы соглашаетесь <br class="hidden-xs">с 
                 <a href="">политикой конфиденциальности</a>
             </div>
         </div>
@@ -33,7 +33,8 @@ export default {
         name: {
             type: String,
             required: true
-        }
+        },
+        tag: String
     },
     data() {
         return {

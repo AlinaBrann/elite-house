@@ -3,12 +3,16 @@
 		<transition name="fade">
 		<router-view 
 			@round-position="roundPosition"
-			@open-booking="openBookingPopup"
-			@open-proposal="openProposalPopup"
-			@open-special="openSpecialPopup"
-			@open-feedback="openFeedbackPopup" /> 
+			@open-booking="openPopupBooking"
+			@open-proposal="openPopupProposal"
+			@open-special="openPopupSpecial"
+			@open-feedback="openPopupFeedback"
+			@open-menu="openMenu" /> 
 		</transition>
-		<BookingPopup 
+		<HiddenMenu 
+			@open-special="openPopupSpecial"
+			:class="{ '_showPopup': menuShow, '_hidePopup': !menuShow }"/>
+		<PopupBooking 
 			:class="{ '_showPopup': modalVisible, '_hidePopup': !modalVisible }"
 			@close-modal="modalVisible = false"
 			:price="popupPrice"
@@ -16,17 +20,17 @@
 			:area="popupArea"
 			/>
 		
-		<SpecialPopup 
-			:class="{ '_showPopup': showSpecialPopup, '_hidePopup': !showSpecialPopup  }"
-			@close-modal="showSpecialPopup = false"
+		<PopupSpecial 
+			:class="{ '_showPopup': showPopupSpecial, '_hidePopup': !showPopupSpecial  }"
+			@close-modal="showPopupSpecial = false"
 			:image="openSpecialImg"
 			:title="openSpecialTitle"
 			:text="openSpecialText"
 			/>
-		<FeedbackPopup 
-			:class="{ '_showPopup': showFeedbackPopup, '_hidePopup': !showFeedbackPopup  }"
-			@close-modal="showFeedbackPopup = false"
-			@open-modal="showFeedbackPopup = false"
+		<PopupFeedback 
+			:class="{ '_showPopup': showPopupFeedback, '_hidePopup': !showPopupFeedback  }"
+			@close-modal="showPopupFeedback = false"
+			@open-modal="showPopupFeedback = false"
 			/>
 		
 		<Popup 
@@ -35,21 +39,22 @@
 			:yPos="posY" 
 			:xPos="posX"
 			:class="{'_active': backdrop, '_hide': !backdrop}"
-			@click="$emit('close')"/>
-		<ProposalModal 
-			v-if="showProposalPopup" 
-			:class="{ '_showPopup': showProposalPopup, '_hidePopup': !showProposalPopup }" 
-			@close="showProposalPopup = false; backdrop = false"
+			@close-all="closeAllPopups"/>
+		<PopupProposal 
+			v-if="showPopupProposal" 
+			:class="{ '_showPopup': showPopupProposal, '_hidePopup': !showPopupProposal }" 
+			@close="showPopupProposal = false; backdrop = false"
 			class="popup-offer"
 		/>
 	</div>
 </template>
 <script>
 
-	import BookingPopup from '@/components/BookingPopup/BookingPopup'
-	import ProposalModal from '@/components/ProposalModal/ProposalModal'
-	import SpecialPopup from '@/components/SpecialPopup/SpecialPopup'
-	import FeedbackPopup from '@/components/FeedbackPopup/FeedbackPopup'
+	import PopupBooking from '@/components/PopupBooking/PopupBooking'
+	import PopupProposal from '@/components/PopupProposal/PopupProposal'
+	import PopupSpecial from '@/components/PopupSpecial/PopupSpecial'
+	import PopupFeedback from '@/components/PopupFeedback/PopupFeedback'
+	import HiddenMenu from '@/components/HiddenMenu/HiddenMenu'
 
 	import Popup from '@/components/PopupBackdrop/PopupBackdrop'
 
@@ -66,10 +71,11 @@
 				posX: 50,
 				screenWidth: window.innerWidth,
 				screenHeight: window.innerHeight,
-				showProposalPopup: false,
+				showPopupProposal: false,
 				modalVisible: false,
-				showSpecialPopup: false,
-				showFeedbackPopup: false,
+				showPopupSpecial: false,
+				showPopupFeedback: false,
+				menuShow: false,
 				popupPrice: '',
 				popupArea: '',
 				popupTitle: '',
@@ -80,11 +86,12 @@
 			}
 		},
 		components: {
-			ProposalModal,
-			BookingPopup,
+			PopupProposal,
+			PopupBooking,
 			Popup,
-			SpecialPopup,
-			FeedbackPopup
+			PopupSpecial,
+			PopupFeedback,
+			HiddenMenu
 
 		},
 		methods: {
@@ -103,7 +110,6 @@
 				} else {
 					this.posX = 50
 				}
-				console.log(this.screenWidth / 3 * 2);
 			},
 			roundPosition(event) {
 				let current = event.currentTarget
@@ -111,37 +117,77 @@
 				this.left = current.getBoundingClientRect().left
 				this.top = current.getBoundingClientRect().top
 				this.trans()
-				console.log(this.left);
-				
 			},
-			openBookingPopup(item) {
+			closeAllPopups() {
+				this.backdrop = false
+				this.showPopupProposal = 
+				this.modalVisible = 
+				this.showPopupSpecial = 
+				this.showPopupFeedback =  false
+			},
+			openPopupBooking(item) {
 				this.popupPrice = item.price,
 				this.popupArea = item.area,
 				this.popupTitle = item.title,
 				this.modalVisible = true
 			},
-			openFeedbackPopup() {
-				this.showFeedbackPopup = !this.showFeedbackPopup
+			openPopupFeedback() {
+				this.menuShow = false
+				if (!this.menuShow) {
+					this.roundPosition(event) 
+				}
+				this.showPopupFeedback = !this.showPopupFeedback
 				let phoneButton = document.getElementById('phoneButton');
-				if (this.showFeedbackPopup ) {
+				let menuButton = document.getElementById('menuButton');
+				if (this.showPopupFeedback ) {
 					phoneButton.classList.add('_active')
+					menuButton.classList.remove('_active')
+					this.backdrop = true
+				} else {
+					phoneButton.classList.remove('_active')
+					this.backdrop = false
 				}
 			},
-			openSpecialPopup(item) {
+			openMenu() {
+				this.menuShow = !this.menuShow
+				this.showPopupFeedback = false
+				let phoneButton = document.getElementById('phoneButton');
+				let menuButton = document.getElementById('menuButton');
+				if (this.menuShow ) {
+					menuButton.classList.add('_active')
+					phoneButton.classList.remove('_active')
+					this.backdrop = true
+				} else {
+					menuButton.classList.remove('_active')
+					this.backdrop = false
+				}
+			},
+			closePopupFeedback() {
+				this.showPopupFeedback = false
+				this.backdrop = !this.backdrop
+				let phoneButton = document.getElementById('phoneButton');
+				if (this.showPopupFeedback ) {
+					phoneButton.classList.add('_active')
+				} else {
+					phoneButton.classList.remove('_active')
+				}
+			},
+			openPopupSpecial(item) {
 				if ( item) {
-				if ( item.specialPopup) {
+				if ( item.PopupSpecial) {
 					
-					this.openSpecialImg = item.specialPopup.img
-					this.openSpecialText = item.specialPopup.text
-					this.openSpecialTitle = item.specialPopup.title
+					this.openSpecialImg = item.PopupSpecial.img
+					this.openSpecialText = item.PopupSpecial.text
+					this.openSpecialTitle = item.PopupSpecial.title
 				}
 				}
-				this.showSpecialPopup = true
+				this.showPopupSpecial = true
 			},
-			openProposalPopup() {
-				this.showProposalPopup = true
+			openPopupProposal() {
+				this.roundPosition(event) 
+				this.showPopupProposal = true
 				let header = document.getElementById('header');
-				if (this.showProposalPopup ) {
+				if (this.showPopupProposal ) {
 					header.classList.add('_back')
 				}
 			},
@@ -155,3 +201,16 @@
 		
 	})
 </script>
+
+<style lang="sass" >
+@import '@/assets/styles/variables'
+
+@import '@/assets/styles/libs/media'
+#app 
+	+max-screen($screen-sm)
+		position: fixed
+		width: 100%
+		height: 100%
+		overflow-x: hidden
+
+</style>

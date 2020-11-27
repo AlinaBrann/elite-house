@@ -1,6 +1,7 @@
 $halfHeight: 0.72em
 .flip
 	&-clock 
+		display: flex
 		text-align: center
 		perspective: 600px
 		margin: 0 auto
@@ -11,7 +12,7 @@ $halfHeight: 0.72em
 		&__piece 
 			position: relative
 			display: inline-block
-			margin: 0 0.2vw
+			margin: 0 8px
 			+min-screen($screen-md)
 				margin: 0 8px
 			&:not(:last-of-type)
@@ -36,7 +37,7 @@ $halfHeight: 0.72em
 		display: block
 		position: relative
 		padding-bottom: $halfHeight
-		font-size: 2.25rem
+		font-size: 28px
 		line-height: 0.95
 		+min-screen($screen-md)
 			font-size: 28px
@@ -62,7 +63,9 @@ $halfHeight: 0.72em
 			backface-visibility: hidden
 			-webkit-backface-visibility: hidden
 			transform-style: preserve-3d
-			width: 2.1em
+			width: 1.9em
+			+min-screen($screen-md)
+				width: 2.1em
 
 
 		&__top-4digits,

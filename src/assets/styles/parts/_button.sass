@@ -4,7 +4,7 @@
 	justify-content: center
 	white-space: nowrap
 	height: $button_height
-	padding: 3px 25px 0
+	padding: 3px 15px 0
 	background: $orange
 	color: #FFF
 	font-family: $medium
@@ -15,6 +15,8 @@
 	border: 2px solid $orange
 	border-radius: $radius
 	@extend .transition
+	+min-screen($screen-md)
+		padding: 3px 25px 0
 	&:hover
 		background: $orange_dark
 		border-color: $orange_dark
@@ -61,15 +63,18 @@
 			color: $orange-dark
 			border-color: $orange-dark
 	&-white
-		+size(40px,56px)
+		+size(30px,42px)
 		background-color: #FFF
-		border-radius: $radius * 2
+		border-radius: $radius
 		border: none
 		@extend .transition
+		+min-screen($screen-md)
+			+size(40px,56px)
+			border-radius: $radius * 2
 		&:hover
 			background-color: #E5E5E5 !important
 		._dark &
-			background-color: #4C4D4F
+			background-color: $grey
 	
 	&-arrow
 		display: flex

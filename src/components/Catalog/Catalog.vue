@@ -1,7 +1,7 @@
 <template>
 	<section class="section catalog-section" id="catalog">
 		<h2 
-			class="section__title" 
+			class="section__title catalog__title" 
 			v-bind:data-title="content.catalog.title">
 			{{ content.catalog.title }}
 		</h2>
@@ -9,7 +9,7 @@
 			<div class="container">
 				<div class="filter__wrapper">
 					<div class="row _no-pudding-top">
-						<div class="col-md-4 filter__border-block">
+						<div class="col-xs-12 col-md-4 filter__border-block">
 							<div class="filter-block">
 								<div class="filter-block__title">площадь, m<sup>2</sup></div>
 								<div ref="sliderArea" class="filter-range"></div>
@@ -20,7 +20,7 @@
 							</div>
 							
 						</div>
-						<div class="col-md-4 filter__border-block">
+						<div class="col-xs-12 col-md-4 filter__border-block">
 							<div class="filter-block">
 								<div class="filter-block__title">Диапазон цен</div>
 
@@ -31,7 +31,7 @@
 							</div>
 							
 						</div>
-						<div class="col-md-4 filter__border-block">
+						<div class="col-xs-12 col-md-4 filter__border-block">
 							<div class="filter-block">
 								<div class="filter-block__title">Предпочитаемый район</div>
 								<transition-group
@@ -93,7 +93,7 @@
 					<transition name="slide">
 						<div class="filter-addinations" v-show="filterAddinations">
 							<div class="row">
-								<div class="col-md-4 filter__border-block">
+								<div class="col-xs-12 col-md-4 filter__border-block">
 									<div class="filter-block">
 										<div class="filter-block__title">цоколь</div>
 										<div class="filter-block__radio-wrapper">
@@ -109,7 +109,7 @@
 									</div>
 								</div>
 
-								<div class="col-md-4 filter__border-block">
+								<div class="col-xs-12 col-md-4 filter__border-block">
 									<div class="filter-block">
 										<div class="filter-block__title">отдельный санузел</div>
 										<div class="filter-block__radio-wrapper">
@@ -129,7 +129,7 @@
 									</div>
 								</div>
 
-								<div class="col-md-4 filter__border-block">
+								<div class="col-xs-12 col-md-4 filter__border-block">
 									<div class="filter-block">
 										<div class="filter-block__title">витраж</div>
 										<div class="filter-block__radio-wrapper">
@@ -146,7 +146,7 @@
 								</div>
 							</div>
 							<div class="row">
-								<div class="col-md-4 filter__border-block">
+								<div class="col-xs-12 col-md-4 filter__border-block">
 									<div class="filter-block">
 										<div class="filter-block__title">отдельный вход</div>
 										<div class="filter-block__radio-wrapper">
@@ -162,7 +162,7 @@
 									</div>
 								</div>
 
-								<div class="col-md-4 filter__border-block">
+								<div class="col-xs-12 col-md-4 filter__border-block">
 									<div class="filter-block">
 										<div class="filter-block__title">видеонаблюдение</div>
 										<div class="filter-block__radio-wrapper">
@@ -178,7 +178,7 @@
 									</div>
 								</div>
 
-								<div class="col-md-4 filter__border-block">
+								<div class="col-xs-12 col-md-4 filter__border-block">
 									<div class="filter-block">
 										<div class="filter-block__title">подъезд для погрузки</div>
 										<div class="filter-block__radio-wrapper">
@@ -198,7 +198,7 @@
 					</transition>
 
 					<div class="row">
-						<div class="col-md-12">
+						<div class="col-xs-12 col-md-12">
 							<div class="filter-buttons">
 								<button
 									type="button" 
@@ -233,7 +233,7 @@
 		<div class="catalog">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-12">
+					<div class="col-xs-12 col-md-12">
 						<transition-group class="catalog-wrapper" name="catalog-item" tag="ol">
 							<CatalogItem 
 								v-for="item in filteredProducts.slice(0, 4)" 
@@ -241,10 +241,10 @@
 								:key="item.id" 
 								class="catalog-item"
 								booking="item"
-								@open-booking="openBookingPopup"
-								@open-proposal="openProposalPopup"
+								@open-booking="openPopupBooking"
+								@open-proposal="openPopupProposal"
 								@round-position="roundPosition"
-								@open-special="openSpecialPopup" 
+								@open-special="openPopupSpecial" 
 							/>
 						</transition-group>
 						<transition name="catalog-item">
@@ -362,13 +362,13 @@
 			closeModal() {
 				this.modalVisible = false
 			},
-			openBookingPopup(item) {
+			openPopupBooking(item) {
 				this.$emit('open-booking', item)
 			},
-			openProposalPopup() {
+			openPopupProposal() {
 				this.$emit('open-proposal')
 			},
-			openSpecialPopup(item) {
+			openPopupSpecial(item) {
 				this.$emit('open-special', item)
 			},
 			roundPosition(event) {

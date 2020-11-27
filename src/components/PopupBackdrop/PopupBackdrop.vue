@@ -1,5 +1,6 @@
 <template>
     <div class="popup-backdrop" 
+    @click="$emit('close-all');"
     :style="
     [leftPosition ? {'left': + leftPosition + 'px' } : {'left': '10%'},
     topPosition ? {'top': + topPosition + 'px' } : {'top': '10%'},

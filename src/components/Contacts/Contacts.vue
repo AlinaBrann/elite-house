@@ -46,6 +46,13 @@
                         <div class="contacts-content__title _v1">Адрес</div>
                         <p v-for="(time,i) in contacts.workingTime" :key="i">{{ time }}</p>
                     </div>
+                    <div class="contacts-content-col visible-xs">
+                        <div class="contacts-content__title _v2">Отдел продаж</div>
+                        <a :href="'tel:' + phone" class="contacts-content__phone">{{ phone }}</a>
+                        <a :href="'mailto:' + mail" class="contacts-content__mail">{{ mail }}</a>
+                        <button class="contacts-content__button button" @click="$emit('open-feedback');">оставить заявку</button>
+                        <MapBlock :coords="[42.878645, 74.616197]" :height="400" :center="[42.880534, 74.616267]"/>
+                    </div>
                     <ul class="contacts-social">
                         <li class="contacts-social-item" v-for="(link,i) in contacts.social" :key="i">
                             <a 
@@ -59,11 +66,11 @@
                         <span>Сайт сделали в <a :href="contacts.samolet" target="_blank">Самалёте</a></span>
                     </div>
                 </div>
-                <div class="contacts-content-col">
+                <div class="contacts-content-col hidden-xs">
                     <div class="contacts-content__title _v2">Отдел продаж</div>
                     <a :href="'tel:' + phone" class="contacts-content__phone">{{ phone }}</a>
                     <a :href="'mailto:' + mail" class="contacts-content__mail">{{ mail }}</a>
-                    <button class="button" @click="$emit('open-feedback'); $emit('round-position', $event);">оставить заявку</button>
+                    <button class="button" @click="$emit('open-feedback');">оставить заявку</button>
                 </div>
             </div>
         </div>
@@ -73,6 +80,7 @@
 <script>
 import Contacts from '@/assets/data.json'
 import { yandexMap, ymapMarker } from 'vue-yandex-maps'
+import MapBlock from '@/components/MapBlock/MapBlock'
 
 export default {
     data() {
@@ -97,6 +105,7 @@ export default {
     components: {
         yandexMap, 
         ymapMarker,
+        MapBlock
     },
     methods: {
         zoomIn() {

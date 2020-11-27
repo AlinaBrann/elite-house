@@ -7,7 +7,7 @@
 		>
 			<div v-if="proId == item.id" class="catalog-item catalog-item-detail">
 				<div class="row">
-					<div class="col-xs-12 col-md-7">
+					<div class="col-xs-3 col-md-7">
 						<div class="catalog-item-details-head">
 							<router-link to="/#catalog" class="button-arrow">
 								<svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -16,7 +16,7 @@
 							</router-link>
 						</div>
 					</div>
-					<div class="col-xs-12 col-md-5">
+					<div class="col-xs-9 col-md-5">
 						<div class="catalog-item-details-head">
 							<div class="catalog-item-details-head__title">Подробное описание</div>
 						</div>
@@ -61,7 +61,7 @@
 							<button class="catalog-item__button button _full" @click="$emit('open-booking', item)">ЗАБРОНИРОВАТЬ</button>
 							<button 
 								class="catalog-item__button button _full _border _dark-text"
-								@click="$emit('open-proposal');$emit('round-position', $event);"
+								@click="$emit('open-special', item);"
 								>
 								Спец. предложение
 							</button>
@@ -179,7 +179,15 @@
 					dots: false,
 					focusOnSelect: true,
 					slidesToShow: 5,
-					asNavFor: '._for'
+					asNavFor: '._for',
+					responsive: [
+						{
+							breakpoint: 768,
+							settings: {
+								slidesToShow: 2
+							}
+						}
+					]
 				}
 			}
 		},

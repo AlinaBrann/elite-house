@@ -31,7 +31,7 @@
                     Оставьте контактные данные и наш отвественный менеджер с вами свяжется! 
                 </div>
                 <FeedbackForm 
-                    class="popup-feedback-form"
+                    class="popup-feedback-form special-popup-form__form"
                     name="specialFeedback"
                 />
             </div>
@@ -51,7 +51,7 @@ export default {
     ],
     data() {
         return {
-            content: Content.specialPopup
+            content: Content.PopupSpecial
         }
     },
     components: {
@@ -60,4 +60,4 @@ export default {
 }
 </script>
 
-<style src="./SpecialPopup.sass" lang="sass"></style>
+<style src="./PopupSpecial.sass" lang="sass"></style>

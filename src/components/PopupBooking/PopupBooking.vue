@@ -8,9 +8,21 @@
                 <button @click="$emit('close-modal')" class="popup-closer"></button>
                 <div class="popup__title booking-popup__title">Бронь помещения</div>
                 <div class="booking-popup-info">
-                    <div class="booking-popup-info__item">$ {{ price | currency }}</div>
-                    <div class="booking-popup-info__item">{{ title }}</div>
-                    <div class="booking-popup-info__item">{{ area }} m<sup>2</sup></div>
+                    <div class="booking-popup-info__item">
+                        <div class="booking-popup-info__item-title">Цена</div>
+                        <div class="booking-popup-info__item-border"></div>
+                        <div class="booking-popup-info__value">$ {{ price | currency }}</div>
+                    </div>
+                    <div class="booking-popup-info__item">
+                        <div class="booking-popup-info__item-title">Помещение</div>
+                        <div class="booking-popup-info__item-border"></div>
+                        <div class="booking-popup-info__value">{{ title }}</div>
+                    </div>
+                    <div class="booking-popup-info__item">
+                        <div class="booking-popup-info__item-title">Площадь</div>
+                        <div class="booking-popup-info__item-border"></div>
+                        <div class="booking-popup-info__value">{{ area }} m<sup>2</sup></div>
+                    </div>
                 </div>                
                 <div class="booking-popup__text">
                     Оставьте нам ваш номер телефона и&nbsp;менеджер свяжется 
@@ -41,4 +53,4 @@ export default {
 }
 </script>
 
-<style src="./BookingPopup.sass" lang="sass"></style>
+<style src="./PopupBooking.sass" lang="sass"></style>

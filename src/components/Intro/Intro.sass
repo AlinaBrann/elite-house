@@ -3,21 +3,30 @@
 @import '@/assets/styles/libs/mixins'
 
 .intro
+	position: relative
 	display: flex
 	flex-direction: column
 	width: 100%
-	height: 100vh
 	color: #FFF
+	+min-screen($screen-md)
+		height: 100vh
 	&:before
 		content: ''
 		position: absolute
-		top: 0
+		bottom: 0
 		left: 0
 		display: block
-		+size(100%)
+		+size(100%,402px)
 		background: url('/images/intro-bg.png') no-repeat center
-		background-size: cover
+		background-position: center right
+		background-size: auto 100%
 		z-index: 0
+		+min-screen($screen-md)
+			+size(100%)
+			bottom: auto
+			top: 0
+			background-size: cover
+			background-position: center
 	&__top-banner
 		position: relative
 		display: none
@@ -38,10 +47,17 @@
 		margin-top: auto
 		display: flex
 		flex-direction: column
-		justify-content: flex-end
+		justify-content: flex-start
 		align-items: flex-start
 		flex: auto
-		padding-bottom: 10.526315789473683vh
+		padding-top: 137px
+		padding-bottom: 10px
+		background: $grey
+		+min-screen($screen-md)
+			padding-top: 0
+			padding-bottom: 10.526315789473683vh
+			justify-content: flex-end
+			background: none
 	&__title
 		margin-bottom: 24px
 		font-family: "RoadRadio-Bold"
@@ -53,19 +69,27 @@
 			font-family: "RoadRadio-Black"
 			font-size: 52px
 	&__subtitle
+		width: 80%
 		margin-bottom: 24px
 		font-size: 22px
+		line-height: 30px
 		font-family: $medium
 		+min-screen($screen-md)
+			width: 100%
 			margin-bottom: 30px
 			font-size: 24px
+			line-height: normal
 	&-slider
-		width: 40%
+		width: 90%
 		font-family: $medium
 		line-height: 24px
+		+min-screen($screen-md)
+			width: 40%
 		&-wrapper
 			padding-top: 50px
-			margin-top: 16.88vh
+			margin-top: 46px
+			+min-screen($screen-sm)
+				margin-top: 16.88vh
 			+max-screen-height(640px)
 				margin-top: 5vh
 		&-dots
@@ -118,14 +142,18 @@
 	&-video-toggle
 		$parent: &
 		position: absolute
-		top: 57%
-		right: 18%
+		top: 140%
+		left: calc(50% - 42.5px)
 		display: block
 		+size(85px)
 		background: url('/images/play.svg') no-repeat center left 60%
 		background-size: 28px
 		border: none
 		border-radius: 50%
+		+min-screen($screen-md)
+			top: 57%
+			right: 18%
+			left: auto	
 		&__background,
 		&:before,
 		&:after
@@ -144,8 +172,8 @@
 			z-index: -1
 		&:before
 			+size(150px)
-			background: transparentize(#4C4D4F, .3)
-			border: 3px solid #4C4D4F
+			background: transparentize($grey, .3)
+			border: 3px solid $grey
 		&:after
 			+size(150px)
 			border: 3px solid $orange
@@ -155,13 +183,18 @@
 				&__background
 					transform: translate(-50%,-50%) scale(1.77) 
 	&-video
-		position: absolute
-		top: 0
-		left: 0
+		position: relative
 		display: block
 		width: 100%
-		height: 100%
+		height: 400px
 		z-index: -1
+		order: 1
+		+min-screen($screen-md)
+			position: absolute
+			top: 0
+			left: 0
+			height: 100%
+			order: 0	
 		iframe 
 			position: absolute
 			top: 0

@@ -2,14 +2,14 @@
 	position: fixed
 	display: flex
 	width: 100%
-	height: 100%
+	height: 100vh
 	top: 0
 	left: 0
 	align-content: center
 	justify-content: center
 	z-index: 10000
 	&._dark
-		background: transparentize(#4C4D4F,.4)
+		background: transparentize($grey,.4)
 		overflow: auto
 		&._hidePopup
 			transition-delay: 0.4s !important
@@ -36,26 +36,31 @@
 		right: 0
 		bottom: 100%
 		+size(50px)
-		background: transparentize(#4C4D4F,.04)
+		background: transparentize($grey,.04)
 		border-radius: 50%
 		cursor: pointer
 		z-index: 10	
 		._showPopup &,
 		._active &,
 		&._active
-			animation: backdropIn 0.5s forwards
+			animation: backdropInMob 0.5s forwards
+			+min-screen($screen-md)
+				animation: backdropIn 0.5s forwards
 		._hidePopup &,
 		.modal-leave-active &,
 		&._hide
-			animation: backdropOut 0.5s forwards
+			animation: backdropOutMob 0.5s forwards
+			+min-screen($screen-md)
+				animation: backdropOut 0.5s forwards
 	&-content
 		position: static
-		max-height: 60vh
 		margin: auto
 		color: #FFF
 		opacity: 0
 		transition: 0.4s
 		z-index: 1
+		+min-screen($screen-md)
+			max-height: 60vh
 		._showPopup &,
 		.modal-enter-to &
 			opacity: 1
@@ -74,14 +79,19 @@
 			width: 800px
 			max-width: 100%	
 			max-height: none
-			padding: 80px 40px 45px
-			background: #4C4D4F
+			padding: 64px 16px 32px
+			background: $grey
 			border-radius: $radius * 2
+			+min-screen($screen-md)
+				padding: 80px 40px 45px
 	&__title
 		margin-bottom: 10px
-		font-size: 46px
-		line-height: 60px
+		font-size: 28px
+		line-height: 32px
 		font-family: "RoadRadio-Bold"
+		+min-screen($screen-md)
+			font-size: 46px
+			line-height: 60px
 		._dark &
 			font-family: $medium
 			font-size: 36px
@@ -93,20 +103,31 @@
 		&__content
 			width: 640px
 			max-width: 100%
+			padding: 0 16px
+			+min-screen($screen-sm)
+				padding: 0
 		&-form
 			padding-top: 6.52vh
 
 	&-closer
 		position: absolute
-		top: 8.93vh
-		right: 8.93vh
+		top: 16px
+		right: 16px
 		display: block
 		+size(24px)
 		border: none
 		background: url('/images/close.svg') no-repeat center
 		background-size: contain
 		z-index: 100
-	
+		+min-screen($screen-md)
+			top: 8.93vh
+			right: 8.93vh
+		._dark &
+			top: 16px
+			right: 16px
+			+min-screen($screen-md)
+				top: 40px
+				right: 40px
 	&-docs
 		&-item
 			$parent: &
@@ -156,6 +177,29 @@
 		transform: scale(5)
 	30%
 		+size(20vw)
+	70%
+		transform: scale(1)
+	100%
+		opacity: 0
+	
+@keyframes backdropInMob
+	0%
+		opacity: 0
+		transform: scale(1)
+	10%
+		opacity: 1
+	50%
+		+size(20vh)
+	100%
+		+size(40vh)
+		transform: scale(5)
+
+@keyframes backdropOutMob
+	0%
+		+size(40vh)
+		transform: scale(5)
+	30%
+		+size(20vh)
 	70%
 		transform: scale(1)
 	100%

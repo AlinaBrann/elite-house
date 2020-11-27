@@ -18,7 +18,7 @@
                                 <img :src="'/images/' + item.img" class="possibilities-slider-slide__image" alt="">
                                 <div class="possibilities-slider-slide__title">{{ item.title }}</div>
                                 <div class="possibilities-slider-slide__text" v-html="item.text"></div>
-                                <button class="possibilities-slider-slide__button button _border">Подробнее</button>
+                                <button class="possibilities-slider-slide__button button _border" @click="$emit('open-feedback'); ">Подробнее</button>
                             </div>
                             
                         </div>
@@ -42,8 +42,16 @@ export default {
                 dots: false,
                 fade: false,
                 slidesToShow: 3,
-                focusOnSelect: true
-
+                focusOnSelect: true,
+                responsive: [
+                    {
+                        breakpoint: 768,
+                        settings: {
+                            dots: true,
+                            slidesToShow: 1
+                        }
+                    }
+                ]
             },
         }
     },

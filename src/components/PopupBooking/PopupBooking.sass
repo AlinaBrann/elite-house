@@ -1,0 +1,45 @@
+@import '@/assets/styles/variables'
+@import '@/assets/styles/libs/media'
+
+.booking-popup
+    background: $grey
+    transition: 0.4s
+    &._hidePopup
+        transition-delay: 0.4s
+    &__content
+        width: 640px
+        max-width: 100%
+        padding: 0 16px
+        +min-screen($screen-md)
+            padding: 0
+    &__title
+        margin-bottom: 40px
+    &__text
+        font-size: 18px
+        line-height: 26px
+    &-info
+        display: flex
+        flex-direction: column
+        padding: 16px 0
+        margin-bottom: 40px
+        border: none
+        border-top: 1px solid transparentize(#FFF,.8)
+        border-bottom: 1px solid transparentize(#FFF,.8)
+        +min-screen($screen-sm)
+            flex-direction: row
+        &__item
+            flex: 1 1 33%
+            display: flex
+            &:not(:last-of-type)
+                padding-bottom: 16px
+                +min-screen($screen-sm)
+                    padding-bottom: 0
+            &-title
+                +min-screen($screen-sm)
+                    display: none
+            &-border
+                margin: 0 3px 3px
+                flex: auto
+                border-bottom: 1px dotted transparentize(#FFF,.9)
+                +min-screen($screen-sm)
+                    display: none

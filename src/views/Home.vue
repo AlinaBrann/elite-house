@@ -1,28 +1,34 @@
 <template>
-    <div id="app">
+    <div id="home">
+		<Preloader v-if="showPreloader"/>
         <Intro 
 			free="168" 
-			@open-booking="openBookingPopup"
-			@open-proposal="openProposalPopup"
+			@open-booking="openPopupBooking"
+			@open-proposal="openPopupProposal"
 			@round-position="roundPosition"
-			@open-special="openSpecialPopup"
-			@open-feedback="openFeedbackPopup" />
+			@open-special="openPopupSpecial"
+			@open-feedback="openPopupFeedback"
+			@open-menu="openMenu" />
         <Banner deadline="2020-12-25 00:00:00" />
         <Catalog 
-			@open-booking="openBookingPopup"
-			@open-proposal="openProposalPopup"
+			@open-booking="openPopupBooking"
+			@open-proposal="openPopupProposal"
 			@round-position="roundPosition"
-			@open-special="openSpecialPopup"/>
+			@open-special="openPopupSpecial"
+			/>
         <Projects/>
-		<Possibilities/>
+		<Possibilities
+			@round-position="roundPosition"
+			@open-feedback="openPopupFeedback"/>
 		<Contacts
 			@round-position="roundPosition"
-			@open-feedback="openFeedbackPopup"/>
+			@open-feedback="openPopupFeedback"/>
     </div>
     
 </template>
 
 <script>
+	import Preloader from '@/components/Preloader/Preloader'
 	import Intro from '@/components/Intro/Intro'
 	import Banner from '@/components/Banner/Banner'
 	import Catalog from '@/components/Catalog/Catalog'
@@ -30,12 +36,15 @@
 	import Possibilities from '@/components/Possibilities/Possibilities'
 	import Contacts from '@/components/Contacts/Contacts'
 
-	import Vue from 'vue'
-
-
 	export default {
-		name: 'App',
+		name: 'Home',
+		data() {
+			return {
+				showPreloader: true
+			}
+		},
 		components: {
+			Preloader,
 			Intro,
 			Banner,
             Catalog,
@@ -44,34 +53,33 @@
 			Contacts
 		},
 		methods: {
-			openBookingPopup(item) {
+			openPopupBooking(item) {
 				this.$emit('open-booking', item)
 			},
-			openProposalPopup() {
+			openPopupProposal() {
 				this.$emit('open-proposal')
 			},
-			openFeedbackPopup() {
+			openPopupFeedback() {
 				this.$emit('open-feedback')
 			},
-			openSpecialPopup(item) {
+			openMenu() {
+				this.$emit('open-menu')
+			},
+			openPopupSpecial(item) {
 				this.$emit('open-special', item)
 			},
 			roundPosition(event) {
 				this.$emit('round-position', event)
+			},
+			showPreloaderFunc() {
+				setTimeout(() => this.showPreloader = false, 3000);
 			}
 			
+		},
+		mounted() {
+			this.showPreloaderFunc()
 		}
 	}
-	Vue.mixin({
-		data: function () {
-			return {
-				
-			}
-		},
-		
-		
-		
-	})
 </script>
 
 <style>

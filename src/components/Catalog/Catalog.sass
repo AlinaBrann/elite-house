@@ -1,11 +1,20 @@
 @import '@/assets/styles/variables'
+@import '@/assets/styles/libs/media'
 
 .catalog 
 	min-height: 100vh
 	background: #FFF
 	&-section
-		padding-top: 80px
+		padding-top: 50px
 		padding-bottom: 125px
+		+min-screen($screen-sm)
+			padding-top: 80px
+	&__title
+		&:before
+			white-space: pre-wrap
+			+min-screen($screen-sm)
+				white-space: normal
+
 	&-wrapper
 		padding-top: 40px
 

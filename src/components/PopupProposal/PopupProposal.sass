@@ -6,22 +6,31 @@
     &__content
         width: 640px
         max-width: 100%
+        padding: 30px 16px
+        +min-screen($screen-md)
+            padding: 0
     &-checkboxes
         display: flex
         flex-wrap: wrap
-        margin-bottom: 15px
+        flex-direction: column
+        margin-bottom: 8px
+        +min-screen($screen-md)
+            flex-direction: row
+            margin-bottom: 15px
     &-checkbox
         $parent: &
         flex: 0 0 50%
         &__label
             position: relative
             display: block
-            margin-bottom: 16px
+            margin-bottom: 24px
             padding-left: 40px
             font-family: $medium
             font-size: 17px
             line-height: 24px
             transition: 0.4s
+            +min-screen($screen-md)
+                 margin-bottom: 16px
             &:after,
             &:before
                 content: ''
@@ -57,13 +66,14 @@
     &-total
         position: absolute
         left: 50%
-        top: 8.47vh
+        top: 16px
         display: flex
         align-items: center
         transform: translateX(-50%)
         color: #FFF
-        
         font-size: 17px
+        +min-screen($screen-md)
+            top: 8.47vh
         &__item
             letter-spacing: -3px
             &:first-of-type
@@ -81,14 +91,22 @@
     &-slide
         &__title
             width: 90%
-            margin: 30px 0 40px
+            margin: 6px 0 24px
             font-size: 18px
             line-height: 26px
+            +min-screen($screen-md)
+                margin: 30px 0 40px
+
     &__head
         position: relative
 
     &-filter-block
         color: #FFF
+        padding-top: 0
+        padding-bottom: 32px
+        +min-screen($screen-md)
+            padding-top: 23px
+            padding-bottom: 16px
         &__title
             margin-bottom: 27px
             text-align: center

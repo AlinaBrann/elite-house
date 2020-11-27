@@ -1,12 +1,16 @@
 @import '@/assets/styles/variables'
 @import '@/assets/styles/libs/media'
 .header
-    position: absolute
+    position: fixed
     left: 0
     top: 0
     width: 100vw
-    padding-top: 7.1vh
+    padding-top: 16px
     z-index: 1000
+    transition: 0.4s
+    +min-screen($screen-sm)
+        position: absolute
+        padding-top: 7.1vh
     &._back
         z-index: 1
     &.vue-fixed-header--isFixed 
@@ -19,17 +23,21 @@
         z-index: 1
     &-logo
         &-wrapper
-            flex: 17%
+            flex: 25%
+            +min-screen($screen-md)
+                flex: 17%
         &__img
             height: 36px
             +min-screen($screen-md)
                 height: 56px
     &-phone
         font-family: $medium
-        font-size: 16px
+        font-size: 14px
         transition: 0.4s
+        +min-screen($screen-md)
+            font-size: 16px
         ._dark &
-            color: #4C4D4F
+            color: $grey
     &-menu
         display: none
         +min-screen($screen-md)
@@ -44,18 +52,22 @@
             font-size: 16px
             padding: 5px 0
             ._dark &
-                color: #4C4D4F
+                color: $grey
     &-info
         &-wrapper
             position: relative
             display: flex
             align-items: center
-            flex: 23.5%
+            flex: auto
+            +min-screen($screen-md)
+                flex: 23.5%
     &-button
         position: relative
     &-phone-toggle
-        margin-left: 1.250vw
+        margin-left: 8px
         z-index: 10
+        +min-screen($screen-md)
+            margin-left: 1.250vw
         &:before
             content: ''
             display: block
@@ -97,8 +109,10 @@
                 background: #fff
                 
     &-menu-toggle
-        margin-left: 1.875vw
+        margin-left: 16px
         z-index: 10
+        +min-screen($screen-md)
+            margin-left: 1.875vw
         &__item
             position: absolute
             top: 50%

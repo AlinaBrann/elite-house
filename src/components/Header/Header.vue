@@ -38,50 +38,23 @@
                         <button class="header-button header-phone-toggle button-white"
                             id="phoneButton"
                             :class="{ '_active': phonePopup }"
-                            @click="$emit('round-position', $event); $emit('open-feedback'); menuShow = false"
+                            @click="$emit('open-feedback'); menuShow = false"
                             >
                             <span class="header-phone-toggle__item"></span>
                             <span class="header-phone-toggle__item"></span>
                         </button>
                         <button 
                             class="header-button header-menu-toggle button-white" 
-                            ref="menuButton"
+                            id="menuButton"
                             :class="{ '_active': menuShow }"
-                            @click="$emit('round-position', $event); menuToggle();"
+                            @click="$emit('open-menu');"
                             >
                             <span class="header-menu-toggle__item"></span>
                             <span class="header-menu-toggle__item"></span>
                         </button>          
                     </div>
                 </div>
-                <div class="hidden-menu" :class="{ '_showPopup': menuShow, '_hidePopup': !menuShow }">
-                    
-                    <div class="container">
-                        <div class="hidden-menu-content">
-                            <ul class="hidden-menu-nav">
-                                <li 
-                                    v-for="item in menu"
-                                    :key="item.name"
-                                    class="hidden-menu-nav__item animated-link"
-                                    >
-                                    <a 
-                                        @click="$emit('round-position', $event); menuToggle();" 
-                                        :href="item.path"
-                                        v-smooth-scroll="{ duration: 2000, offset: 2 }"
-                                        >
-                                        {{ item.name }}
-                                    </a>
-                                </li>
-                            </ul>
-                            <div class="hidden-menu-info">
-                                <a :href="'tel:' + phone" class="hidden-menu-info__phone">{{ phone }}</a>
-                                <div class="hidden-menu-info__title">Адрес</div>
-                                <div class="hidden-menu-info__address">{{ address }}</div>
-                                <a :href="'mailto:' + mail" class="hidden-menu-info__mail">{{ mail }}</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
         </header>
     </fixed-header>
@@ -112,10 +85,10 @@ export default {
     }
   },
   methods: {
-      openBookingPopup(item) {
+      openPopupBooking(item) {
         this.$emit('open-booking', item)
     },
-    openProposalPopup() {
+    openPopupProposal() {
         this.$emit('round-roposal')
     },
     roundPosition(event) {

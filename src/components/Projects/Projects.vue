@@ -125,23 +125,16 @@ export default {
                 focusOnSelect: true,
                 centerMode: false,
                 prevArrow:"<button class='button-arrow _prev _white'><svg width='17' height='16' viewBox='0 0 17 16' fill='none'><path d='M0.292891 7.29289C-0.0976333 7.68341 -0.0976334 8.31658 0.29289 8.7071L6.65685 15.0711C7.04738 15.4616 7.68054 15.4616 8.07106 15.0711C8.46159 14.6805 8.46159 14.0474 8.07106 13.6569L2.41421 8L8.07107 2.34314C8.46159 1.95262 8.46159 1.31946 8.07107 0.928931C7.68054 0.538406 7.04738 0.538406 6.65685 0.92893L0.292891 7.29289ZM17 7L0.999998 7L0.999998 9L17 9L17 7Z'/></svg></button>",
-                nextArrow:"<button class='button-arrow _next _white'><svg width='17' height='16' viewBox='0 0 17 16' fill='none'><path d='M0.292891 7.29289C-0.0976333 7.68341 -0.0976334 8.31658 0.29289 8.7071L6.65685 15.0711C7.04738 15.4616 7.68054 15.4616 8.07106 15.0711C8.46159 14.6805 8.46159 14.0474 8.07106 13.6569L2.41421 8L8.07107 2.34314C8.46159 1.95262 8.46159 1.31946 8.07107 0.928931C7.68054 0.538406 7.04738 0.538406 6.65685 0.92893L0.292891 7.29289ZM17 7L0.999998 7L0.999998 9L17 9L17 7Z'/></svg></button>"
+                nextArrow:"<button class='button-arrow _next _white'><svg width='17' height='16' viewBox='0 0 17 16' fill='none'><path d='M0.292891 7.29289C-0.0976333 7.68341 -0.0976334 8.31658 0.29289 8.7071L6.65685 15.0711C7.04738 15.4616 7.68054 15.4616 8.07106 15.0711C8.46159 14.6805 8.46159 14.0474 8.07106 13.6569L2.41421 8L8.07107 2.34314C8.46159 1.95262 8.46159 1.31946 8.07107 0.928931C7.68054 0.538406 7.04738 0.538406 6.65685 0.92893L0.292891 7.29289ZM17 7L0.999998 7L0.999998 9L17 9L17 7Z'/></svg></button>",
+                responsive: [
+                    {
+                        breakpoint: 768,
+                        settings: {
+                            slidesToShow: 1
+                        }
+                    }
+                ]
 
-            },
-            forSettings: {
-                arrows: false,
-                dots: false,
-                fade: true,
-                focusOnSelect: true,
-                asNavFor: '._nav'
-                
-            },
-            navSettings: {
-                arrows: false,
-                dots: false,
-                focusOnSelect: true,
-                slidesToShow: 5,
-                asNavFor: '._for'
             }
         }
     },

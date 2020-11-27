@@ -1,0 +1,24 @@
+@import '@/assets/styles/variables'
+@import '@/assets/styles/libs/media'
+
+.bunner 
+    padding-top: 32px
+    +min-screen($screen-md)
+        padding-top: 120px
+    &__container
+        position: relative
+        display: flex
+        align-items: center
+        justify-content: center
+        background: #C4C4C4
+        min-height: 500px
+        border-radius: 6px
+        +min-screen($screen-md)
+            min-height: 240px
+    .flip-clock
+        position: absolute
+        left: 50%
+        bottom: 24px
+        transform: translateX(-50%)
+        +min-screen($screen-md)
+            bottom: 20px
