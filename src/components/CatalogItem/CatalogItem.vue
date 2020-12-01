@@ -66,14 +66,27 @@ export default {
                 fade: true,
                 focusOnSelect: true,
                 asNavFor: '.nav_' + this.item.id
-                
             },
             navSettings: {
                 arrows: true,
                 dots: false,
                 focusOnSelect: true,
                 slidesToShow: 2,
-                asNavFor: '.for_' + this.item.id
+                asNavFor: '.for_' + this.item.id,
+                responsive: [
+                    {
+                        breakpoint: 900,
+                        settings: {
+                            slidesToShow: 4
+                        }
+                    },
+                    {
+                        breakpoint: 548,
+                        settings: {
+                            slidesToShow: 2
+                        }
+                    }
+                ]
             }
         }
     },

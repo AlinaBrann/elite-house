@@ -42,17 +42,19 @@
 		display: flex
 		flex-direction: column
 		align-items: flex-start
-		+min-screen($screen-md)
+		+min-screen($screen-lg)
 			padding-left: 9.375vw
 		&__item
 			margin-bottom: 4vh
 			font-size: 32px
 			font-family: $medium
 			+min-screen($screen-md)
-				font-size: 42px
+				font-size: 38px
 				white-space: nowrap
 				&:last-of-type
 					margin-bottom: 15vh
+			+min-screen($screen-lg)
+				font-size: 42px
 	&-menu
 		display: block
 		+min-screen($screen-md)

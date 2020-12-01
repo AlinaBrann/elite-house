@@ -4,19 +4,21 @@
 .catalog 
 	min-height: 100vh
 	background: #FFF
+	padding-bottom: 120px
 	&-section
 		padding-top: 50px
-		padding-bottom: 125px
 		+min-screen($screen-sm)
 			padding-top: 80px
 	&__title
 		&:before
 			white-space: pre-wrap
 			+min-screen($screen-sm)
-				white-space: normal
+				white-space: nowrap
 
 	&-wrapper
 		padding-top: 40px
+	&__button
+		margin: 40px auto 0
 
 .slider-process
 	background-color: $orange

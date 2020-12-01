@@ -10,7 +10,11 @@ export default new Router ({
         if (to.hash) {
             return {selector: to.hash}
         } else {
-            return { x: 0, y: 0 }
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                  resolve({ x: 0, y: 0 })
+                }, 100)
+              })
         }
     },
     routes: [

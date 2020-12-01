@@ -8,12 +8,54 @@
     height: 100%
     background: $grey
     z-index: 10000
-    &__first-part
-        animation: firstPart 1.5s ease-in-out infinite
+    &-logo
+        width: 134px
+        height: 56px
+        transform-origin: center
+        transform-box: fill-box
+        overflow: visible
+    &-line
+        width: 30px
+        height: 30px
+        fill: $orange
+        transform-origin: center
+        transform-box: fill-box
+        animation: firstPart 2s ease-in-out  forwards
+        animation-delay: 1s
+        will-change: transform
+        &-wrap
+            transform: translateX(52px)
+            animation: firstPartWrap 0.5s ease-in-out  forwards
+            animation-delay: 3s
+    &-letters-wrap
+        width: 0
+        display: block
+    &-letter
+        fill: #FFF
+        animation: letter 0.8s ease-in-out backwards
+        will-change: opacity
+        @for $i from 1 to 12
+            &:nth-child(#{$i})
+                animation-delay: 3s + $i * 0.1s
 
 @keyframes firstPart
     0%
-        transform: rotate(0deg)
+        transform: rotate(0deg) 
 
     100%
-        transform: rotate(-360deg)
+        transform: rotate(-720deg)
+
+@keyframes firstPartWrap
+    0%
+        transform: translateX(52px)
+
+    100%
+        transform: translateX(0px)
+
+
+@keyframes letter
+    0%
+        opacity: 0
+
+    100%
+        opacity: 1

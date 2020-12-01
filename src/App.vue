@@ -1,7 +1,11 @@
 <template>
-	<div id="app">
-		<transition name="fade">
+	<div id="app" v-cloak>
+		<transition name="fade-page">
+		<Preloader v-if="showPreloader"/>
+		</transition>
+		<transition name="fade-page">
 		<router-view 
+			
 			@round-position="roundPosition"
 			@open-booking="openPopupBooking"
 			@open-proposal="openPopupProposal"
@@ -49,7 +53,7 @@
 	</div>
 </template>
 <script>
-
+	import Preloader from '@/components/Preloader/Preloader'
 	import PopupBooking from '@/components/PopupBooking/PopupBooking'
 	import PopupProposal from '@/components/PopupProposal/PopupProposal'
 	import PopupSpecial from '@/components/PopupSpecial/PopupSpecial'
@@ -76,6 +80,7 @@
 				showPopupSpecial: false,
 				showPopupFeedback: false,
 				menuShow: false,
+				showPreloader: true,
 				popupPrice: '',
 				popupArea: '',
 				popupTitle: '',
@@ -86,6 +91,7 @@
 			}
 		},
 		components: {
+			Preloader,
 			PopupProposal,
 			PopupBooking,
 			Popup,
@@ -191,9 +197,12 @@
 					header.classList.add('_back')
 				}
 			},
+			showPreloaderFunc() {
+				setTimeout(() => this.showPreloader = false, 5000);
+			}
 		},
 		mounted() {
-			
+			this.showPreloaderFunc()
 		}
 	}
 	Vue.mixin({

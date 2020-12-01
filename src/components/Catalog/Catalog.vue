@@ -9,7 +9,7 @@
 			<div class="container">
 				<div class="filter__wrapper">
 					<div class="row _no-pudding-top">
-						<div class="col-xs-12 col-md-4 filter__border-block">
+						<div class="col-xs-12 col-sm-4 filter__border-block">
 							<div class="filter-block">
 								<div class="filter-block__title">площадь, m<sup>2</sup></div>
 								<div ref="sliderArea" class="filter-range"></div>
@@ -20,7 +20,7 @@
 							</div>
 							
 						</div>
-						<div class="col-xs-12 col-md-4 filter__border-block">
+						<div class="col-xs-12 col-sm-4 filter__border-block">
 							<div class="filter-block">
 								<div class="filter-block__title">Диапазон цен</div>
 
@@ -31,7 +31,7 @@
 							</div>
 							
 						</div>
-						<div class="col-xs-12 col-md-4 filter__border-block">
+						<div class="col-xs-12 col-sm-4 filter__border-block">
 							<div class="filter-block">
 								<div class="filter-block__title">Предпочитаемый район</div>
 								<transition-group
@@ -93,7 +93,7 @@
 					<transition name="slide">
 						<div class="filter-addinations" v-show="filterAddinations">
 							<div class="row">
-								<div class="col-xs-12 col-md-4 filter__border-block">
+								<div class="col-xs-12 col-sm-4 filter__border-block">
 									<div class="filter-block">
 										<div class="filter-block__title">цоколь</div>
 										<div class="filter-block__radio-wrapper">
@@ -109,7 +109,7 @@
 									</div>
 								</div>
 
-								<div class="col-xs-12 col-md-4 filter__border-block">
+								<div class="col-xs-12 col-sm-4 filter__border-block">
 									<div class="filter-block">
 										<div class="filter-block__title">отдельный санузел</div>
 										<div class="filter-block__radio-wrapper">
@@ -129,7 +129,7 @@
 									</div>
 								</div>
 
-								<div class="col-xs-12 col-md-4 filter__border-block">
+								<div class="col-xs-12 col-sm-4 filter__border-block">
 									<div class="filter-block">
 										<div class="filter-block__title">витраж</div>
 										<div class="filter-block__radio-wrapper">
@@ -146,7 +146,7 @@
 								</div>
 							</div>
 							<div class="row">
-								<div class="col-xs-12 col-md-4 filter__border-block">
+								<div class="col-xs-12 col-sm-4 filter__border-block">
 									<div class="filter-block">
 										<div class="filter-block__title">отдельный вход</div>
 										<div class="filter-block__radio-wrapper">
@@ -162,7 +162,7 @@
 									</div>
 								</div>
 
-								<div class="col-xs-12 col-md-4 filter__border-block">
+								<div class="col-xs-12 col-sm-4 filter__border-block">
 									<div class="filter-block">
 										<div class="filter-block__title">видеонаблюдение</div>
 										<div class="filter-block__radio-wrapper">
@@ -178,7 +178,7 @@
 									</div>
 								</div>
 
-								<div class="col-xs-12 col-md-4 filter__border-block">
+								<div class="col-xs-12 col-sm-4 filter__border-block">
 									<div class="filter-block">
 										<div class="filter-block__title">подъезд для погрузки</div>
 										<div class="filter-block__radio-wrapper">
@@ -254,7 +254,7 @@
 						</transition>
 						<button 
 							v-show="filteredProducts.length > 4"
-							class="button _border"
+							class="button catalog__button _border"
 						>Показать ещё ({{ filteredProducts.length - 4 }})
 						</button>
 					</div>

@@ -114,6 +114,7 @@
 					:class="{ '_showPopup': showPopupDocs, '_hidePopup': !showPopupDocs }"
 					v-if="item.documents"
 					>
+					<div class="popup-back-closer" @click="showPopupDocs = false"></div>
 					<div class="popup-content" >
 						<div class="popup-body">
 							<button @click="showPopupDocs = false" class="popup-closer"></button>

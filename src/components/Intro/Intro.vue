@@ -5,7 +5,7 @@
         </div>
         <div class="intro-video">
             <iframe
-            src="https://www.youtube.com/embed/S0zAVyfXSYA?autoplay=1&mute=1&enablejsapi=1&controls=0&fs=0&loop=1&modestbranding=1&start=20"
+            src="https://www.youtube-nocookie.com/embed/S0zAVyfXSYA?autoplay=1&mute=1&enablejsapi=1&controls=0&fs=0&loop=1&modestbranding=1&start=20"
             frameborder="0" allowfullscreen>
             </iframe>
         </div>
@@ -46,7 +46,7 @@
         <div class="popup" :class="{ '_showPopup': videoPopup, '_hidePopup': !videoPopup }">
 
             <div class="popup-content" v-if="videoPopup" >
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/S0zAVyfXSYA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/S0zAVyfXSYA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         </div>
     </section>

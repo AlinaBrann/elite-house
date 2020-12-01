@@ -5,18 +5,18 @@
                 <div class="header-row">
                     <div class="header-logo-wrapper">
                         <a href="#intro" v-smooth-scroll class="header-logo">
-                            <transition-group name="fade">
+                            <transition-group name="slide">
                                 <img 
                                     v-if="darkTheme"
                                     :key="2"
-                                    src="/images/logo.png" 
+                                    src="/images/logo.svg" 
                                     class="header-logo__img" 
                                     alt="">
                                 <img 
                                     v-else
                                     transition="fade"
                                     :key="1"
-                                    src="/images/logo-white.png" 
+                                    src="/images/logo-white.svg" 
                                     class="header-logo__img" 
                                     alt="">
                             </transition-group>

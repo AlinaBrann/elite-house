@@ -1,6 +1,5 @@
 <template>
-    <div id="home">
-		<Preloader v-if="showPreloader"/>
+    <div id="home" >
         <Intro 
 			free="168" 
 			@open-booking="openPopupBooking"
@@ -28,7 +27,6 @@
 </template>
 
 <script>
-	import Preloader from '@/components/Preloader/Preloader'
 	import Intro from '@/components/Intro/Intro'
 	import Banner from '@/components/Banner/Banner'
 	import Catalog from '@/components/Catalog/Catalog'
@@ -44,7 +42,6 @@
 			}
 		},
 		components: {
-			Preloader,
 			Intro,
 			Banner,
             Catalog,
@@ -70,14 +67,10 @@
 			},
 			roundPosition(event) {
 				this.$emit('round-position', event)
-			},
-			showPreloaderFunc() {
-				setTimeout(() => this.showPreloader = false, 3000);
 			}
-			
 		},
 		mounted() {
-			this.showPreloaderFunc()
+			
 		}
 	}
 </script>

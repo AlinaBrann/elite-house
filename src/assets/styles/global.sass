@@ -54,6 +54,7 @@ body
 		transform: translateY(10px)
 	&-leave-active
 		position: absolute
+		transition: opacity .5s
 	&-move
 		transition: transform 1s
 	&-enter-active 
@@ -85,7 +86,15 @@ body
 	&-enter
 		opacity: 1
 
-
+.fade-page
+	&-enter-active,
+	&-leave-active 
+		transition-duration: 0.3s
+		transition-property: opacity
+		transition-timing-function: ease
+	&-enter,
+	&-leave-active 
+		opacity: 0	
 ._jcfe
 	display: flex
 	justify-content: flex-end
@@ -118,6 +127,17 @@ body
 	&:hover
 		&:after
 			animation: lineActive 1s forwards
+
+[v-cloak]
+	.preloader
+		display: flex
+	& > section
+		display: none !important
+
+@keyframes spinner 
+	to 
+		transform: rotate(360deg)
+    
 
 // map mood
 

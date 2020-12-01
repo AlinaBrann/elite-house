@@ -5,6 +5,10 @@
     &__content
         width: 800px
         max-width: 100%
+        +min-screen($screen-sm)
+            width: 700px
+        +min-screen($screen-md)
+            width: 800px
     &__title
         ._dark &
             margin-bottom: 33px

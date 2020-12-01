@@ -10,13 +10,16 @@
     &__title
         margin-bottom: 50px
         text-align: center
-        +max-screen($screen-md)
+        +max-screen($screen-sm)
             &:before
                 bottom: -3px
                 white-space: pre-wrap
     &-slider
-        width: 96.5%
         margin: auto
+        +min-screen($screen-sm)
+            width: 100%
+        +min-screen($screen-md)
+            width: 96.5%
         &-slide
             &__wrapper
                 display: flex
@@ -27,17 +30,38 @@
                 margin: 0 20px
                 background: #F2F2F2
                 border-radius: $radius * 2
+                +min-screen($screen-sm)
+                    margin: 0 10px
+                +min-screen($screen-md)
+                    margin: 0 20px
             &__image
                 margin-bottom: 25px
+                +min-screen($screen-sm)
+                    height: 70px
+                +min-screen($screen-lg)
+                    height: 120px
             &__title
                 margin-bottom: 10px
                 font-family: $bold
                 font-size: 20px
                 line-height: 28px
+                +min-screen($screen-sm)
+                    font-size: 18px
+                    line-height: 23px
+                +min-screen($screen-md)
+                    font-size: 20px
+                    line-height: 28px
+
             &__text
                 font-family: $medium
                 color: transparentize(#000,.2)
                 line-height: 24px
+                +min-screen($screen-sm)
+                    font-size: 14px
+                    line-height: 18px
+                +min-screen($screen-md)
+                    font-size: 16px
+                    line-height: 24px
             &__button
                 width: 240px
                 max-width: 100%
