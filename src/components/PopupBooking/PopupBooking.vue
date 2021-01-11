@@ -9,11 +9,6 @@
                 <div class="popup__title booking-popup__title">Бронь помещения</div>
                 <div class="booking-popup-info">
                     <div class="booking-popup-info__item">
-                        <div class="booking-popup-info__item-title">Цена</div>
-                        <div class="booking-popup-info__item-border"></div>
-                        <div class="booking-popup-info__value">$ {{ price | currency }}</div>
-                    </div>
-                    <div class="booking-popup-info__item">
                         <div class="booking-popup-info__item-title">Помещение</div>
                         <div class="booking-popup-info__item-border"></div>
                         <div class="booking-popup-info__value">{{ title }}</div>
@@ -43,7 +38,6 @@ import FeedbackForm from '@/components/FeedbackForm/FeedbackForm'
 
 export default {
     props: [
-        "price",
         "area",
         "title"
     ],

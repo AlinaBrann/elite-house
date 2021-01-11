@@ -23,7 +23,6 @@
 		<PopupBooking 
 			:class="{ '_showPopup': modalVisible, '_hidePopup': !modalVisible }"
 			@close-modal="modalVisible = false"
-			:price="popupPrice"
 			:title="popupTitle"
 			:area="popupArea"
 			/>
@@ -99,7 +98,6 @@
 				showPopupGallery: false,
 				menuShow: false,
 				showPreloader: true,
-				popupPrice: '',
 				popupArea: '',
 				popupTitle: '',
 				openSpecialTitle: '',
@@ -160,7 +158,6 @@
 				this.showPopupFeedback =  false
 			},
 			openPopupBooking(item) {
-				this.popupPrice = item.price,
 				this.popupArea = item.area,
 				this.popupTitle = item.title,
 				this.modalVisible = true

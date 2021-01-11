@@ -32,11 +32,7 @@
                 <div class="catalog-item__content">
                     <div class="catalog-item__area">{{ item.area }} m<sup>2</sup></div>
                     <div class="catalog-item__address" v-html="item.address"></div>
-                    <div class="catalog-item__price">
-                        $ {{ item.price | currency }}
-                        <span v-if="item.currency"> {{ item.currency }}</span>
-                        <span v-else> &#8381;</span>
-                    </div>
+                    
                     <button class="catalog-item__button button _full" @click="$emit('open-booking', item)">ЗАБРОНИРОВАТЬ</button>
                     <button 
                         class="catalog-item__button button _full _border"

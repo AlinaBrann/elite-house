@@ -10,7 +10,7 @@
 			<div class="container">
 				<div class="filter__wrapper">
 					<div class="row _no-pudding-top">
-						<div class="col-xs-12 col-sm-4 filter__border-block">
+						<div class="col-xs-12 col-sm-8 filter__border-block">
 							<div class="filter-block">
 								<div class="filter-block__title">площадь, m<sup>2</sup></div>
 								<div ref="sliderArea" class="filter-range"></div>
@@ -21,17 +21,7 @@
 							</div>
 							
 						</div>
-						<div class="col-xs-12 col-sm-4 filter__border-block">
-							<div class="filter-block">
-								<div class="filter-block__title">Диапазон цен</div>
-
-								<div ref="sliderPrice" class="filter-range"></div>
-								<div class="filter-block__label">
-									<span>от $ {{ value[0] | currency }}</span><span>до $ {{ value[1] | currency }}</span>
-								</div>
-							</div>
-							
-						</div>
+						
 						<div class="col-xs-12 col-sm-4 filter__border-block">
 							<div class="filter-block">
 								<div class="filter-block__title">Предпочитаемый район</div>
@@ -425,13 +415,10 @@ export default {
 	data() {
 		return {
 			newObject: [],
-			value: [50000, 300000],
 			valueArea: [0, 100],
 			content: Flats,
 			selectedObjects: [],
 			flats: Flats.objects,
-			minPrice: 0,
-			maxPrice: 1000000,
 			minArea: 0,
 			maxArea: 1000,
 			sortedProducts: [],
@@ -448,10 +435,8 @@ export default {
 			errorText: false,
 			districtShow: false,
 			filterAddinations: false,
-			popupPrice: '',
 			popupArea: '',
 			sliderArea: this.$refs.sliderArea,
-			sliderPrice: this.$refs.sliderPrice,
 			objectShow: false,
 			objects: [
 				"Нью Йорк",
@@ -538,8 +523,7 @@ export default {
 			this.sortedProducts = this.flats
 			this.filtered = true
 			this.sortedProducts = this.sortedProducts.filter(function (item) {
-				return (item.price >= vm.value[0] && item.price <= vm.value[1]) &&
-					(item.area >= vm.valueArea[0] && item.area <= vm.valueArea[1]) &&
+				return (item.area >= vm.valueArea[0] && item.area <= vm.valueArea[1]) &&
 					(vm.plinthParam.length === 0 || vm.plinthParam.includes(item.plinth)) &&
 					(vm.bathroom.length === 0 || vm.bathroom.includes('all') || vm.bathroom.includes(item.bathroom)) &&
 					(vm.stainedGlass.length === 0 || vm.stainedGlass.includes(item.stainedGlass)) &&
@@ -676,8 +660,7 @@ export default {
 
 		
 
-		var sliderArea = vm.$refs.sliderArea,
-			sliderPrice = vm.$refs.sliderPrice
+		var sliderArea = vm.$refs.sliderArea
 		noUiSlider.create(
 			sliderArea, {
 				start: this.valueArea,
@@ -688,29 +671,16 @@ export default {
 				}
 			}
 		);
-		noUiSlider.create(
-			sliderPrice, {
-				start: this.value,
-				connect: true,
-				step: 10000,
-				range: {
-					'min': vm.minPrice,
-					'max': vm.maxPrice
-				}
-			}
-		);
+		
 
 		$('.button-reset').on('click', () => {
 			sliderArea.noUiSlider.reset()
-			sliderPrice.noUiSlider.reset()
 		});
 
 		sliderArea.noUiSlider.on('update', function (values) {
 			vm.valueArea = values
 		});
-		sliderPrice.noUiSlider.on('update', function (values) {
-			vm.value = values
-		});
+		
 
 	},
 	events: {
