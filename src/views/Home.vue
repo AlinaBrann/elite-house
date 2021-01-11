@@ -7,15 +7,17 @@
 			@round-position="roundPosition"
 			@open-special="openPopupSpecial"
 			@open-feedback="openPopupFeedback"
-			@open-menu="openMenu" />
+			@open-menu="openMenu"
+			@close-menu="closeMenu"
+			@open-video="openPopupVideo" />
         <Banner deadline="2020-12-25 00:00:00" />
         <Catalog 
 			@open-booking="openPopupBooking"
 			@open-proposal="openPopupProposal"
 			@round-position="roundPosition"
 			@open-special="openPopupSpecial"
+			@open-gallery="openPopupGallery"
 			/>
-        <Projects/>
 		<Possibilities
 			@round-position="roundPosition"
 			@open-feedback="openPopupFeedback"/>
@@ -30,22 +32,19 @@
 	import Intro from '@/components/Intro/Intro'
 	import Banner from '@/components/Banner/Banner'
 	import Catalog from '@/components/Catalog/Catalog'
-	import Projects from '@/components/Projects/Projects'
 	import Possibilities from '@/components/Possibilities/Possibilities'
 	import Contacts from '@/components/Contacts/Contacts'
-
 	export default {
 		name: 'Home',
 		data() {
 			return {
-				showPreloader: true
+				showPreloader: true,
 			}
 		},
 		components: {
 			Intro,
 			Banner,
             Catalog,
-			Projects,
 			Possibilities,
 			Contacts
 		},
@@ -62,19 +61,25 @@
 			openMenu() {
 				this.$emit('open-menu')
 			},
+			closeMenu() {
+				this.$emit('close-menu')
+			},
 			openPopupSpecial(item) {
 				this.$emit('open-special', item)
 			},
+			sortByCategories() {
+				this.$emit('select-object')
+			},
 			roundPosition(event) {
 				this.$emit('round-position', event)
+			},
+			openPopupVideo() {
+				this.$emit('open-video')
+			},
+			openPopupGallery(item, index){
+				this.$emit('open-gallery', item, index)
 			}
 		},
-		mounted() {
-			
-		}
 	}
+	
 </script>
-
-<style>
-
-</style>

@@ -1,15 +1,16 @@
 <svg width="1280" height="760" viewBox="0 0 1280 760" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g clip-path="url(#clip0)">
 <path d="M0 0H1280L1014 295.5L921 211.5L429 760H0V0Z" fill="#4C4D4F"/>
-<g clip-path="url(#clip1)">
 <g filter="url(#filter0_d)">
 <mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="422" y="211" width="611" height="657">
-<rect x="422" y="767.607" width="746.734" height="150.197" transform="rotate(-48.0844 422 767.607)" fill="#C4C4C4"/>
+<path d="M920.845 211.94L422 767.607L533.766 867.944L1032.61 312.277L920.845 211.94Z" fill="#C4C4C4"/>
 </mask>
 <g mask="url(#mask0)">
-<rect x="316.432" y="28.0342" width="1476" height="830" fill="#F47321" fill-opacity="0.5"/>
+<path d="M1792.43 28.0342H316.432V858.034H1792.43V28.0342Z" fill="#F47321" fill-opacity="0.5"/>
 </g>
 </g>
+<g filter="url(#filter1_i)">
+<path d="M1278.35 229L1280.49 230.923V411.637L966.583 760.261H800L1278.35 229Z" fill="black" fill-opacity="0.2"/>
 </g>
 </g>
 <defs>
@@ -22,11 +23,18 @@
 <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
 <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
 </filter>
+<filter id="filter1_i" x="800" y="229" width="480.485" height="537.261" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="6"/>
+<feGaussianBlur stdDeviation="4"/>
+<feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/>
+<feBlend mode="normal" in2="shape" result="effect1_innerShadow"/>
+</filter>
 <clipPath id="clip0">
 <rect width="1280" height="760" fill="white"/>
-</clipPath>
-<clipPath id="clip1">
-<rect width="1360" height="756" fill="white" transform="translate(422 4)"/>
 </clipPath>
 </defs>
 </svg>

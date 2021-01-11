@@ -1,155 +1,185 @@
 @import '@/assets/styles/variables'
 @import '@/assets/styles/libs/media'
 .header
-    position: fixed
-    left: 0
-    top: 0
-    width: 100%
-    padding-top: 16px
-    z-index: 1000
-    transition: 0.4s
-    +min-screen($screen-md)
-        position: absolute
-        padding-top: 7.1vh
-    &._back
-        z-index: 1
-    &.vue-fixed-header--isFixed 
-        position: fixed
-    &-row
-        position: relative
-        display: flex
-        align-items: center
-        justify-content: space-between
-        z-index: 1
-    &-logo
-        &-wrapper
-            flex: 25%
-            +min-screen($screen-md)
-                flex: 17%
-        &__img
-            height: 36px
-            +min-screen($screen-md)
-                height: 56px
-    &-phone
-        font-family: $medium
-        font-size: 14px
-        transition: 0.4s
-        +min-screen($screen-md)
-            font-size: 16px
-        ._dark &
-            color: $grey
-    &-menu
-        display: none
-        +min-screen($screen-md)
-            display: flex
-            justify-content: space-between
-        &-wrapper
-            flex: auto
-        &__item
-            position: relative
-            text-transform: uppercase
-            font-family: $medium
-            font-size: 16px
-            padding: 5px 0
-            ._dark &
-                color: $grey
-    &-info
-        &-wrapper
-            position: relative
-            display: flex
-            align-items: center
-            flex: auto
-            +min-screen($screen-md)
-                flex: 23.5%
-    &-button
-        position: relative
-    &-phone-toggle
-        margin-left: 8px
-        z-index: 10
-        +min-screen($screen-md)
-            margin-left: 1.250vw
-        &:before
-            content: ''
-            display: block
-            width: 14px
-            height: 20px
-            position: absolute
-            top: 50%
-            left: 50%
-            transform: translate(-50%,-50%)
-            background: url('/images/phone.svg') no-repeat center
-            background-size: 14px
-            transition: 0.4s
-            transition-delay: 0.4s
-            opacity: 1
-            ._dark &
-                background-image: url('/images/phone-white.svg')
-        &._active 
-            &:before
-                opacity: 0
-                transition-delay: 0s  
-            
-        &__item
-            position: absolute
-            top: 50%
-            left: 50%
-            transform: translate(-50%,-50%) rotate(45deg)
-            display: block
-            width: 20px
-            height: 2px
-            background: #343435
-            transition: 0.4s
-            opacity: 0
-            ._active &
-                opacity: 1
-                transition-delay: 0.5s
-            &:first-child
-                transform: translate(-50%,-50%) rotate(-45deg)
-            ._dark &
-                background: #fff
-                
-    &-menu-toggle
-        margin-left: 16px
-        z-index: 10
-        +min-screen($screen-md)
-            margin-left: 1.875vw
-        &__item
-            position: absolute
-            top: 50%
-            left: 50%
-            transform: translate(-50%,-50%)
-            display: block
-            width: 20px
-            height: 2px
-            background: #343435
-            transition: 0.4s
-            ._active &
-                transform: translate(-50%,-50%) rotate(45deg)
-                transition-delay: 0.3s
-            ._dark &
-                background: #fff
-            &:before
-                content: ''
-                position: absolute
-                top: calc(50% - 6px)
-                left: 50%
-                transform: translate(-50%,-50%)
-                display: block
-                width: 20px
-                height: 2px
-                background: #343435
-                transition: 0.4s
-                transition-delay: 0.3s
-                ._dark &
-                    background: #fff
-                ._active &
-                    transform: translate(-50%,-10px)
-                    opacity: 0
-                    transition-delay: 0s
-            &:first-child
-                ._active &
-                    transform: translate(-50%,-50%) rotate(-45deg)
-                &:before
-                    top: calc(50% + 6px)
-                    ._active &
-                        transform: translate(-50%,10px)
+	position: fixed
+	left: 0
+	top: 0
+	width: 100%
+	padding-top: 16px
+	padding-bottom: 16px
+	z-index: 100
+	transition: 0.4s
+	+min-screen($screen-md)
+		position: absolute
+		padding-top: 7.1vh
+		padding-bottom: 5vh
+	&._background
+		&:before
+			content: ''
+			display: block
+			position: absolute
+			top: 0
+			left: 0
+			width: 100%
+			height: 100%
+			background: transparentize($grey, .3)
+			transition: 0.4s
+		&._dark 
+			&:before
+				background: transparentize(#FFF, .3)
+
+	&._back
+		z-index: 1
+	&.vue-fixed-header--isFixed 
+		position: fixed
+	&-row
+		position: relative
+		display: flex
+		align-items: center
+		justify-content: space-between
+		z-index: 1
+	&-logo
+		&-wrapper
+			flex: 25%
+			+min-screen($screen-md)
+				flex: 17%
+		&__img
+			height: 36px
+			+min-screen($screen-md)
+				height: 56px
+			&._whitelogo
+				display: block
+				._dark &
+					display: none
+			&._darklogo
+				display: none
+				._dark &
+					display: block
+	&-phone
+		font-family: $medium
+		font-size: 14px
+		&:hover
+			transition: 0.4s
+		+min-screen($screen-md)
+			font-size: 16px
+		._dark &
+			color: $grey
+			transition: 0s
+	&-menu
+		display: none
+		+min-screen($screen-md)
+			display: flex
+			justify-content: space-between
+		&-wrapper
+			flex: auto
+		&__item
+			position: relative
+			text-transform: uppercase
+			font-family: $medium
+			font-size: 16px
+			padding: 5px 0
+			transition: 0s
+			&:hover
+				transition: 0.4s
+			._dark &
+				color: $grey
+	&-info
+		&-wrapper
+			position: relative
+			display: flex
+			align-items: center
+			flex: auto
+			+min-screen($screen-md)
+				flex: 23.5%
+	&-button
+		position: relative
+	&-phone-toggle
+		margin-left: 8px
+		z-index: 10
+		transition: 0s
+		&:hover
+			transition: 0.4s
+		+min-screen($screen-md)
+			margin-left: 1.250vw
+		path
+			._dark &
+				fill: #FFF
+		&._active 
+			&:before,
+			svg
+				opacity: 0
+				transition-delay: 0s  
+			
+		&__item
+			position: absolute
+			top: 50%
+			left: 50%
+			transform: translate(-50%,-50%) rotate(45deg)
+			display: block
+			width: 20px
+			height: 2px
+			background: #343435
+			opacity: 0
+			&:hover
+				transition: 0.4s
+			._active &
+				opacity: 1
+			&:first-child
+				transform: translate(-50%,-50%) rotate(-45deg)
+			._dark &
+				background: #fff
+				
+	&-menu-toggle
+		$parent: &
+		margin-left: 16px
+		transition: 0s
+		z-index: 10
+		&:hover
+			transition: 0.4s
+		+min-screen($screen-md)
+			margin-left: 1.875vw
+		&__item
+			position: absolute
+			top: 50%
+			left: 50%
+			transform: translate(-50%,-50%)
+			display: block
+			width: 20px
+			height: 2px
+			background: #343435
+			transition: transform 0.4s
+			._active &
+				transform: translate(-50%,-50%) rotate(45deg)
+				transition-delay: 0.3s
+			._dark &
+				background: #fff
+			&:before
+				content: ''
+				position: absolute
+				top: calc(50% - 6px)
+				left: 50%
+				transform: translate(-50%,-50%)
+				display: block
+				width: 20px
+				height: 2px
+				background: #343435
+				transition: transform 0.4s opacity 0.4s
+				
+				._dark &
+					background: #fff
+				._active &
+					transform: translate(-50%,-10px)
+					opacity: 0
+					transition-delay: 0s
+			&:first-child
+				._active &
+					transform: translate(-50%,-50%) rotate(-45deg)
+				&:before
+					top: calc(50% + 6px)
+					._active &
+						transform: translate(-50%,10px)
+		&:focus
+			#{$parent}
+				&__item
+					&:before
+						transition-delay: 0.3s

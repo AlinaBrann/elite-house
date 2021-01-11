@@ -15,9 +15,15 @@
 		align-items: center
 		justify-content: center
 		min-height: 20vh
-		font-size: 24px
+		font-size: 16px
+		line-height: 20px
+		padding: 20px
 		font-family: $medium
 		text-align: center
+		+min-screen($screen-sm)
+			font-family: $default-font-family
+			font-size: 24px
+			line-height: 38px
 	&-enter 
 		transform: scale(0.5) translatey(-80px)
 		opacity: 0
@@ -111,9 +117,8 @@
 		&-slide
 			div
 				height: 100%
+		&-next,
 		&-prev
-			display: none !important
-		&-next
 			position: absolute
 			top: 50%
 			right: 25%
@@ -136,6 +141,12 @@
 				border-color: $orange-dark
 				background: transparentize(#FFF,0) url(/images/arrow-orange-dark.svg) no-repeat center
 				background-size: 60%
+		&-prev
+			transform: translate(50%,-50%) rotate(180deg)
+			right: 75%
+			z-index: 1
+			+min-screen($screen-sm)
+				display: none !important
 			
 	&._for
 		margin-bottom: 8px

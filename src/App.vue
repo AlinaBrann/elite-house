@@ -11,10 +11,14 @@
 			@open-proposal="openPopupProposal"
 			@open-special="openPopupSpecial"
 			@open-feedback="openPopupFeedback"
-			@open-menu="openMenu" /> 
+			@open-menu="openMenu"
+			@close-menu="closeMenu"
+			@open-video="openPopupVideo"
+			@open-gallery="openPopupGallery" /> 
 		</transition>
 		<HiddenMenu 
 			@open-special="openPopupSpecial"
+			@open-menu="openMenu"
 			:class="{ '_showPopup': menuShow, '_hidePopup': !menuShow }"/>
 		<PopupBooking 
 			:class="{ '_showPopup': modalVisible, '_hidePopup': !modalVisible }"
@@ -31,23 +35,34 @@
 			:title="openSpecialTitle"
 			:text="openSpecialText"
 			/>
+		<PopupVideo
+			:class="{ '_showPopup': showPopupVideo, '_hidePopup': !showPopupVideo  }"
+			@close="closePopupVideo()"
+			:videoSrc="videoSrc"
+			/>
 		<PopupFeedback 
 			:class="{ '_showPopup': showPopupFeedback, '_hidePopup': !showPopupFeedback  }"
-			@close-modal="showPopupFeedback = false"
+			@close-modal="openPopupFeedback()"
 			@open-modal="showPopupFeedback = false"
 			/>
-		
+		<PopupGallery
+			:class="{ '_showPopup': showPopupGallery, '_hidePopup': !showPopupGallery  }"
+			:images="gallery"
+			:index="index"
+			@close-modal="showPopupGallery = false"
+			/>
 		<Popup 
 			:leftPosition="left" 
 			:topPosition="top" 
 			:yPos="posY" 
 			:xPos="posX"
+			:style="'z-index:' + backZindex"
 			:class="{'_active': backdrop, '_hide': !backdrop}"
-			@close-all="closeAllPopups"/>
+			@click="closeAllPopups()"/>
 		<PopupProposal 
 			v-if="showPopupProposal" 
 			:class="{ '_showPopup': showPopupProposal, '_hidePopup': !showPopupProposal }" 
-			@close="showPopupProposal = false; backdrop = false"
+			@close="closePopupProposal()"
 			class="popup-offer"
 		/>
 	</div>
@@ -58,8 +73,9 @@
 	import PopupProposal from '@/components/PopupProposal/PopupProposal'
 	import PopupSpecial from '@/components/PopupSpecial/PopupSpecial'
 	import PopupFeedback from '@/components/PopupFeedback/PopupFeedback'
+	import PopupVideo from '@/components/PopupVideo/PopupVideo'
+	import PopupGallery from '@/components/PopupGallery/PopupGallery'
 	import HiddenMenu from '@/components/HiddenMenu/HiddenMenu'
-
 	import Popup from '@/components/PopupBackdrop/PopupBackdrop'
 
 	import Vue from 'vue'
@@ -78,7 +94,9 @@
 				showPopupProposal: false,
 				modalVisible: false,
 				showPopupSpecial: false,
+				showPopupVideo: false,
 				showPopupFeedback: false,
+				showPopupGallery: false,
 				menuShow: false,
 				showPreloader: true,
 				popupPrice: '',
@@ -87,7 +105,14 @@
 				openSpecialTitle: '',
 				openSpecialText: '',
 				openSpecialImg: '',
-				backdrop: false
+				videoSrc: '',
+				backdrop: false,
+				backZindex: 10,
+				bodyClassClose: 'modal-close',
+				bodyClassOpen: 'modal-open',
+				bodyClass: this.bodyClassClose,
+				gallery: [],
+				index: 0
 			}
 		},
 		components: {
@@ -96,11 +121,14 @@
 			PopupBooking,
 			Popup,
 			PopupSpecial,
+			PopupVideo,
+			PopupGallery,
 			PopupFeedback,
 			HiddenMenu
 
 		},
 		methods: {
+			
 			trans() {
 				if(this.top <= this.screenHeight / 3){
 					this.posY = 30
@@ -126,9 +154,9 @@
 			},
 			closeAllPopups() {
 				this.backdrop = false
-				this.showPopupProposal = 
-				this.modalVisible = 
-				this.showPopupSpecial = 
+				this.showPopupProposal = false
+				this.modalVisible = false
+				this.showPopupSpecial = false
 				this.showPopupFeedback =  false
 			},
 			openPopupBooking(item) {
@@ -143,30 +171,53 @@
 					this.roundPosition(event) 
 				}
 				this.showPopupFeedback = !this.showPopupFeedback
-				let phoneButton = document.getElementById('phoneButton');
-				let menuButton = document.getElementById('menuButton');
+				let header = document.getElementById('header'),
+				phoneButton = document.getElementById('phoneButton'),
+				menuButton = document.getElementById('menuButton');
 				if (this.showPopupFeedback ) {
 					phoneButton.classList.add('_active')
 					menuButton.classList.remove('_active')
+					header.classList.remove('_dark','_background')
 					this.backdrop = true
+					this.bodyClass = this.bodyClassOpen
 				} else {
 					phoneButton.classList.remove('_active')
 					this.backdrop = false
+					this.bodyClass = this.bodyClassClose
 				}
 			},
 			openMenu() {
 				this.menuShow = !this.menuShow
 				this.showPopupFeedback = false
-				let phoneButton = document.getElementById('phoneButton');
-				let menuButton = document.getElementById('menuButton');
+				if (!this.showPopupFeedback) {
+					this.roundPosition(event) 
+				}
+				let header = document.getElementById('header'),
+				phoneButton = document.getElementById('phoneButton'),
+				menuButton = document.getElementById('menuButton');
+				
 				if (this.menuShow ) {
 					menuButton.classList.add('_active')
 					phoneButton.classList.remove('_active')
+					header.classList.remove('_dark','_background')
 					this.backdrop = true
+					this.bodyClass = this.bodyClassOpen
 				} else {
 					menuButton.classList.remove('_active')
 					this.backdrop = false
+					this.bodyClass = this.bodyClassClose
 				}
+			},
+			closeMenu() {
+				this.menuShow = false
+				this.showPopupFeedback = false
+				this.roundPosition(event) 
+				let menuButton = document.getElementById('menuButton'),
+				phoneButton = document.getElementById('phoneButton');
+				menuButton.classList.remove('_active')
+				phoneButton.classList.remove('_active')
+				this.backdrop = false
+				this.bodyClass = this.bodyClassClose
 			},
 			closePopupFeedback() {
 				this.showPopupFeedback = false
@@ -174,8 +225,10 @@
 				let phoneButton = document.getElementById('phoneButton');
 				if (this.showPopupFeedback ) {
 					phoneButton.classList.add('_active')
+					this.bodyClass = this.bodyClassOpen
 				} else {
 					phoneButton.classList.remove('_active')
+					this.bodyClass = this.bodyClassClose
 				}
 			},
 			openPopupSpecial(item) {
@@ -187,27 +240,67 @@
 					this.openSpecialTitle = item.PopupSpecial.title
 				}
 				}
+				
 				this.showPopupSpecial = true
+			},
+			openPopupGallery(item, index) {
+				this.gallery = item.gallery	
+				this.index = index
+				this.showPopupGallery = true
 			},
 			openPopupProposal() {
 				this.roundPosition(event) 
 				this.showPopupProposal = true
-				let header = document.getElementById('header');
 				if (this.showPopupProposal ) {
-					header.classList.add('_back')
-				}
+					this.backZindex = 100
+					this.bodyClass = this.bodyClassOpen
+				} 
+			},
+			closePopupProposal() {
+				this.showPopupProposal = false
+				this.backdrop = false
+				this.backZindex = 10
+				this.bodyClass = this.bodyClassClose
+			},
+			closePopupVideo() {
+				this.showPopupVideo = false
+				this.backdrop = false
+				this.backZindex = 10
+				this.bodyClass = this.bodyClassClose
+				this.videoSrc = ''
+			},
+			openPopupVideo() {
+				this.roundPosition(event) 
+				this.videoSrc = 'https://www.youtube-nocookie.com/embed/3omF4eooT2A?&amp;autoplay=1&rel=0'
+				this.showPopupVideo = true
+				if (this.showPopupVideo ) {
+					this.backZindex = 100
+					this.bodyClass = this.bodyClassOpen
+				} 
 			},
 			showPreloaderFunc() {
 				setTimeout(() => this.showPreloader = false, 5000);
+			},
+			addBodyClass() {
+				document.body.classList.add(this.bodyClass);
+			},
+			updateVH(){
+				document.documentElement.style.setProperty('--vh', (window.innerHeight * 0.01) + 'px');				
 			}
 		},
+		watch: {
+			bodyClass: function (val) {
+				document.body.className = val;
+			},},
 		mounted() {
 			this.showPreloaderFunc()
+			window.addEventListener('resize', this.updateVH);
+			this.updateVH();
+			
 		}
 	}
 	Vue.mixin({
-		
-		
+	
 	})
 </script>
 
@@ -217,9 +310,9 @@
 @import '@/assets/styles/libs/media'
 #app 
 	+max-screen($screen-sm)
-		position: fixed
+		// position: fixed
 		width: 100%
-		height: 100%
+		// height: calc(var(--vh, 1vh) * 100)
 		overflow-x: hidden
 
 </style>

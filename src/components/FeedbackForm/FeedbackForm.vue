@@ -21,7 +21,7 @@
             <input type="submit" class="button feedback-form__button" value="Перезвоните мне">
             <div class="feedback-privacy">
                 Нажимая на кнопку «Перезвоните мне» вы соглашаетесь <br class="hidden-xs">с 
-                <a href="">политикой конфиденциальности</a>
+                <a href="/privacy-policy.pdf" target="_blank">политикой конфиденциальности</a>
             </div>
         </div>
     </form>

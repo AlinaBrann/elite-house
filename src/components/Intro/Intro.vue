@@ -1,13 +1,19 @@
 <template>
     <section class="intro">
-        <div class="intro__top-banner" id="topBanner">
+        <a href="#catalog" v-smooth-scroll class="intro__top-banner" id="topBanner">
             {{ free }} свободных помещений в Бишкеке →
-        </div>
+        </a>
         <div class="intro-video">
-            <iframe
-            src="https://www.youtube-nocookie.com/embed/S0zAVyfXSYA?autoplay=1&mute=1&enablejsapi=1&controls=0&fs=0&loop=1&modestbranding=1&start=20"
-            frameborder="0" allowfullscreen>
-            </iframe>
+            <div class="intro-video-wrapper">
+               <video width="100%" loop controls autoplay muted>
+                <source src="/Elite-House_compress.mp4" >
+               
+                Элемент video не поддерживается вашим браузером. 
+                <a href="video/duel.mp4">Скачайте видео</a>.
+                </video>
+                <!-- <iframe src="https://www.youtube.com/embed/gd5k7RWzF4M?autoplay=1&amp;loop=1&amp;enablejsapi=1&amp;&amp;playerapiid=featuredytplayer&amp;controls=0&amp;modestbranding=1&amp;rel=0&amp;showinfo=0&amp;color=white&amp;iv_load_policy=3&amp;theme=light&amp;wmode=transparentm&amp;playlist=gd5k7RWzF4M&amp;mute=1" frameborder="0" allow="autoplay" id="widget2" ></iframe> -->
+            </div>
+            
         </div>
        
         <div class="intro-content">
@@ -17,6 +23,7 @@
                 @round-position="roundPosition"
                 @open-feedback="openPopupFeedback"
                 @open-menu="openMenu"
+                @close-menu="closeMenu"
                 @open-special="openPopupSpecial" />
 
             <div class="container">
@@ -36,19 +43,14 @@
                 </div>
                 <button 
                     class="intro-video-toggle" 
-                    @click="videoPopup = true; roundPosition($event);"
+                    @click="$emit('open-video');"
                 >
                     <span class="intro-video-toggle__background"></span>
                 </button>
 
             </div>
         </div>
-        <div class="popup" :class="{ '_showPopup': videoPopup, '_hidePopup': !videoPopup }">
-
-            <div class="popup-content" v-if="videoPopup" >
-                <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/S0zAVyfXSYA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-        </div>
+        
     </section>
 </template>
 
@@ -65,6 +67,7 @@ export default {
             item: Intro.intro,
             videoPopup: false,
             isFixed: false,
+            videoSrc: '',
             scrollPosition: null,
             settings: {
                 arrows: false,
@@ -102,6 +105,9 @@ export default {
         openMenu() {
             this.$emit('open-menu')
         },
+        closeMenu() {
+            this.$emit('close-menu')
+        },
         openPopupProposal() {
             this.$emit('round-roposal')
         },
@@ -112,6 +118,10 @@ export default {
         openPopupSpecial() {
             this.$emit('open-special')
         },
+        openPopupVideo() {
+            this.$emit('open-video')
+        },
+        
     
     }
 }

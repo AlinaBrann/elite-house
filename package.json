@@ -13,6 +13,7 @@
     "jquery": "^3.5.1",
     "nouislider": "^14.6.3",
     "vue": "^2.6.11",
+    "vue-clickaway": "^2.2.2",
     "vue-fixed-header": "^3.2.15",
     "vue-nouislider": "^1.0.1",
     "vue-range-component": "^1.0.3",

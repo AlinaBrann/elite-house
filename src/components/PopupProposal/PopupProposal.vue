@@ -1,5 +1,6 @@
 <template>
     <div class="popup popup-offer" >
+        <div class="popup-back-closer" @click="$emit('close')"></div>
         <div class="popup-offer__head">
             <div class="popup-offer-total">
                 <div class="popup-offer-total__item">{{ current }}</div>
@@ -57,7 +58,7 @@
                                 <input type="submit" class="feedback-form__button button" value="Перезвоните мне">
                                 <div class="feedback-privacy">
                                     Нажимая на кнопку «Перезвоните мне» вы соглашаетесь <br>с 
-                                    <a href="">политикой конфиденциальности</a>
+                                    <a href="/privacy-policy.pdf" target="_blank">политикой конфиденциальности</a>
                                 </div>
                             </div>
                         </div>

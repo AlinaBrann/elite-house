@@ -3,6 +3,7 @@ import Vue from 'vue'
 import router from './router'
 import App from './App.vue'
 import YmapPlugin from 'vue-yandex-maps'
+import 'nouislider/distribute/nouislider.css'
 
 import 'slick-carousel/slick/slick.js'
 import 'slick-carousel/slick/slick.css'

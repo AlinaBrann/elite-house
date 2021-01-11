@@ -8,8 +8,8 @@
                         :class="'preview-slider _for for_' + item.id"
                         v-if="item.gallery!=undefined && item.gallery.length > 0"
                     >
-                        <div v-for="image in item.gallery" :key="image.id">
-                            <img :src="'/images/' + image.img" >
+                        <div v-for="(image, index) in item.gallery" :key="index">
+                            <img :src="'/images/' + image.img" @click="$emit('open-gallery', item, index);">
                         </div>
                     </Slick>
                     <Slick

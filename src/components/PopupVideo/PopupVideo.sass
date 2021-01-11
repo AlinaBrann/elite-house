@@ -1,0 +1,12 @@
+@import '@/assets/styles/variables'
+@import '@/assets/styles/libs/media'
+.popup-video
+    &__content
+        width: 90vw
+        height: 350px
+        +min-screen($screen-md)
+            height: 90vh
+            max-height: none
+    iframe 
+        width: 100%
+        height: 100%

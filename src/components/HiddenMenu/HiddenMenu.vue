@@ -9,9 +9,9 @@
                         class="hidden-menu-nav__item animated-link"
                         >
                         <a 
-                            @click="$emit('round-position', $event); menuToggle();" 
+                            @click="$emit('round-position', $event); $emit('open-menu');" 
                             :href="item.path"
-                            v-smooth-scroll="{ duration: 2000, offset: 2 }"
+                            v-smooth-scroll="{ duration: 2000,  offset: -143 }"
                             >
                             {{ item.name }}
                         </a>
@@ -23,7 +23,7 @@
                             Специальные предложения
                         </li>
                         <li class="header-menu__item hidden-menu-menu__item animated-link">
-                            <a href="#catalog" v-smooth-scroll >Выбрать помещения</a>
+                            <a href="#catalog" v-smooth-scroll="{ duration: 2000, offset: 2 }" >Выбрать помещения</a>
                         </li>
                     </ul>
                 </div>

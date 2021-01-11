@@ -2,10 +2,10 @@
 	<div>
 		<div 
 		class="catalog-item-details container"
-		v-for="item in flats" 
-		:key="item.id" 
+		v-for="(item, index) in flats" 
+		:key="index" 
 		>
-			<div v-if="proId == item.id" class="catalog-item catalog-item-detail">
+			<div v-if="proId == index + 1" class="catalog-item catalog-item-detail">
 				<div class="row">
 					<div class="col-xs-3 col-md-7">
 						<div class="catalog-item-details-head">
@@ -36,8 +36,8 @@
 							class="preview-slider catalog-item-detail-slider _for"
 							v-if="item.gallery!=undefined && item.gallery.length > 0"
 						>
-							<div v-for="image in item.gallery" :key="image.id">
-								<img :src="'/images/' + image.img" >
+							<div v-for="(image,i) in item.gallery" :key="i">
+								<img :src="'/images/' + image.img" @click="$emit('open-gallery', item, i);">
 							</div>
 						</Slick>
 						<Slick

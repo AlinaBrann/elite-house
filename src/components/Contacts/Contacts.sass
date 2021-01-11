@@ -184,4 +184,28 @@
 		span
 			display: block
 		a
+			position: relative
 			border-bottom: 1px solid $orange
+			img
+				position: absolute
+				top: -3px
+				left: calc(100% + 5px)
+			&:hover
+				& > img
+					animation: samoliot 2s linear
+
+@keyframes samoliot
+	0%
+		transform: rotate(0deg) 
+	30%
+		transform: rotate(25deg)
+	60%
+		transform: rotate(-15deg)
+	100%
+		transform: rotate(0deg)
+	// 0%
+	// 	transform: translate(0,0) rotate(0deg)
+	// 30%
+	// 	transform: translateX(40px) rotate(180deg)
+	// 100%
+	// 	transform: translate(0,0) rotate(0deg)

@@ -1,0 +1,28 @@
+@import '@/assets/styles/variables'
+@import '@/assets/styles/libs/media'
+
+.popup-gallery
+    background: transparentize($grey,.3)
+
+    &__body
+        position: relative
+        ._dark &
+            padding: 0
+            background: none
+        .popup-closer
+            top: 20px
+            right: 20px
+    &-slider
+        .button-arrow
+            position: absolute
+            top: 50%
+            transform: translateY(-50%)
+            &._prev
+                left: 20px
+                z-index: 10
+            &._next
+                right: 20px
+                transform: translateY(-50%) rotate(180deg)
+        .slick-slide
+            img
+                height: 60vh

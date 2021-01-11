@@ -63,7 +63,7 @@
                     </ul>
                     <div class="contacts-copyright">
                         <span>© {{year}} <a :href="contacts.site" target="_blank">ООО Elite House</a></span>
-                        <span>Сайт сделали в <a :href="contacts.samolet" target="_blank">Самалёте</a></span>
+                        <span>Сайт сделали <br>в агентстве <a :href="contacts.samolet" target="_blank">Самолёт <img src="/images/samoliot.svg" alt=""></a></span>
                     </div>
                 </div>
                 <div class="contacts-content-col hidden-xs">
@@ -109,14 +109,10 @@ export default {
     },
     methods: {
         zoomIn() {
-            this.zoom += 1
-            
-            console.log(this.zoom);
+            this.zoom += 1            
         },
         zoomOut() {
-            this.zoom -= 1
-            
-            console.log(this.zoom);
+            this.zoom -= 1            
         }
     }
 }
