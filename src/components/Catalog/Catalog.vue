@@ -256,9 +256,9 @@
 					<div class="col-xs-12 col-md-12">
 						<transition-group class="catalog-wrapper" name="catalog-item" tag="ol">
 							<CatalogItem 
-								v-for="item in filteredProducts.slice(0, 4)" 
+								v-for="item in filteredProducts.slice(0, toShow)" 
 								v-bind:item="item" 
-								:key="item.id" 
+								:key="item" 
 								class="catalog-item"
 								booking="item"
 								@open-booking="openPopupBooking"
@@ -277,7 +277,8 @@
 						<button 
 							v-show="filteredProducts.length > 4"
 							class="button catalog__button _border"
-						>Показать ещё ({{ filteredProducts.length - 4 }})
+							@click="toShow += 3"
+						>Показать ещё ({{ filteredProducts.length - toShow }})
 						</button>
 					</div>
 				</div>
@@ -418,6 +419,7 @@ export default {
 			valueArea: [0, 100],
 			content: Flats,
 			selectedObjects: [],
+			toShow: 3,
 			flats: Flats.objects,
 			minArea: 0,
 			maxArea: 1000,
