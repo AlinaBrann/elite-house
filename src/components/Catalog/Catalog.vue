@@ -256,9 +256,9 @@
 					<div class="col-xs-12 col-md-12">
 						<transition-group class="catalog-wrapper" name="catalog-item" tag="ol">
 							<CatalogItem 
-								v-for="item in filteredProducts.slice(0, toShow)" 
+								v-for="(item, idx) in filteredProducts.slice(0, toShow)" 
 								v-bind:item="item" 
-								:key="item" 
+								:key="idx" 
 								class="catalog-item"
 								booking="item"
 								@open-booking="openPopupBooking"
@@ -275,11 +275,21 @@
 							</div>
 						</transition>
 						<button 
-							v-show="filteredProducts.length > 4"
+							v-if="filteredProducts.length > 4 && (filteredProducts.length - toShow) != 0"
 							class="button catalog__button _border"
-							@click="toShow += 3"
-						>Показать ещё ({{ filteredProducts.length - toShow }})
+							@click="showMore()"
+						>
+							Показать ещё ({{ filteredProducts.length - toShow }})
 						</button>
+						<a 
+							v-else
+							class="button catalog__button _border"
+							href="#catalog"
+                            v-smooth-scroll="{ duration: 500,  offset: -143 }"
+							@click="toShow = 3"
+						>
+							Скрыть
+						</a>
 					</div>
 				</div>
 
@@ -626,6 +636,20 @@ export default {
 			this.objectName = item.objectName,
 			this.modalVisible = true
 		},
+		showMore() {
+			if (this.sortedProducts.length > this.toShow || this.flats.length > this.toShow) {
+				
+				if ((this.flats.length - this.toShow) <= 3 ) {
+					
+					this.toShow += (this.flats.length - this.toShow)
+					
+				}
+				else {
+					this.toShow += 3
+				}
+			} 
+			
+		}
 
 	},
 	computed: {
