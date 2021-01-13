@@ -256,9 +256,9 @@
 					<div class="col-xs-12 col-md-12">
 						<transition-group class="catalog-wrapper" name="catalog-item" tag="ol">
 							<CatalogItem 
-								v-for="(item, idx) in filteredProducts.slice(0, toShow)" 
+								v-for="item in filteredProducts.slice(0, toShow)" 
 								v-bind:item="item" 
-								:key="idx" 
+								:key="item.id" 
 								class="catalog-item"
 								booking="item"
 								@open-booking="openPopupBooking"
@@ -269,27 +269,27 @@
 							/>
 						</transition-group>
 						<transition name="catalog-item">
-							<div v-if="errorText" class="catalog-item _no-results">
+							<div v-show="errorText" class="catalog-item _no-results">
 								Подходящих предложений не найдено. 
 								<br>Попробуйте другие параметры подбора.
 							</div>
 						</transition>
 						<button 
-							v-if="filteredProducts.length > 4 && (filteredProducts.length - toShow) != 0"
+							v-if="filteredProducts.length > 4 && (filteredProducts.length - toShow) > 0"
 							class="button catalog__button _border"
 							@click="showMore()"
 						>
 							Показать ещё ({{ filteredProducts.length - toShow }})
 						</button>
 						<a 
-							v-else
+							v-else-if=" (filteredProducts.length - toShow) == 0"
 							class="button catalog__button _border"
 							href="#catalog"
-                            v-smooth-scroll="{ duration: 500,  offset: -143 }"
+							v-smooth-scroll="{ duration: 500,  offset: -143 }"
 							@click="toShow = 3"
 						>
 							Скрыть
-						</a>
+						</a>						
 					</div>
 				</div>
 
@@ -430,6 +430,7 @@ export default {
 			content: Flats,
 			selectedObjects: [],
 			toShow: 3,
+			toShowCount: 3,
 			flats: Flats.objects,
 			minArea: 0,
 			maxArea: 1000,
@@ -550,6 +551,8 @@ export default {
 			} else {
 				this.errorText = false
 			}
+			this.toShow = this.toShowCount
+			console.log(this.toShow);
 
 		},
 		resetFilters() {
@@ -582,7 +585,9 @@ export default {
 			}
 		},
 		onSubmit() {
+			
 			this.sortByCategories();
+
 		},
 		closeModal() {
 			this.modalVisible = false
@@ -639,11 +644,15 @@ export default {
 		showMore() {
 			if (this.sortedProducts.length > this.toShow || this.flats.length > this.toShow) {
 				
-				if ((this.flats.length - this.toShow) <= 3 ) {
+				if ((this.flats.length - this.toShow) <= this.toShowCount ) {
 					
 					this.toShow += (this.flats.length - this.toShow)
 					
-				}
+				} else if ((this.sortedProducts.length - this.toShow) <= this.toShowCount ) {
+					
+					this.toShow += (this.sortedProducts.length - this.toShow)
+					
+				} 
 				else {
 					this.toShow += 3
 				}
