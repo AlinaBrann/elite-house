@@ -98,7 +98,9 @@ export default {
     },
     methods: {
         goTodetail(prodId) {
-            this.$router.push({name:'CatalogItemDetails',params:{Pid:prodId}})
+            let routeData = this.$router.resolve({name:'CatalogItemDetails',params:{Pid:prodId}})
+            window.open(routeData.href, '_blank');
+            
         }
     }
 }

@@ -5,7 +5,7 @@
 		v-for="(item, index) in flats" 
 		:key="index" 
 		>
-			<div v-if="proId == index + 1" class="catalog-item catalog-item-detail">
+			<div v-if="proId == item.id" class="catalog-item catalog-item-detail">
 				<div class="row">
 					<div class="col-xs-3 col-md-7">
 						<div class="catalog-item-details-head">
