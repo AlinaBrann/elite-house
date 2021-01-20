@@ -647,8 +647,10 @@ export default {
 				if ((this.flats.length - this.toShow) <= this.toShowCount ) {
 					
 					this.toShow += (this.flats.length - this.toShow)
-					console.log('not sorted ' + this.sortedProducts.length);
 					
+				} else if ((this.sortedProducts.length - this.toShow) <= this.toShowCount ) {
+					
+					this.toShow += (this.sortedProducts.length - this.toShow)
 				} 
 				else {
 					this.toShow += 3

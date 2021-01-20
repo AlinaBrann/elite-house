@@ -48,7 +48,7 @@
                                         type="tel" 
                                         :id="'ProposalModalFeedback' + (index + 1) + '-phone'" 
                                         v-model="phone"
-                                        class="input">
+                                        class="input input-tel">
                                     <transition name="fade">
                                         <div v-show="errors" class="input-error">{{ errors }}</div>
                                     </transition>
@@ -75,7 +75,8 @@ import Slick from 'vue-slick';
 import Offer from '@/assets/data.json'
 import 'nouislider/distribute/nouislider.css'
 import noUiSlider from 'nouislider'
-
+import intlTelInput from 'intl-tel-input'
+import Inputmask from "inputmask"
 export default {
     data() {
         return {
@@ -146,6 +147,15 @@ export default {
         sliderAreaProposalModal.noUiSlider.on('update', function (values) {
             vm.valueArea = values
         });
+        var inputs = document.querySelectorAll("input[type='tel']")
+			var im = new Inputmask("(999) 999-999");
+			[].forEach.call(inputs, function(input) {
+				intlTelInput(input, {
+					separateDialCode: true
+				});
+				
+				im.mask(input);
+			});
 	}
 }
 </script>

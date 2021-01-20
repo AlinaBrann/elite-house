@@ -76,7 +76,8 @@
 	import PopupGallery from '@/components/PopupGallery/PopupGallery'
 	import HiddenMenu from '@/components/HiddenMenu/HiddenMenu'
 	import Popup from '@/components/PopupBackdrop/PopupBackdrop'
-
+	import intlTelInput from 'intl-tel-input'
+	import Inputmask from "inputmask"
 	import Vue from 'vue'
 
 
@@ -110,7 +111,8 @@
 				bodyClassOpen: 'modal-open',
 				bodyClass: this.bodyClassClose,
 				gallery: [],
-				index: 0
+				index: 0,
+				youTubeLink: 'https://www.youtube-nocookie.com/embed/3omF4eooT2A?&amp;autoplay=1&rel=0'
 			}
 		},
 		components: {
@@ -268,7 +270,7 @@
 			},
 			openPopupVideo() {
 				this.roundPosition(event) 
-				this.videoSrc = 'https://www.youtube-nocookie.com/embed/3omF4eooT2A?&amp;autoplay=1&rel=0'
+				this.videoSrc = this.youTubeLink
 				this.showPopupVideo = true
 				if (this.showPopupVideo ) {
 					this.backZindex = 100
@@ -293,7 +295,16 @@
 			this.showPreloaderFunc()
 			window.addEventListener('resize', this.updateVH);
 			this.updateVH();
-			
+
+			var inputs = document.querySelectorAll("input[type='tel']");
+			var im = new Inputmask("(999) 999-999");
+			[].forEach.call(inputs, function(input) {
+				intlTelInput(input, {
+					separateDialCode: true
+				});
+				
+				im.mask(input);
+			});
 		}
 	}
 	Vue.mixin({
@@ -303,7 +314,6 @@
 
 <style lang="sass" >
 @import '@/assets/styles/variables'
-
 @import '@/assets/styles/libs/media'
 #app 
 	+max-screen($screen-sm)
