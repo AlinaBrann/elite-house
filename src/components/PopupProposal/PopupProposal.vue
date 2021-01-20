@@ -151,7 +151,8 @@ export default {
 			var im = new Inputmask("(999) 999-999");
 			[].forEach.call(inputs, function(input) {
 				intlTelInput(input, {
-					separateDialCode: true
+                    separateDialCode: true,
+                    initialCountry: 'kg'
 				});
 				
 				im.mask(input);
