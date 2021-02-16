@@ -13,6 +13,7 @@
 		position: absolute
 		padding-top: 7.1vh
 		padding-bottom: 5vh
+		background: #4c4d4f
 	&._background
 		&:before
 			content: ''
@@ -22,11 +23,11 @@
 			left: 0
 			width: 100%
 			height: 100%
-			background: transparentize($grey, .3)
+			background: transparentize($grey, 0)
 			transition: 0.4s
 		&._dark 
 			&:before
-				background: transparentize(#FFF, .3)
+				background: transparentize(#FFF, 0)
 
 	&._back
 		z-index: 1

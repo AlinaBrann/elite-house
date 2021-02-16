@@ -21,6 +21,7 @@
 							</div>
 							
 						</div>
+<<<<<<< Updated upstream
 						<div class="col-xs-12 col-sm-4 filter__border-block">
 							<div class="filter-block">
 								<div class="filter-block__title">Диапазон цен</div>
@@ -32,60 +33,46 @@
 							</div>
 							
 						</div>
+=======
+>>>>>>> Stashed changes
 						<div class="col-xs-12 col-sm-4 filter__border-block">
 							<div class="filter-block">
-								<div class="filter-block__title">Предпочитаемый район</div>
+								<div class="filter-block__title">Объекты</div>
 								<transition-group
-									class="filter-districts" 
-									name="fade" 
-									tag="ul"
-									
-									>
-									<li 
-										class="filter-districts__item" 
-										@click="districtShow = !districtShow"
-										v-for="district in districts" 
-										:key="district">
-										<span>{{ district }}</span>
+										class="filter-districts"
+										name="fade"
+										tag="ul"
+
+								>
+									<li
+											class="filter-districts__item"
+											@click="objectShow = !objectShow"
+											v-for="selectObject in selectedObjects"
+											:key="selectObject">
+										<span>{{ selectObject }}</span>
 									</li>
 									<li
-										class="filter-districts__item" 
-										@click="districtShow = !districtShow"
-										v-if="districts.length === 0"
-										:key="1"
-										>
-										Все районы
+											class="filter-districts__item"
+											@click="objectShow = !objectShow"
+											v-if="selectedObjects.length === 0"
+											:key="1"
+									>
+										Все объекты
 									</li>
-									
+
 								</transition-group>
 								<transition
-									name="fade" 									
-									>
-									<div class="filter-districts-popup" v-if="districtShow" v-on-clickaway="hideDistricts">
-										<button @click="districtShow = false" class="filter-districts-closer"></button>
-										<div class="checkbox filter-districts-popup__checkbox">
-											<input type="checkbox" @click="districtsUncheck()" id="district1" name="district" value="первомайский" v-model="districts">
-											<label for="district1" class="checkbox__label">Первомайский район</label>
+										name="fade"
+								>
+									<div class="filter-districts-popup" v-if="objectShow" v-on-clickaway="hideObjects">
+										<button @click="objectShow = false" class="filter-districts-closer"></button>
+										<div class="checkbox filter-districts-popup__checkbox" v-for="(object, i) in objects" :key="i">
+											<input type="checkbox" @click="objectsUncheck()" :id="'object' + i" name="objects" :value="object" v-model="selectedObjects">
+											<label :for="'object' + i" class="checkbox__label">{{ object }}</label>
 										</div>
 										<div class="checkbox filter-districts-popup__checkbox">
-											<input type="checkbox" @click="districtsUncheck()" id="district2" name="district" value="свердловский" v-model="districts">
-											<label for="district2" class="checkbox__label">Свердловский район</label>
-										</div>
-										<div class="checkbox filter-districts-popup__checkbox">
-											<input type="checkbox" @click="districtsUncheck()" id="district3" name="district" value="октябрьский" v-model="districts">
-											<label for="district3" class="checkbox__label">Октябрьский район</label>
-										</div>
-										<div class="checkbox filter-districts-popup__checkbox">
-											<input type="checkbox" @click="districtsUncheck()" id="district4" name="district" value="Ленинский" v-model="districts">
-											<label for="district4" class="checkbox__label">Ленинский район</label>
-										</div>
-										<div class="checkbox filter-districts-popup__checkbox">
-											<input type="checkbox" @click="districtsUncheck()"  id="district5" name="district" value="центральный" v-model="districts">
-											<label for="district5" class="checkbox__label">Центральный район</label>
-										</div>
-										<div class="checkbox filter-districts-popup__checkbox">
-											<input type="checkbox"  @click='uncheckAll()' id="district6" name="district" value="all" v-model="isUnCheckAll">
-											<label for="district6"  class="checkbox__label">Все районы</label>
+											<input type="checkbox"  @click='uncheckAllObjects()' id="object" name="objects" value="all" v-model="isUnCheckAllObjects">
+											<label for="object"  class="checkbox__label">Все объекты</label>
 										</div>
 									</div>
 								</transition>
@@ -95,50 +82,6 @@
 					<transition name="slide">
 						<div class="filter-addinations" v-show="filterAddinations">
 							<div class="row">
-								<div class="col-xs-12 col-sm-4 filter__border-block">
-									<div class="filter-block">
-										<div class="filter-block__title">Объекты</div>
-										<transition-group
-											class="filter-districts" 
-											name="fade" 
-											tag="ul"
-											
-											>
-											<li 
-												class="filter-districts__item" 
-												@click="objectShow = !objectShow"
-												v-for="selectObject in selectedObjects" 
-												:key="selectObject">
-												<span>{{ selectObject }}</span>
-											</li>
-											<li
-												class="filter-districts__item" 
-												@click="objectShow = !objectShow"
-												v-if="selectedObjects.length === 0"
-												:key="1"
-												>
-												Все объекты
-											</li>
-											
-										</transition-group>
-										<transition
-											name="fade" 									
-											>
-											<div class="filter-districts-popup _left" v-if="objectShow" v-on-clickaway="hideObjects">
-												<button @click="objectShow = false" class="filter-districts-closer"></button>
-												<div class="checkbox filter-districts-popup__checkbox" v-for="(object, i) in objects" :key="i">
-													<input type="checkbox" @click="objectsUncheck()" :id="'object' + i" name="objects" :value="object" v-model="selectedObjects">
-													<label :for="'object' + i" class="checkbox__label">{{ object }}</label>
-												</div>
-												<div class="checkbox filter-districts-popup__checkbox">
-													<input type="checkbox"  @click='uncheckAllObjects()' id="object" name="objects" value="all" v-model="isUnCheckAllObjects">
-													<label for="object"  class="checkbox__label">Все объекты</label>
-												</div>
-											</div>
-										</transition>
-									</div>
-								</div>
-
 								<div class="col-xs-12 col-sm-4 filter__border-block">
 									<div class="filter-block">
 										<div class="filter-block__title">отдельный санузел</div>
@@ -158,7 +101,6 @@
 										</div>
 									</div>
 								</div>
-
 								<div class="col-xs-12 col-sm-4 filter__border-block">
 									<div class="filter-block">
 										<div class="filter-block__title">витраж</div>
@@ -174,8 +116,6 @@
 										</div>
 									</div>
 								</div>
-							</div>
-							<div class="row">
 								<div class="col-xs-12 col-sm-4 filter__border-block">
 									<div class="filter-block">
 										<div class="filter-block__title">отдельный вход</div>
@@ -191,7 +131,8 @@
 										</div>
 									</div>
 								</div>
-
+							</div>
+							<div class="row">
 								<div class="col-xs-12 col-sm-4 filter__border-block">
 									<div class="filter-block">
 										<div class="filter-block__title">цоколь</div>
@@ -207,7 +148,6 @@
 										</div>
 									</div>
 								</div>
-
 								<div class="col-xs-12 col-sm-4 filter__border-block">
 									<div class="filter-block">
 										<div class="filter-block__title">подъезд для погрузки</div>
@@ -222,6 +162,8 @@
 											</div>
 										</div>
 									</div>
+								</div>
+								<div class="col-xs-12 col-sm-4 filter__border-block">
 								</div>
 							</div>
 						</div>
@@ -245,7 +187,7 @@
 									class="button-reset"
 									@click="resetFilters()"
 								>
-								Сбросить фльтры
+								Сбросить фильтры
 								</button>
 								<button
 									type="button" 
@@ -356,7 +298,7 @@
 							<img :src="'/images/' + image.img" >
 						</div>
 					</Slick>
-					<div class="projects-popup__small-title">О компликсе</div>
+					<div class="projects-popup__small-title">О комплексе</div>
 					<div class="projects-popup__text" v-html="aboutText"></div>
 
 					<MapBlock :coords="coords" :center="[42.880534, 74.616267]"/>
@@ -374,7 +316,7 @@
 						</ul>
 					</div>
 					<div v-if="advantage">
-						<div class="projects-popup__small-title">Приемущества</div>
+						<div class="projects-popup__small-title">Преимущества</div>
 						<ul class="projects-popup-list">
 							<li 
 								class="projects-popup-list__item _v2" 
@@ -433,7 +375,7 @@ export default {
 			minPrice: 0,
 			maxPrice: 1000000,
 			minArea: 0,
-			maxArea: 1000,
+			maxArea: 2000,
 			sortedProducts: [],
 			plinthParam: [],
 			bathroom: [],
@@ -454,11 +396,13 @@ export default {
 			sliderPrice: this.$refs.sliderPrice,
 			objectShow: false,
 			objects: [
-				"Нью Йорк",
-				"Объект 2",
-				"Объект 3",
-				"Объект 4",
-				"Объект 5"
+				"КОНТИНЕНТАЛЬ",
+				"АСАНБАЙ ОРДО",
+				"ИТАЛЬЯНСКИЙ КВАРТАЛ",
+				"ЭЛ КЛАССИК ПЛЮС",
+				"ЭЛ КЛАССИК",
+				"NOVA CITY",
+				"New York City"
 			],
 			projects: Projects.projects,
 			showMap: false,
@@ -640,6 +584,24 @@ export default {
 			this.objectName = item.objectName,
 			this.modalVisible = true
 		},
+<<<<<<< Updated upstream
+=======
+		showMore() {
+			if (this.sortedProducts.length > this.toShow || this.flats.length > this.toShow) {
+				
+				if ((this.flats.length - this.toShow) <= this.toShowCount ) {
+					
+					this.toShow += (this.flats.length - this.toShow)
+					console.log('not sorted ' + this.sortedProducts.length);
+					
+				} 
+				else {
+					this.toShow += 3
+				}
+			} 
+			
+		}
+>>>>>>> Stashed changes
 
 	},
 	computed: {

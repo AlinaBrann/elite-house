@@ -1,9 +1,9 @@
 <template>
-    <form  @submit="checkForm" class="popup-form feedback-form">
+    <form  @submit="checkForm" class="popup-form feedback-form send_form_ajax">
         <div class="feedback-form-row _v1">
             <div class="input-wrapper feedback-form__name">
                 <label :for="name + '-name'" class="input-label">Ваше имя</label>
-                <input type="text" :id="name + '-name'" class="input">
+                <input type="text" :id="name + '-name'" name="name" class="input">
             </div>
             <div class="input-wrapper feedback-form__phone" :class="{'_error': errors}">
                 <label :for="name + '-phone'" class="input-label">Номер телефона</label>
@@ -11,7 +11,7 @@
                     type="tel" 
                     :id="name + '-phone'" 
                     v-model="phone"
-                    class="input">
+                    class="input" name="phone">
                 <transition name="fade">
                     <div v-show="errors" class="input-error">{{ errors }}</div>
                 </transition>
@@ -26,7 +26,6 @@
         </div>
     </form>
 </template>
-
 <script>
 export default {
     props: {
@@ -41,7 +40,6 @@ export default {
             errors: '',
             phone: null
         }
-    
   },
   methods: {
     checkForm: function (e) {
@@ -53,13 +51,28 @@ export default {
             this.errors = ''
         }
         if (!this.errors) {
+            let lt = this;
+            $(document).ready(function(){
+                $(document).ready(function(){
+                    $.ajax({
+                        url:      "send.php",
+                        type:     "POST",
+                        dataType: "json",
+                        data: "name:nat&phone:pht",
+                        success: function(json){
+                            console.log(json);
+                        }
+                    });
+                });
+            });
+            e.preventDefault();
             return true;
         }
         e.preventDefault();
     },
     validEmail: function (phone) {
-        var re = /^[+]?[0-9]{9,12}$/;
-        return re.test(phone);
+        //var re = /^[+]?[0-9]{9,12}$/;
+        return phone;
     }
   }
 }

@@ -67,11 +67,11 @@
 							</button>
 							<div class="catalog-item-detail-about">
 								<div v-if="item.text">
-									<div class="catalog-item-detail-about__title _v2">О компликсе</div>
+									<div class="catalog-item-detail-about__title _v2">О комплексе</div>
 									<div class="catalog-item-detail-about__text" v-html="item.text"></div>
 								</div>
 
-								<MapBlock :coords="item.coords" :height="400" :center="[42.880534, 74.616267]"/>
+								<MapBlock :coords="item.coords" :height="400" :center="item.coords"/>
 
 								<button 
 									class="catalog-item__button button _full _border _dark-text"
@@ -93,7 +93,7 @@
 									</ul>
 								</div>
 								<div v-if="item.advantage">
-									<div class="catalog-item-detail-about__title">Приемущества</div>
+									<div class="catalog-item-detail-about__title">Преимущества</div>
 									<ul class="catalog-item-detail-about-list">
 										<li 
 											class="catalog-item-detail-about-list__item _v2" 

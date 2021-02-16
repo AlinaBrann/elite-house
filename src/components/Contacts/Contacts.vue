@@ -2,7 +2,7 @@
     <footer class="contacts" id="contacts">
         <div class="contacts-map" style="z-index:0">
             <yandex-map 
-                :coords="[42.884411, 74.603386]" 
+                :coords="[42.877411, 74.593386]"
                 :scrollZoom="false" 
                 :zoom="zoom"
                 style="width: 100vw; height: 100%;">
@@ -51,7 +51,7 @@
                         <a :href="'tel:' + phone" class="contacts-content__phone">{{ phone }}</a>
                         <a :href="'mailto:' + mail" class="contacts-content__mail">{{ mail }}</a>
                         <button class="contacts-content__button button" @click="$emit('open-feedback');">оставить заявку</button>
-                        <MapBlock :coords="[42.878645, 74.616197]" :height="400" :center="[42.880534, 74.616267]"/>
+                        <MapBlock :coords="[42.872924, 74.611049]" :height="400" :center="[42.872924, 74.611049]"/>
                     </div>
                     <ul class="contacts-social">
                         <li class="contacts-social-item" v-for="(link,i) in contacts.social" :key="i">
@@ -97,7 +97,7 @@ export default {
                 layout: 'default#imageWithContent',
                 imageHref: '/images/marker.svg',
                 imageSize: [42, 78],
-                imageOffset: [0, -40],
+                imageOffset: [-21, -70],
                 contentLayout: '<div style="background: red; width: 50px; color: #FFFFFF; font-weight: bold;">$[properties.iconContent]</div>'
             }
         }

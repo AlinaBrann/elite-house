@@ -7,7 +7,7 @@
         >
         <yandex-map 
             class="button-map__map"
-            :coords="center" 
+            :coords="coords"
             :controls="['zoomControl']" 
             :scrollZoom="false" 
             zoom="16"
@@ -46,7 +46,7 @@ export default {
                 layout: 'default#imageWithContent',
                 imageHref: '/images/marker.svg',
                 imageSize: [42, 78],
-                imageOffset: [0, -40],
+                imageOffset: [-21, -70],
                 contentLayout: '<div style="background: red; width: 50px; color: #FFFFFF; font-weight: bold;">$[properties.iconContent]</div>'
             }
         }
