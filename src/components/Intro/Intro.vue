@@ -5,19 +5,11 @@
         </a>
         <div class="intro-video">
             <div class="intro-video-wrapper">
-<<<<<<< Updated upstream
-               <video width="100%" loop controls autoplay muted>
-                <source src="/Elite-House_compress.mp4" >
-               
-                Элемент video не поддерживается вашим браузером. 
-                <a href="video/duel.mp4">Скачайте видео</a>.
-=======
                <video loop autoplay muted>
                 <source src="/Elite-House_2.mp4" >
 
                 Элемент video не поддерживается вашим браузером.
                 <a href="/Elite-House_2.mp4">Скачайте видео</a>.
->>>>>>> Stashed changes
                 </video>
                 <!-- <iframe src="https://www.youtube.com/embed/gd5k7RWzF4M?autoplay=1&amp;loop=1&amp;enablejsapi=1&amp;&amp;playerapiid=featuredytplayer&amp;controls=0&amp;modestbranding=1&amp;rel=0&amp;showinfo=0&amp;color=white&amp;iv_load_policy=3&amp;theme=light&amp;wmode=transparentm&amp;playlist=gd5k7RWzF4M&amp;mute=1" frameborder="0" allow="autoplay" id="widget2" ></iframe> -->
             </div>

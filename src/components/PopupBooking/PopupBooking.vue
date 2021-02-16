@@ -9,11 +9,6 @@
                 <div class="popup__title booking-popup__title">Бронь помещения</div>
                 <div class="booking-popup-info">
                     <div class="booking-popup-info__item">
-                        <div class="booking-popup-info__item-title">Цена</div>
-                        <div class="booking-popup-info__item-border"></div>
-                        <div class="booking-popup-info__value">$ {{ price | currency }}</div>
-                    </div>
-                    <div class="booking-popup-info__item">
                         <div class="booking-popup-info__item-title">Помещение</div>
                         <div class="booking-popup-info__item-border"></div>
                         <div class="booking-popup-info__value">{{ title }}</div>
@@ -32,6 +27,9 @@
                 <FeedbackForm 
                     class="popup-feedback-form"
                     name="bookingFeedback"
+                    @openPopupThanks="openPopupThanks"
+                    :objectTitle="title"
+                    :objectArea="area"
                 />
             </div>
         </div>
@@ -49,6 +47,11 @@ export default {
     ],
     components: {
        FeedbackForm
+    },
+    methods: {
+        openPopupThanks() {
+            this.$emit('openPopupThanks')
+        },
     }
 }
 </script>

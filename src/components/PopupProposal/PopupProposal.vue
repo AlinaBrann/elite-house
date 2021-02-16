@@ -11,7 +11,7 @@
         </div>
         <div class="popup-content popup-offer__content" >
             <div class="popup__title">Индивидуальное предложенние</div>
-            <form  @submit="checkForm">
+            <form  @submit.prevent="checkForm">
                 <Slick
                     :options="settings"
                     @beforeChange="handleAfterChange"
@@ -120,9 +120,11 @@ export default {
                 this.errors = ''
             }
             if (!this.errors) {
+                this.$emit('openPopupThanks')
+                e.preventDefault();
                 return true;
             }
-            e.preventDefault();
+            
         },
         validEmail: function (phone) {
             var re = /^[+]?[0-9]{9,12}$/;

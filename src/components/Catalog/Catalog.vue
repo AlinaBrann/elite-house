@@ -10,7 +10,7 @@
 			<div class="container">
 				<div class="filter__wrapper">
 					<div class="row _no-pudding-top">
-						<div class="col-xs-12 col-sm-4 filter__border-block">
+						<div class="col-xs-12 col-sm-8 filter__border-block">
 							<div class="filter-block">
 								<div class="filter-block__title">площадь, m<sup>2</sup></div>
 								<div ref="sliderArea" class="filter-range"></div>
@@ -21,20 +21,6 @@
 							</div>
 							
 						</div>
-<<<<<<< Updated upstream
-						<div class="col-xs-12 col-sm-4 filter__border-block">
-							<div class="filter-block">
-								<div class="filter-block__title">Диапазон цен</div>
-
-								<div ref="sliderPrice" class="filter-range"></div>
-								<div class="filter-block__label">
-									<span>от $ {{ value[0] | currency }}</span><span>до $ {{ value[1] | currency }}</span>
-								</div>
-							</div>
-							
-						</div>
-=======
->>>>>>> Stashed changes
 						<div class="col-xs-12 col-sm-4 filter__border-block">
 							<div class="filter-block">
 								<div class="filter-block__title">Объекты</div>
@@ -584,8 +570,6 @@ export default {
 			this.objectName = item.objectName,
 			this.modalVisible = true
 		},
-<<<<<<< Updated upstream
-=======
 		showMore() {
 			if (this.sortedProducts.length > this.toShow || this.flats.length > this.toShow) {
 				
@@ -601,7 +585,6 @@ export default {
 			} 
 			
 		}
->>>>>>> Stashed changes
 
 	},
 	computed: {
@@ -633,13 +616,7 @@ export default {
 	},
 	mounted() {
 		let vm = this
-		
-		
-
-		
-
-		var sliderArea = vm.$refs.sliderArea,
-			sliderPrice = vm.$refs.sliderPrice
+		var sliderArea = vm.$refs.sliderArea;
 		noUiSlider.create(
 			sliderArea, {
 				start: this.valueArea,
@@ -650,29 +627,15 @@ export default {
 				}
 			}
 		);
-		noUiSlider.create(
-			sliderPrice, {
-				start: this.value,
-				connect: true,
-				step: 10000,
-				range: {
-					'min': vm.minPrice,
-					'max': vm.maxPrice
-				}
-			}
-		);
 
 		$('.button-reset').on('click', () => {
 			sliderArea.noUiSlider.reset()
-			sliderPrice.noUiSlider.reset()
 		});
 
 		sliderArea.noUiSlider.on('update', function (values) {
 			vm.valueArea = values
 		});
-		sliderPrice.noUiSlider.on('update', function (values) {
-			vm.value = values
-		});
+		
 
 	},
 	events: {

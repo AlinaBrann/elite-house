@@ -7,6 +7,7 @@
             <FeedbackForm 
                 class="popup-feedback-form"
                 name="headerFeedback"
+                @openPopupThanks="openPopupThanks"
             />
         </div>
     </div>     
@@ -24,6 +25,11 @@ export default {
     },
     components: {
        FeedbackForm
+    },
+    methods: {
+        openPopupThanks() {
+            this.$emit('openPopupThanks')
+        },
     }
 }
 </script>

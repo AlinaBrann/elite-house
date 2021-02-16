@@ -26,6 +26,7 @@
 			:price="popupPrice"
 			:title="popupTitle"
 			:area="popupArea"
+			@openPopupThanks="openPopupThanks"
 			/>
 		
 		<PopupSpecial 
@@ -44,6 +45,7 @@
 			:class="{ '_showPopup': showPopupFeedback, '_hidePopup': !showPopupFeedback  }"
 			@close-modal="openPopupFeedback()"
 			@open-modal="showPopupFeedback = false"
+			@openPopupThanks="openPopupThanks"
 			/>
 		<PopupGallery
 			:class="{ '_showPopup': showPopupGallery, '_hidePopup': !showPopupGallery  }"
@@ -63,8 +65,13 @@
 			v-if="showPopupProposal" 
 			:class="{ '_showPopup': showPopupProposal, '_hidePopup': !showPopupProposal }" 
 			@close="closePopupProposal()"
+			@openPopupThanks="openPopupThanks"
 			class="popup-offer"
 		/>
+		<PopupThanks
+			:class="{ '_showPopup': popupThanks, '_hidePopup': !popupThanks }"
+		/>
+		
 	</div>
 </template>
 <script>
@@ -75,6 +82,7 @@
 	import PopupFeedback from '@/components/PopupFeedback/PopupFeedback'
 	import PopupVideo from '@/components/PopupVideo/PopupVideo'
 	import PopupGallery from '@/components/PopupGallery/PopupGallery'
+	import PopupThanks from '@/components/PopupThanks/PopupThanks'
 	import HiddenMenu from '@/components/HiddenMenu/HiddenMenu'
 	import Popup from '@/components/PopupBackdrop/PopupBackdrop'
 
@@ -99,6 +107,7 @@
 				showPopupGallery: false,
 				menuShow: false,
 				showPreloader: true,
+				popupThanks: false,
 				popupPrice: '',
 				popupArea: '',
 				popupTitle: '',
@@ -124,6 +133,7 @@
 			PopupVideo,
 			PopupGallery,
 			PopupFeedback,
+			PopupThanks,
 			HiddenMenu
 
 		},
@@ -255,6 +265,14 @@
 					this.backZindex = 100
 					this.bodyClass = this.bodyClassOpen
 				} 
+			},
+			openPopupThanks() {
+				this.closeAllPopups()
+				this.popupThanks = true
+				setTimeout(() => {
+					this.popupThanks = false
+				}, 1800)
+				console.log(this.popupThanks);
 			},
 			closePopupProposal() {
 				this.showPopupProposal = false

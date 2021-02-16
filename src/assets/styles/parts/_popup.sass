@@ -164,6 +164,21 @@
 				#{$parent}
 					&__title
 						color: #FFF
+	&-thanks
+		&__content
+			width: 90%
+			height: 40vh
+			display: flex
+			align-items: center
+			flex-direction: column
+			justify-content: center
+			background: $grey
+			border-radius: 8px
+			+min-screen($screen-md)
+				width: 40vw
+		&__title
+			margin-bottom: 20px
+			font-size: 28px
 
 
 @keyframes backdropIn
