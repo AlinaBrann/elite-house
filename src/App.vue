@@ -271,7 +271,7 @@
 				this.popupThanks = true
 				setTimeout(() => {
 					this.popupThanks = false
-				}, 1800)
+				}, 3000)
 				console.log(this.popupThanks);
 			},
 			closePopupProposal() {

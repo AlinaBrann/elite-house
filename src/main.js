@@ -10,7 +10,6 @@ import 'slick-carousel/slick/slick.css'
 import {currency} from "@/filters/currency"
 import VueSmoothScroll from 'vue2-smooth-scroll'
 
-
 Vue.filter('currency', currency)
 Vue.use(YmapPlugin)
 Vue.use(VueSmoothScroll,{

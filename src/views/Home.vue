@@ -10,7 +10,7 @@
 			@open-menu="openMenu"
 			@close-menu="closeMenu"
 			@open-video="openPopupVideo" />
-        <Banner deadline="2020-12-25 00:00:00" />
+        <Banner deadline="2021-02-25 00:00:00" />
         <Catalog 
 			@open-booking="openPopupBooking"
 			@open-proposal="openPopupProposal"

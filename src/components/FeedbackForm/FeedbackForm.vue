@@ -33,7 +33,7 @@
     
 </template>
 <script>
-import $ from 'jquery'
+// import $ from 'jquery'
 export default {
     props: [
         'name',
@@ -57,21 +57,21 @@ export default {
             this.errors = ''
         }
         if (!this.errors) {
-            $(document).ready(function(){
-                $(document).ready(function(){
-                    $.ajax({
-                        url:      "send.php",
-                        type:     "POST",
-                        dataType: "json",
-                        data: "name:nat&phone:pht",
-                        success: function(json){
-                            console.log(json);
-                        }
-                    });
-                });
-            });
+            // $(document).ready(function(){
+            //     $(document).ready(function(){
+            //         $.ajax({
+            //             url:      "send.php",
+            //             type:     "POST",
+            //             dataType: "json",
+            //             data: "name:nat&phone:pht",
+            //             success: function(json){
+            //
+            //             }
+            //         });
+            //     });
+            // });
             e.preventDefault();
-            this.$emit('openPopupThanks')
+            this.$emit('openPopupThanks');
             return true;
         }
         e.preventDefault();

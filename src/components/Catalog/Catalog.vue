@@ -21,6 +21,7 @@
 							</div>
 							
 						</div>
+						
 						<div class="col-xs-12 col-sm-4 filter__border-block">
 							<div class="filter-block">
 								<div class="filter-block__title">Объекты</div>
@@ -70,6 +71,22 @@
 							<div class="row">
 								<div class="col-xs-12 col-sm-4 filter__border-block">
 									<div class="filter-block">
+										<div class="filter-block__title">подъезд для погрузки</div>
+										<div class="filter-block__radio-wrapper">
+											<div class="radiobutton">
+												<input type="radio" id="loadingEntrance1" name="loadingEntrance" value="yes" v-model="loadingEntrance">
+												<label for="loadingEntrance1" class="radiobutton__label">Да</label>
+											</div>
+											<div class="radiobutton">
+												<input type="radio" id="loadingEntrance2" name="loadingEntrance" value="no" v-model="loadingEntrance">
+												<label for="loadingEntrance2" class="radiobutton__label">Нет</label>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-xs-12 col-sm-4 filter__border-block">
+									<div class="filter-block">
 										<div class="filter-block__title">отдельный санузел</div>
 										<div class="filter-block__radio-wrapper">
 											<div class="radiobutton">
@@ -87,6 +104,7 @@
 										</div>
 									</div>
 								</div>
+
 								<div class="col-xs-12 col-sm-4 filter__border-block">
 									<div class="filter-block">
 										<div class="filter-block__title">витраж</div>
@@ -102,6 +120,8 @@
 										</div>
 									</div>
 								</div>
+							</div>
+							<div class="row">
 								<div class="col-xs-12 col-sm-4 filter__border-block">
 									<div class="filter-block">
 										<div class="filter-block__title">отдельный вход</div>
@@ -117,8 +137,7 @@
 										</div>
 									</div>
 								</div>
-							</div>
-							<div class="row">
+
 								<div class="col-xs-12 col-sm-4 filter__border-block">
 									<div class="filter-block">
 										<div class="filter-block__title">цоколь</div>
@@ -134,22 +153,11 @@
 										</div>
 									</div>
 								</div>
+
 								<div class="col-xs-12 col-sm-4 filter__border-block">
 									<div class="filter-block">
-										<div class="filter-block__title">подъезд для погрузки</div>
-										<div class="filter-block__radio-wrapper">
-											<div class="radiobutton">
-												<input type="radio" id="loadingEntrance1" name="loadingEntrance" value="yes" v-model="loadingEntrance">
-												<label for="loadingEntrance1" class="radiobutton__label">Да</label>
-											</div>
-											<div class="radiobutton">
-												<input type="radio" id="loadingEntrance2" name="loadingEntrance" value="no" v-model="loadingEntrance">
-												<label for="loadingEntrance2" class="radiobutton__label">Нет</label>
-											</div>
-										</div>
+
 									</div>
-								</div>
-								<div class="col-xs-12 col-sm-4 filter__border-block">
 								</div>
 							</div>
 						</div>
@@ -173,7 +181,7 @@
 									class="button-reset"
 									@click="resetFilters()"
 								>
-								Сбросить фильтры
+								Сбросить фльтры
 								</button>
 								<button
 									type="button" 
@@ -194,7 +202,7 @@
 					<div class="col-xs-12 col-md-12">
 						<transition-group class="catalog-wrapper" name="catalog-item" tag="ol">
 							<CatalogItem 
-								v-for="item in filteredProducts.slice(0, 4)" 
+								v-for="item in filteredProducts.slice(0, toShow)" 
 								v-bind:item="item" 
 								:key="item.id" 
 								class="catalog-item"
@@ -207,16 +215,27 @@
 							/>
 						</transition-group>
 						<transition name="catalog-item">
-							<div v-if="errorText" class="catalog-item _no-results">
+							<div v-show="errorText" class="catalog-item _no-results">
 								Подходящих предложений не найдено. 
 								<br>Попробуйте другие параметры подбора.
 							</div>
 						</transition>
 						<button 
-							v-show="filteredProducts.length > 4"
+							v-if="filteredProducts.length > 4 && (filteredProducts.length - toShow) > 0"
 							class="button catalog__button _border"
-						>Показать ещё ({{ filteredProducts.length - 4 }})
+							@click="showMore()"
+						>
+							Показать ещё ({{ filteredProducts.length - toShow }})
 						</button>
+						<a 
+							v-else-if=" (filteredProducts.length - toShow) == 0"
+							class="button catalog__button _border"
+							href="#catalog"
+							v-smooth-scroll="{ duration: 500,  offset: -143 }"
+							@click="toShow = 3"
+						>
+							Скрыть
+						</a>						
 					</div>
 				</div>
 
@@ -302,7 +321,7 @@
 						</ul>
 					</div>
 					<div v-if="advantage">
-						<div class="projects-popup__small-title">Преимущества</div>
+						<div class="projects-popup__small-title">Приемущества</div>
 						<ul class="projects-popup-list">
 							<li 
 								class="projects-popup-list__item _v2" 
@@ -353,13 +372,12 @@ export default {
 	data() {
 		return {
 			newObject: [],
-			value: [50000, 300000],
 			valueArea: [0, 100],
 			content: Flats,
 			selectedObjects: [],
+			toShow: 3,
+			toShowCount: 3,
 			flats: Flats.objects,
-			minPrice: 0,
-			maxPrice: 1000000,
 			minArea: 0,
 			maxArea: 2000,
 			sortedProducts: [],
@@ -376,10 +394,8 @@ export default {
 			errorText: false,
 			districtShow: false,
 			filterAddinations: false,
-			popupPrice: '',
 			popupArea: '',
 			sliderArea: this.$refs.sliderArea,
-			sliderPrice: this.$refs.sliderPrice,
 			objectShow: false,
 			objects: [
 				"КОНТИНЕНТАЛЬ",
@@ -468,8 +484,7 @@ export default {
 			this.sortedProducts = this.flats
 			this.filtered = true
 			this.sortedProducts = this.sortedProducts.filter(function (item) {
-				return (item.price >= vm.value[0] && item.price <= vm.value[1]) &&
-					(item.area >= vm.valueArea[0] && item.area <= vm.valueArea[1]) &&
+				return (item.area >= vm.valueArea[0] && item.area <= vm.valueArea[1]) &&
 					(vm.plinthParam.length === 0 || vm.plinthParam.includes(item.plinth)) &&
 					(vm.bathroom.length === 0 || vm.bathroom.includes('all') || vm.bathroom.includes(item.bathroom)) &&
 					(vm.stainedGlass.length === 0 || vm.stainedGlass.includes(item.stainedGlass)) &&
@@ -484,6 +499,8 @@ export default {
 			} else {
 				this.errorText = false
 			}
+			this.toShow = this.toShowCount
+			console.log(this.toShow);
 
 		},
 		resetFilters() {
@@ -516,7 +533,9 @@ export default {
 			}
 		},
 		onSubmit() {
+			
 			this.sortByCategories();
+
 		},
 		closeModal() {
 			this.modalVisible = false
@@ -576,8 +595,10 @@ export default {
 				if ((this.flats.length - this.toShow) <= this.toShowCount ) {
 					
 					this.toShow += (this.flats.length - this.toShow)
-					console.log('not sorted ' + this.sortedProducts.length);
 					
+				} else if ((this.sortedProducts.length - this.toShow) <= this.toShowCount ) {
+					
+					this.toShow += (this.sortedProducts.length - this.toShow)
 				} 
 				else {
 					this.toShow += 3
@@ -616,6 +637,11 @@ export default {
 	},
 	mounted() {
 		let vm = this
+
+
+
+
+
 		var sliderArea = vm.$refs.sliderArea;
 		noUiSlider.create(
 			sliderArea, {
@@ -627,6 +653,7 @@ export default {
 				}
 			}
 		);
+		
 
 		$('.button-reset').on('click', () => {
 			sliderArea.noUiSlider.reset()

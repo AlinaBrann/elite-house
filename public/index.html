@@ -1,208 +1,172 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <meta name="description" content="Продажа коммерческой недвижимости в Бишкеке от Elite House. Коммерческая недвижимость во всех района города">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title>Коммерческая недвижимость в Бишкек</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-      (function (factory) {
-        if (typeof define === 'function' && define.amd) {
-          // AMD (Register as an anonymous module)
-          define(['jquery'], factory);
-        } else if (typeof exports === 'object') {
-          // Node/CommonJS
-          module.exports = factory(require('jquery'));
-        } else {
-          // Browser globals
-          factory(jQuery);
-        }
-      }(function ($) {
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Продажа коммерческой недвижимости в Бишкеке от Elite House. Коммерческая недвижимость во всех района города"><link rel="icon" href="/favicon.ico"><title>Коммерческая недвижимость в Бишкеке</title><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script><script>(function (factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD (Register as an anonymous module)
+    define(['jquery'], factory);
+  } else if (typeof exports === 'object') {
+    // Node/CommonJS
+    module.exports = factory(require('jquery'));
+  } else {
+    // Browser globals
+    factory(jQuery);
+  }
+}(function ($) {
 
-        var pluses = /\+/g;
+  var pluses = /\+/g;
 
-        function encode(s) {
-          return config.raw ? s : encodeURIComponent(s);
-        }
+  function encode(s) {
+    return config.raw ? s : encodeURIComponent(s);
+  }
 
-        function decode(s) {
-          return config.raw ? s : decodeURIComponent(s);
-        }
+  function decode(s) {
+    return config.raw ? s : decodeURIComponent(s);
+  }
 
-        function stringifyCookieValue(value) {
-          return encode(config.json ? JSON.stringify(value) : String(value));
-        }
+  function stringifyCookieValue(value) {
+    return encode(config.json ? JSON.stringify(value) : String(value));
+  }
 
-        function parseCookieValue(s) {
-          if (s.indexOf('"') === 0) {
-            // This is a quoted cookie as according to RFC2068, unescape...
-            s = s.slice(1, -1).replace(/\\"/g, '"').replace(/\\\\/g, '\\');
-          }
+  function parseCookieValue(s) {
+    if (s.indexOf('"') === 0) {
+      // This is a quoted cookie as according to RFC2068, unescape...
+      s = s.slice(1, -1).replace(/\\"/g, '"').replace(/\\\\/g, '\\');
+    }
 
-          try {
-            // Replace server-side written pluses with spaces.
-            // If we can't decode the cookie, ignore it, it's unusable.
-            // If we can't parse the cookie, ignore it, it's unusable.
-            s = decodeURIComponent(s.replace(pluses, ' '));
-            return config.json ? JSON.parse(s) : s;
-          } catch(e) {}
-        }
+    try {
+      // Replace server-side written pluses with spaces.
+      // If we can't decode the cookie, ignore it, it's unusable.
+      // If we can't parse the cookie, ignore it, it's unusable.
+      s = decodeURIComponent(s.replace(pluses, ' '));
+      return config.json ? JSON.parse(s) : s;
+    } catch(e) {}
+  }
 
-        function read(s, converter) {
-          var value = config.raw ? s : parseCookieValue(s);
-          return $.isFunction(converter) ? converter(value) : value;
-        }
+  function read(s, converter) {
+    var value = config.raw ? s : parseCookieValue(s);
+    return $.isFunction(converter) ? converter(value) : value;
+  }
 
-        var config = $.cookie = function (key, value, options) {
+  var config = $.cookie = function (key, value, options) {
 
-          // Write
+    // Write
 
-          if (arguments.length > 1 && !$.isFunction(value)) {
-            options = $.extend({}, config.defaults, options);
+    if (arguments.length > 1 && !$.isFunction(value)) {
+      options = $.extend({}, config.defaults, options);
 
-            if (typeof options.expires === 'number') {
-              var days = options.expires, t = options.expires = new Date();
-              t.setMilliseconds(t.getMilliseconds() + days * 864e+5);
-            }
-
-            return (document.cookie = [
-              encode(key), '=', stringifyCookieValue(value),
-              options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
-              options.path    ? '; path=' + options.path : '',
-              options.domain  ? '; domain=' + options.domain : '',
-              options.secure  ? '; secure' : ''
-            ].join(''));
-          }
-
-          // Read
-
-          var result = key ? undefined : {},
-                  // To prevent the for loop in the first place assign an empty array
-                  // in case there are no cookies at all. Also prevents odd result when
-                  // calling $.cookie().
-                  cookies = document.cookie ? document.cookie.split('; ') : [],
-                  i = 0,
-                  l = cookies.length;
-
-          for (; i < l; i++) {
-            var parts = cookies[i].split('='),
-                    name = decode(parts.shift()),
-                    cookie = parts.join('=');
-
-            if (key === name) {
-              // If second argument (value) is a function it's a converter...
-              result = read(cookie, value);
-              break;
-            }
-
-            // Prevent storing a cookie that we couldn't decode.
-            if (!key && (cookie = read(cookie)) !== undefined) {
-              result[name] = cookie;
-            }
-          }
-
-          return result;
-        };
-
-        config.defaults = {};
-
-        $.removeCookie = function (key, options) {
-          // Must not alter options, thus extending a fresh object...
-          $.cookie(key, '', $.extend({}, options, { expires: -1 }));
-          return !$.cookie(key);
-        };
-
-      }));
-    </script>
-    <style>
-      .cookie_container{
-        width: 100vw;
-        height: 120px;
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        box-shadow: 0 0 10px rgba(0,0,0,0.5);
-        background-color: #4C4D4F;
-        z-index: 10;
-        display: flex;
-        align-items: center;
-        padding: 20px 0px;
-        transition: .5s;
-        transform: translateY(100%);
-      }
-      .cookie_container>.container{
-        display: flex !important;
-      }
-      .show_cookie{
-        transform: translateY(0);
-      }
-      .cookie_text{
-        color: #fff;
-        font-family: Gotham-Medium;
-        line-height: 24px;
-        font-size: 16px;
-        flex: 1;
+      if (typeof options.expires === 'number') {
+        var days = options.expires, t = options.expires = new Date();
+        t.setMilliseconds(t.getMilliseconds() + days * 864e+5);
       }
 
-      .cookie_text a{
-        color: #D66319;
+      return (document.cookie = [
+        encode(key), '=', stringifyCookieValue(value),
+        options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+        options.path    ? '; path=' + options.path : '',
+        options.domain  ? '; domain=' + options.domain : '',
+        options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // Read
+
+    var result = key ? undefined : {},
+            // To prevent the for loop in the first place assign an empty array
+            // in case there are no cookies at all. Also prevents odd result when
+            // calling $.cookie().
+            cookies = document.cookie ? document.cookie.split('; ') : [],
+            i = 0,
+            l = cookies.length;
+
+    for (; i < l; i++) {
+      var parts = cookies[i].split('='),
+              name = decode(parts.shift()),
+              cookie = parts.join('=');
+
+      if (key === name) {
+        // If second argument (value) is a function it's a converter...
+        result = read(cookie, value);
+        break;
       }
 
-      .cookie_button{
-        margin-left: 20px;
+      // Prevent storing a cookie that we couldn't decode.
+      if (!key && (cookie = read(cookie)) !== undefined) {
+        result[name] = cookie;
       }
-      @media (max-width:900px){
-        .cookie_container{
-          padding: 10px;
-          flex-direction: column;
-          height: 200px;
-        }
-        .cookie_container>.container{
-          display: flex !important;
-          flex-direction: column !important;
-        }
-        .cookie_button{
-          margin-top: 10px;
-          margin-left: 0px;
-        }
-        .cookie_text{
-          line-height: 22px;
-          font-size: 16px;
-        }
-      }
-    </style>
-    <script>
-      $(document).ready(function(){
-        if($.cookie('cookie_accepted')!='true')
-        {
-          setTimeout(function(){
-            $(".cookie_container").addClass('show_cookie');
-          },5000);
-        }
-        $(".cookie_button").click(function(){
-          $.cookie('cookie_accepted', 'true', { expires: 30, path: '/' });
-          $(".cookie_container").removeClass("show_cookie");
-        });
-      });
-    </script>
-  </head>
-  <body>
-    <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  <div class="cookie_container">
-    <div class="container">
-      <div class="cookie_text">
-        Мы используем файлы cookie на этом сайте для улучшения работы <br>
-        Нажимая кнопку "Принять", Вы&nbsp;соглашаетесь с <a href="/privacy-policy.pdf" target="_blank">политикой&nbsp;конфиденциальности</a>
-      </div>
-      <button class="button cookie_button" style="">Принять</button>
-    </div>
-  </div>
-  </body>
-</html>
+    }
+
+    return result;
+  };
+
+  config.defaults = {};
+
+  $.removeCookie = function (key, options) {
+    // Must not alter options, thus extending a fresh object...
+    $.cookie(key, '', $.extend({}, options, { expires: -1 }));
+    return !$.cookie(key);
+  };
+
+}));</script><style>.cookie_container{
+  width: 100vw;
+  height: 120px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  background-color: #4C4D4F;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  padding: 20px 0px;
+  transition: .5s;
+  transform: translateY(100%);
+}
+.cookie_container>.container{
+  display: flex !important;
+}
+.show_cookie{
+  transform: translateY(0);
+}
+.cookie_text{
+  color: #fff;
+  font-family: Gotham-Medium;
+  line-height: 24px;
+  font-size: 16px;
+  flex: 1;
+}
+
+.cookie_text a{
+  color: #D66319;
+}
+
+.cookie_button{
+  margin-left: 20px;
+}
+@media (max-width:900px){
+  .cookie_container{
+    padding: 10px;
+    flex-direction: column;
+    height: 200px;
+  }
+  .cookie_container>.container{
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  .cookie_button{
+    margin-top: 10px;
+    margin-left: 0px;
+  }
+  .cookie_text{
+    line-height: 22px;
+    font-size: 16px;
+  }
+}</style><script>$(document).ready(function(){
+  if($.cookie('cookie_accepted')!='true')
+  {
+    setTimeout(function(){
+      $(".cookie_container").addClass('show_cookie');
+    },5000);
+  }
+  $(".cookie_button").click(function(){
+    $.cookie('cookie_accepted', 'true', { expires: 30, path: '/' });
+    $(".cookie_container").removeClass("show_cookie");
+  });
+});</script><link href="/css/chunk-69f7bfba.9dd0cc23.css" rel="prefetch"><link href="/js/chunk-69f7bfba.43a52569.js" rel="prefetch"><link href="/css/app.2e38947b.css" rel="preload" as="style"><link href="/css/chunk-vendors.7f237bd9.css" rel="preload" as="style"><link href="/js/app.2c27d468.js" rel="preload" as="script"><link href="/js/chunk-vendors.2e6a3f58.js" rel="preload" as="script"><link href="/css/chunk-vendors.7f237bd9.css" rel="stylesheet"><link href="/css/app.2e38947b.css" rel="stylesheet"></head><body><noscript><strong>We're sorry but elite-house doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript><div id="app"></div><div class="cookie_container"><div class="container"><div class="cookie_text">Мы используем файлы cookie на этом сайте для улучшения работы<br>Нажимая кнопку "Принять", Вы&nbsp;соглашаетесь с <a href="/privacy-policy.pdf" target="_blank">политикой&nbsp;конфиденциальности</a></div><button class="button cookie_button" style="">Принять</button></div></div><script src="/js/chunk-vendors.2e6a3f58.js"></script><script src="/js/app.2c27d468.js"></script></body></html>

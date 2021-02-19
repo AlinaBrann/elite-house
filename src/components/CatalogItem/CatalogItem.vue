@@ -6,7 +6,7 @@
                     <Slick
                         :options="settings"
                         :class="'preview-slider _for for_' + item.id"
-                        v-if="item.gallery!=undefined && item.gallery.length > 0"
+                        v-show="item.gallery!=undefined && item.gallery.length > 0"
                     >
                         <div v-for="(image, index) in item.gallery" :key="index">
                             <img :src="'/images/' + image.img" @click="$emit('open-gallery', item, index);">
@@ -15,7 +15,7 @@
                     <Slick
                         :options="navSettings"
                         :class="'preview-slider _nav nav_' + item.id"
-                        v-if="item.gallery!=undefined && item.gallery.length > 0">
+                        v-show="item.gallery!=undefined && item.gallery.length > 0">
                         <div v-for="image in item.gallery" :key="image.id">
                             <img :src="'/images/' + image.img" >
                         </div>
@@ -32,11 +32,7 @@
                 <div class="catalog-item__content">
                     <div class="catalog-item__area">{{ item.area }} m<sup>2</sup></div>
                     <div class="catalog-item__address" v-html="item.address"></div>
-                    <div class="catalog-item__price">
-                        $ {{ item.price | currency }}
-                        <span v-if="item.currency"> {{ item.currency }}</span>
-                        <span v-else> &#8381;</span>
-                    </div>
+                    
                     <button class="catalog-item__button button _full" @click="$emit('open-booking', item)">ЗАБРОНИРОВАТЬ</button>
                     <button 
                         class="catalog-item__button button _full _border"
@@ -102,7 +98,9 @@ export default {
     },
     methods: {
         goTodetail(prodId) {
-            this.$router.push({name:'CatalogItemDetails',params:{Pid:prodId}})
+            let routeData = this.$router.resolve({name:'CatalogItemDetails',params:{Pid:prodId}})
+            window.open(routeData.href, '_blank');
+            
         }
     }
 }

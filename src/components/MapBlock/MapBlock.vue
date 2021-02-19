@@ -7,7 +7,7 @@
         >
         <yandex-map 
             class="button-map__map"
-            :coords="coords"
+            :coords="center" 
             :controls="['zoomControl']" 
             :scrollZoom="false" 
             zoom="16"
