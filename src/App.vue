@@ -269,6 +269,10 @@
 			openPopupThanks() {
 				this.closeAllPopups()
 				this.popupThanks = true
+				let menuButton = document.getElementById('menuButton'),
+				phoneButton = document.getElementById('phoneButton');
+				menuButton.classList.remove('_active')
+				phoneButton.classList.remove('_active')
 				setTimeout(() => {
 					this.popupThanks = false
 				}, 3000)

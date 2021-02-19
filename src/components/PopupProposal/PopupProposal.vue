@@ -23,7 +23,7 @@
                             <div class="popup-offer-checkbox" 
                                 v-for="(item, index) in slide.checkboxes" 
                                 :key="item">
-                                <input type="checkbox" :id="slide.checkboxesName + (index + 1)" class="popup-offer-checkbox__input">
+                                <input type="checkbox" :value="slide.checkboxesName + (index + 1)" :id="slide.checkboxesName + (index + 1)" class="popup-offer-checkbox__input">
                                 <label :for="slide.checkboxesName + (index + 1)" class="popup-offer-checkbox__label">{{ item }}</label>
                             </div>
                         </div>
@@ -40,7 +40,7 @@
                             <div class="feedback-form-row _v1">
                                 <div class="input-wrapper feedback-form__name">
                                     <label :for="'ProposalModalFeedback' + (index + 1) + '-name'" class="input-label">Ваше имя</label>
-                                    <input type="text" :id="'ProposalModalFeedback' + (index + 1) + '-name'" class="input">
+                                    <input type="text" v-model="nameInput" :id="'ProposalModalFeedback' + (index + 1) + '-name'" class="input">
                                 </div>
                                 <div class="input-wrapper feedback-form__phone" :class="{'_error': errors}">
                                     <label :for="'ProposalModalFeedback' + (index + 1) + '-phone'" class="input-label">Номер телефона</label>
@@ -100,7 +100,8 @@ export default {
             minArea: 0,
             maxArea: 200,
             errors: '',
-            phone: null
+            phone: null,
+            nameInput: ''
         }
     },
     components: {

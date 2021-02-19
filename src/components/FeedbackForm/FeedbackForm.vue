@@ -4,7 +4,7 @@
             <div class="feedback-form-row _v1">
                 <div class="input-wrapper feedback-form__name">
                     <label :for="name + '-name'" class="input-label">Ваше имя</label>
-                    <input type="text" :id="name + '-name'" name="name" class="input">
+                    <input type="text" v-model="nameInput" :id="name + '-name'" name="name" class="input">
                     <input type="hidden" id="object-title" :value="objectTitle">
                     <input type="hidden" id="object-area" :value="objectArea">
                 </div>
@@ -44,7 +44,8 @@ export default {
     data() {
         return {
             errors: '',
-            phone: null
+            phone: null,
+            nameInput: ''
         }
   },
   methods: {
