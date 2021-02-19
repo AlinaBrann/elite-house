@@ -23,9 +23,10 @@
                             <div class="popup-offer-checkbox" 
                                 v-for="(item, index) in slide.checkboxes" 
                                 :key="item">
-                                <input type="checkbox" :value="slide.checkboxesName + (index + 1)" :id="slide.checkboxesName + (index + 1)" class="popup-offer-checkbox__input">
+                                <input type="checkbox" v-model="checkboxes" :value="slide.checkboxesName + (index + 1)" :id="slide.checkboxesName + (index + 1)" class="popup-offer-checkbox__input">
                                 <label :for="slide.checkboxesName + (index + 1)" class="popup-offer-checkbox__label">{{ item }}</label>
                             </div>
+                            {{checkboxes}}
                         </div>
                         <div class="filter-block popup-offer-filter-block" v-if="slide.range">
                             <div class="filter-block__title popup-offer-filter-block__title" v-html="slide.range.title"></div>
@@ -101,7 +102,8 @@ export default {
             maxArea: 200,
             errors: '',
             phone: null,
-            nameInput: ''
+            nameInput: '',
+            checkboxes: []
         }
     },
     components: {
